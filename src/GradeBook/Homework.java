@@ -1,4 +1,4 @@
-package GradeBook;
+package Gradebook;
 
 public class Homework extends Assignment {
 

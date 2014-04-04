@@ -1,4 +1,4 @@
-package GradeBook;
+package Gradebook;
 
 import java.util.ArrayList;
 
