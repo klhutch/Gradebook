@@ -1,4 +1,4 @@
-package Gradebook;
+package gradebook;
 
 public class Lab extends Assignment {
 
