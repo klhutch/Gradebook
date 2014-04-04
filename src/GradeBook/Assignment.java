@@ -1,5 +1,4 @@
-// Comment on Gradebook like things.
-package Gradebook;
+package GradeBook;
 
 import java.util.HashMap;
 
