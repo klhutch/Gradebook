@@ -1,27 +1,20 @@
 package gradebook;
 
-import java.util.ArrayList;
+class Student {
 
-public class Student {
-
-    String firstName;
-    String lastName;
-    String studentId;
-    Integer age;
-    Boolean sex;
-    Integer grade;
-    ArrayList<Grade> grades;
+    String first;
+    String last;
+    String id;
+    String advisor;
+    Integer gradYear;
     
-    Student(String firstName, String lastName, String studentId, Integer age, Boolean sex, Integer grade) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.studentId = studentId;
-        this.age = age;
-        this.sex = sex;
-        this.grade = grade;
+    Student(String first, String last, String id,String advisor,
+            Integer gradYear) {
+        this.first = first;
+        this.last = last;
+        this.id = id;
+        this.advisor = advisor;
     }
     
-    void addGrade(Grade grade) {
-        this.grades.add(grade);
-    }
+    
 }
