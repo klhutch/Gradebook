@@ -15,4 +15,7 @@ abstract class Assignment {
         this.grades = grades;
         this.totalPoints = totalPoints;
     }
+    
+    
+    
 }
