@@ -1,14 +1,18 @@
 package gradebook;
 
-public abstract class Assignment {
+import java.util.HashMap;
 
+public abstract class Assignment {
     String name;
-    Integer weight;
-    Integer totalPoints;
+    int weight;
+    HashMap<String, Integer> grades;
+    Double totalPoints;
     
-    Assignment(String name, Integer weight, Integer totalPoints) {
+    Assignment(String name, Integer weight, HashMap<String, Integer> grades,
+            Double totalPoints) {
         this.name = name;
         this.weight = weight;
+        this.grades = grades;
         this.totalPoints = totalPoints;
     }
 }
