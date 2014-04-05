@@ -2,7 +2,7 @@ package gradebook;
 
 import java.util.ArrayList;
 
-public class GradeBook {
+public class MyGradeBook {
 
     String courseName;
     String couresNumber;
@@ -11,7 +11,7 @@ public class GradeBook {
     ArrayList<Student> students;
     ArrayList<Assignment> assignment;
     
-    GradeBook(String courseName, String courseNumber, String teacherName, String teacherId) {
+    MyGradeBook(String courseName, String courseNumber, String teacherName, String teacherId) {
         this.couresNumber = courseName;
         this.couresNumber = courseNumber;
         this.teacherName = teacherName;
