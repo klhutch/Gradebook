@@ -2,7 +2,7 @@ package gradebook;
 
 import java.util.HashMap;
 
-public abstract class Assignment {
+abstract class Assignment {
     String name;
     int weight;
     HashMap<String, Integer> grades;
