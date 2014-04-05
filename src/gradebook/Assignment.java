@@ -2,6 +2,15 @@ package gradebook;
 
 import java.util.HashMap;
 
+/**Class Assignment
+ * 
+ * @author Kate Hutchinson (klhutch)
+ * @author Jesse Oberstein (joberste)
+ * @author Nathan Goodman (nmg49)
+ * 
+ * @version 4-4-14
+ *
+ */
 abstract class Assignment {
     String name;
     int weight;
