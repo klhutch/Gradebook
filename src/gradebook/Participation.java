@@ -13,8 +13,7 @@ import java.util.HashMap;
  */
 class Participation extends Assignment {
     
-    Participation(String name, Integer weight, HashMap<String, Integer> grades, 
-            Double totalPoints) {
+    Participation(String name, Integer weight, Double totalPoints) {
         super(name, weight, totalPoints);
     }
 }

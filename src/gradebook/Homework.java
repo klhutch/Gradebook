@@ -13,8 +13,7 @@ import java.util.HashMap;
  */
 class Homework extends Assignment {
     
-    Homework(String name, Integer weight, HashMap<String, Integer> grades, 
-            Double totalPoints) {
+    Homework(String name, Integer weight, Double totalPoints) {
         super(name, weight, totalPoints);
     }
 

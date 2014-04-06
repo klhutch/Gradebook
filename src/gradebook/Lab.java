@@ -13,8 +13,7 @@ import java.util.HashMap;
  */
 class Lab extends Assignment {
     
-    Lab(String name, Integer weight, HashMap<String, Integer> grades, 
-            Double totalPoints) {
+    Lab(String name, Integer weight, Double totalPoints) {
         super(name, weight, totalPoints);
     }
 }
