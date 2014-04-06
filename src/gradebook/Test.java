@@ -13,6 +13,12 @@ import java.util.HashMap;
  */
 class Test extends Assignment {
     
+    /** Constructor Test
+     * 
+     * @param name - the name of the test
+     * @param weight - the weight of the test
+     * @param totalPoints - the number of points the test is worth
+     */
     Test(String name, Integer weight, Double totalPoints) {
         super(name, weight, totalPoints);
     }

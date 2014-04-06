@@ -13,6 +13,12 @@ import java.util.HashMap;
  */
 class Lab extends Assignment {
     
+    /** Constructor Lab
+     * 
+     * @param name - the name of the lab assignment
+     * @param weight - the weight of the lab assignment
+     * @param totalPoints - the number of points the lab is worth
+     */
     Lab(String name, Integer weight, Double totalPoints) {
         super(name, weight, totalPoints);
     }

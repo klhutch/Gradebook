@@ -13,6 +13,12 @@ import java.util.HashMap;
  */
 class Participation extends Assignment {
     
+    /** Constructor Participation
+     * 
+     * @param name - the name of the participation assignment
+     * @param weight - the weight of participation
+     * @param totalPoints - the number of points participation is worth
+     */
     Participation(String name, Integer weight, Double totalPoints) {
         super(name, weight, totalPoints);
     }

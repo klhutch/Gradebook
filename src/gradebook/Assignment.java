@@ -17,6 +17,12 @@ abstract class Assignment {
     HashMap<String, Integer> grades;
     Double totalPoints;
     
+    /** Constructor Assignment
+     * 
+     * @param name - the name of the Assignment
+     * @param weight - the weight of the Assignment
+     * @param totalPoints - the total number of points an assignement is worth
+     */
     Assignment(String name, Integer weight, Double totalPoints) {
         this.name = name;
         this.weight = weight;

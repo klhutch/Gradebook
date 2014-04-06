@@ -11,6 +11,10 @@ package gradebook;
  */
 public class User {
     
+    /** Main method
+     * used in running a program, determines what happens in
+     * program execution and calls other functions
+     */
     public static void main() {
         
     }

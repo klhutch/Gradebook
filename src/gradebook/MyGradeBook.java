@@ -14,25 +14,43 @@ import java.util.HashMap;
  */
 public class MyGradeBook {
     //TODO add setters for these?
-    String courseName;
-    String couresNumber;
-    String teacherName;
-    String teacherId;
     
+    //FIELDS
+    
+    //basic information about the gradebook
+    String courseName = "";
+    String couresNumber = "";
+    String teacherName = "";
+    String teacherId = "";
+    
+    //information about the gradebook that will and can change
     ArrayList<Student> students;
     ArrayList<Assignment> assignments;
     
+    
+    /** Constructor MyGradeBook
+     * returns a basic gradebook with all fields empty
+     */
     public MyGradeBook() {
         this.students = new ArrayList<Student>();
         this.assignments = new ArrayList<Assignment>();
     }
     
 
-    
+    /** method addStudent
+     * used to add a Student object to a gradebook
+     * 
+     * @param newStudent - the Student object to be added
+     */
     void addStudent(Student newStudent) {
         this.students.add(newStudent);
     }
     
+    /** method addAssignment
+     * used to add an Assignment object to a gradebook
+     * 
+     * @param newAssignment - the Assignment object ot be added
+     */
     void addAssignment(Assignment newAssignment) {
         this.assignments.add(newAssignment);
     }

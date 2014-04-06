@@ -13,6 +13,12 @@ import java.util.HashMap;
  */
 class Quiz extends Assignment{
     
+    /** Constructor Quiz
+     * 
+     * @param name - the name of the quiz
+     * @param weight - the weight of the quiz
+     * @param totalPoints - the number of points the quiz is worth
+     */
     Quiz(String name, Integer weight, Double totalPoints) {
         super(name, weight, totalPoints);
     }
