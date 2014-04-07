@@ -10,7 +10,7 @@ package gradebook;
  *
  */
 class Student {
-    //Fields - basic information about a student
+    //FIELDS - basic information about a student
     private String first;
     private String last;
     private String id;
