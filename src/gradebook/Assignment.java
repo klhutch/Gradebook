@@ -14,7 +14,7 @@ import java.util.HashMap;
 abstract class Assignment {
     String name;
     int weight;
-    HashMap<String, Integer> grades;
+    HashMap<String, Double> grades;
     Double totalPoints;
     
     /** Constructor Assignment
@@ -26,7 +26,7 @@ abstract class Assignment {
     Assignment(String name, Integer weight, Double totalPoints) {
         this.name = name;
         this.weight = weight;
-        this.grades = new HashMap<String, Integer>();
+        this.grades = new HashMap<String, Double>();
         this.totalPoints = totalPoints;
     }
     
@@ -58,6 +58,18 @@ abstract class Assignment {
         return true;
     }
     
-    
-    
+    /**
+     * Adds a student's grade to this assignment by pairing his/her username
+     * with his/her grade for this assignment.
+     * 
+     * @param username
+     *            The username of a student, represented by a string.
+     * @param grade
+     *            The matching student's grade for this assignment.
+     * @return HashMap<String, Double> A hashmap of student username and grade
+     *         for this assignment.
+     */
+    public void addAssignmentGrade(String username, Double grade) {
+        this.grades.put(username, grade);
+    }
 }
