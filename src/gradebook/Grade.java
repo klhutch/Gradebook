@@ -9,4 +9,12 @@ public class Grade {
         this.assignment = assignment;
         this.score = score;
     }
+    
+    Assignment getAssignment() {
+        return this.assignment;
+    }
+    
+    Double getScore() {
+        return this.score;
+    }
 }
