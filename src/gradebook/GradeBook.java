@@ -27,44 +27,31 @@ public class GradeBook {
     }
     
     ArrayList<Double> getListOfScores(Assignment assignment) {
-        ArrayList<Double> scores = new ArrayList<Double>();
-        for (Student s : this.students) {
-            for (Grade g : s.grades) {
-                if (g.assignment == assignment) {
-                    scores.add(g.getScore());
-                }
-            }
-        }
-        return scores;
+//        ArrayList<Double> scores = new ArrayList<Double>();
+//        for (Student s : this.students) {
+//            for (Grade g : s.grades) {
+//                if (g.assignment == assignment) {
+//                    scores.add(g.getScore());
+//                }
+//            }
+//        }
+//        return scores;
+        return null;
     }
     
     Double getAssignmentAverage(Assignment assignment) {
-        Double average = 0.0;
-        for (Student s : this.students) {
-            //Do something
-        }
-        return average;
+        return 0.0;
     }
     
     Double getAssignmentMedian(Assignment assignment) {
-        
+        return 0.0;
     }
     
     Double getAssignmentMax(Assignment assignment) {
-        Double average = 0.0;
-        for (Student s : this.students) {
-            if (s.grade.getAssignment() == assignment) {
-                
-            }
-        }
-        return average;
+        return 0.0;
     }
     
     Double getAssignmentMin(Assignment assignment) {
-        Double average = 0.0;
-        for (Student s : this.students) {
-            //Do something
-        }
-        return average;
+        return 0.0;
     }
 }

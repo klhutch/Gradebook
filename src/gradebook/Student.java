@@ -1,27 +1,47 @@
 package gradebook;
 
-import java.util.ArrayList;
-
-public class Student {
-
-    String firstName;
-    String lastName;
-    String studentId;
-    Integer age;
-    Boolean sex;
-    Integer grade;
-    ArrayList<Grade> grades;
+/**Class Student
+ * 
+ * @author Kate Hutchinson (klhutch)
+ * @author Jesse Oberstein (joberste)
+ * @author Nathan Goodman (nmg49)
+ * 
+ * @version 4-4-14
+ *
+ */
+class Student {
+    //Fields - basic information about a student
+    private String first;
+    private String last;
+    private String id;
+    private String advisor;
+    private Integer gradYear;
     
-    Student(String firstName, String lastName, String studentId, Integer age, Boolean sex, Integer grade) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.studentId = studentId;
-        this.age = age;
-        this.sex = sex;
-        this.grade = grade;
+    
+    /** Constructor Student
+     * 
+     * @param first - first name of the student
+     * @param last - last name of the student
+     * @param id - the student's username
+     * @param advisor - the name of the student's advisor
+     * @param gradYear - the year the student is set to graduate
+     */
+    Student(String first, String last, String id,String advisor,
+            Integer gradYear) {
+        this.first = first;
+        this.last = last;
+        this.id = id;
+        this.advisor = advisor;
     }
     
-    void addGrade(Grade grade) {
-        this.grades.add(grade);
+    /** method getUseername
+     * used to retrieve the username of one student
+     * 
+     * @return the value of the id field
+     */
+    String getUsername() {
+        return id;
     }
+    
+    
 }
