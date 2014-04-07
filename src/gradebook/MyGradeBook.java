@@ -315,4 +315,33 @@ public class MyGradeBook {
         return "";
     }
     
+    
+    /* Stuff from defunct GradeBook class
+     * 
+    
+    GradeBook(String courseName, String courseNumber, String teacherName, String teacherId) {
+        this.couresNumber = courseName;
+        this.couresNumber = courseNumber;
+        this.teacherName = teacherName;
+        this.teacherId = teacherId;
+    }
+  
+    
+    ArrayList<Double> getListOfScores(Assignment assignment) {
+//        ArrayList<Double> scores = new ArrayList<Double>();
+//        for (Student s : this.students) {
+//            for (Grade g : s.grades) {
+//                if (g.assignment == assignment) {
+//                    scores.add(g.getScore());
+//                }
+//            }
+//        }
+//        return scores;
+        return null;
+    }
+    
+    
+   
+     */
+    
 }

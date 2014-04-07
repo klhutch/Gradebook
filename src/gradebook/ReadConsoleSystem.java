@@ -2,7 +2,7 @@ package gradebook;
 import java.util.Scanner;
 
 // Test class for using the console!
-public class ReadConsoleSystem {
+class ReadConsoleSystem {
     String input;
     Thread t;
 

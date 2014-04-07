@@ -1,6 +1,6 @@
 package gradebook;
 
-public class Grade {
+class Grade {
 
     Assignment assignment;
     Double score;
