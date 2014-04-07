@@ -17,7 +17,8 @@ abstract class Assignment {
     HashMap<String, Double> grades;
     Double totalPoints;
     
-    /** Constructor Assignment
+    /** 
+     * Constructor Assignment
      * 
      * @param name - the name of the Assignment
      * @param weight - the weight of the Assignment
@@ -30,8 +31,25 @@ abstract class Assignment {
         this.totalPoints = totalPoints;
     }
     
+    
+    /**
+     * Adds a student's grade to this assignment by pairing his/her username
+     * with his/her grade for this assignment.
+     * 
+     * @param username
+     *            The username of a student, represented by a string.
+     * @param grade
+     *            The matching student's grade for this assignment.
+     * @return HashMap<String, Double> A hashmap of student username and grade
+     *         for this assignment.
+     */
+    public void addAssignmentGrade(String username, Double grade) {
+        this.grades.put(username, grade);
+    }
+    
     @Override
-    /** method equals
+    /** 
+     * method equals
      * to determine the equivalence of two objects, one of which is
      * an assignment
      * 
@@ -58,18 +76,5 @@ abstract class Assignment {
         return true;
     }
     
-    /**
-     * Adds a student's grade to this assignment by pairing his/her username
-     * with his/her grade for this assignment.
-     * 
-     * @param username
-     *            The username of a student, represented by a string.
-     * @param grade
-     *            The matching student's grade for this assignment.
-     * @return HashMap<String, Double> A hashmap of student username and grade
-     *         for this assignment.
-     */
-    public void addAssignmentGrade(String username, Double grade) {
-        this.grades.put(username, grade);
-    }
+    
 }
