@@ -48,7 +48,6 @@ class Student {
     
     /**
      * Gets the username of this student.
-     * 
      * @return String The username of this student is returned.
      */
     String getStudentUsername() {

@@ -19,6 +19,11 @@ class Assignment {
     String name;
     Integer totalPoints;
     int weight;
+    /**
+     * Store a collection of each grade of the assignment. 
+     * The String corresponds to the StudentID and the 
+     * double corresponds to the number of points earned
+     */
     HashMap<String, Double> grades;
     
     /** 
