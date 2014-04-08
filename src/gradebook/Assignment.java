@@ -100,9 +100,6 @@ class Assignment {
      * @return boolean - "Is 'this' equivalent to obj?"
      */
     public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
         
         if (!(obj instanceof Assignment)) {
             return false;
