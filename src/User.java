@@ -19,14 +19,14 @@ public class User {
      */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        Console console = new Console();
-        boolean login = Console.login(input);
+        Console console = Console.getInstance();
+        boolean login = console.login(input);
         boolean quit = false;
         if (login) {
         System.out.println("Enter a command to begin "
                 + "(type \"gb help\" for a list of commands)");
             while (!quit) {
-                quit = Console.getCommand(input);
+                quit = console.getCommand(input);
             }
         }
         input.close();

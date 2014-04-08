@@ -89,25 +89,32 @@ public class Console {
     }
     
     private void add(ArrayList<String> parsedCommand) {
-//        parsedCommand.remove(0); //remove the 'gb add' portion of the command. We already know that we're adding something
         if (parsedCommand.size() > 1) {
             switch(parsedCommand.get(1)) {
             case "student":
             case "s":
+//                this.gradebook.addStudent();
                 System.out.println("Added student");
                 break;
             case "assignment":
             case "a":
+//                this.gradebook.addAssignment();
                 System.out.println("Added assignment");
                 break;
             case "gradebook":
-            case "g":
-                System.out.println("Added gradebook");
-                break;
+//            case "g":
+//                this.gradebook.addGradeBook
+//                System.out.println("Added gradebook");
+//                break;
+//            }
+                default:
+                    System.out.println(parsedCommand.get(1) + " is not a valid sub-command for gb add. "
+                        + "Please enter a valid command to continue. For a list of valid commands, "
+                        + "type \"gb help -add\" into the console");
             }
         }
         else {
-            System.out.println("You must specify what you wish to add. Type \"gb help add\" for move details");
+            System.out.println("You must specify what you wish to add. Type \"gb help -add\" for move details");
         }
     }
     
