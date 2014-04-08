@@ -1,7 +1,10 @@
 package gradebook;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /**Class MyGradebook
  * 
@@ -36,35 +39,29 @@ public class MyGradeBook {
         this.assignments = new ArrayList<Assignment>();
     }
     
-
-    /** method addStudent
-     * used to add a Student object to a gradebook
-     * 
-     * @param newStudent - the Student object to be added
-     */
-    void addStudent(Student newStudent) {
-        this.students.add(newStudent);
-    }
-    
-    /** method addAssignment
-     * used to add an Assignment object to a gradebook
-     * 
-     * @param newAssignment - the Assignment object ot be added
-     */
-    void addAssignment(Assignment newAssignment) {
-        this.assignments.add(newAssignment);
-    }
-    
     /**
      * Factory method to construct an empty MyGradebook
      * 
      * @return an empty MyGradeBook
      */
     public static MyGradeBook initialize() {
-        //TODO write initialize [empty]
         return new MyGradeBook();
     }
 
+    Scanner convertToInt(Scanner intline) {
+        String ints = "";
+        while (intline.hasNext()) {
+            if (intline.hasNextDouble()) {
+                int i = new Integer((int) intline.nextDouble());
+                ints = ints.concat(i + "\t");
+            }
+            else {
+                ints = ints.concat(intline.nextInt() + "\t");
+            }
+        }
+        return new Scanner(ints);
+    }
+    
     /**
      * Factory method to construct a MyGradebook that contains the grade book
      * from filename
@@ -73,12 +70,55 @@ public class MyGradeBook {
      *            the filename for the file that contains the initial grade
      *            book, which is formatted like initial.txt
      * @return a MyGradebook that contains the grade book from filename
+     * @throws FileNotFoundException 
      */
-    public static MyGradeBook initializeWithFile(String filename) {
-        //TODO write initializeWithFile
-        return null;
+    public static MyGradeBook initializeWithFile(String filename) throws FileNotFoundException {
+        Scanner scan = new Scanner(new File(filename));
+        MyGradeBook mygb = MyGradeBook.initialize();
+        scan.nextLine();
+        Scanner scanNames = new Scanner(scan.nextLine()).useDelimiter("\t");
+        scanNames.skip("\t" + "\t" + "\t" + "\t" + "\t");
+        Scanner scanTotals = new Scanner(scan.nextLine());
+        Scanner scanWeights = new Scanner(scan.nextLine());
+        //mygb.convertToInt(scanTotals);
+        //mygb.convertToInt(scanWeights);
+        while (scanTotals.hasNext()) {
+            Assignment newAssignment = 
+                    new Assignment(
+                            scanNames.next(), 
+                            scanTotals.nextInt(), 
+                            scanWeights.nextInt());
+            mygb.assignments.add(newAssignment);
+        }
+        while (scan.hasNextLine()) {
+            Scanner scanStudent = new Scanner(scan.nextLine());
+            scanStudent.useDelimiter("\t"); 
+            while (scanStudent.hasNext()) {
+                String susername = scanStudent.next();
+                Student newStudent = 
+                        new Student(
+                                susername,
+                                scanStudent.next(),
+                                scanStudent.next(),
+                                scanStudent.next(), 
+                                scanStudent.nextInt());
+                mygb.students.add(newStudent);
+                for (int i = 0; i < mygb.assignments.size(); i++) {
+                    if (scanStudent.hasNextInt()) {
+                        mygb.assignments.get(i).addAssignmentGrade(susername,
+                                new Double(scanStudent.nextInt()));
+                    }
+                    else {
+                        mygb.assignments.get(i).addAssignmentGrade(susername,
+                                scanStudent.nextDouble());
+                    }
+                }
+            }
+        }
+        return mygb;
     }
 
+    
     /**
      * Factory method to construct a MyGradebook that contains the grade book
      * from startingString
@@ -89,10 +129,55 @@ public class MyGradeBook {
      * @return a MyGradebook that contains the grade book from startingString
      */
     public static MyGradeBook initializeWithString(String startingString) {
-        //TODO write initializeWIthString
+        // TODO Needs to be made applicable to strings.
+        /*Scanner scan = new Scanner(startingString);
+        while(scan.hasNext()) {
+            if (scan.hasNext("\n")) {   
+            }
+            
+        }*/
         return null;
     }
 
+    
+    /**
+     * Gets an assignment that has the same name as the given one from this
+     * gradebook's list of assignments.
+     * 
+     * @param aname
+     *            The name of the assignment in question.
+     * @return Assignment A way to represent an assignment that contains
+     *         student's grades.
+     */
+    Assignment getAssignment(String aname) {
+        for (int i = 0; i < this.assignments.size(); i++) {
+            if (this.assignments.get(i).getAssignmentName().equals(aname)) {
+                return this.assignments.get(i);
+            }
+        }
+        throw new RuntimeException("Assignment not found");
+    }
+    
+    
+    /**
+     * Gets a student that has the same name as the given one from this
+     * gradebook's list of students.
+     * 
+     * @param sname
+     *            The username of the student in question.
+     * @return Student A way to represent a student that contains a student's
+     *         basic information, including username.
+     */
+    Student getStudent(String sname) {
+        for (int i = 0; i < this.students.size(); i++) {
+            if (this.students.get(i).getStudentUsername().equals(sname)) {
+                return this.students.get(i);
+            }
+        }
+        throw new RuntimeException("Student not found");
+    }
+    
+    
     /**
      * Add to the state of this grade book---new assignments, new students, new
      * grades---by processing filename
@@ -104,9 +189,31 @@ public class MyGradeBook {
      *            students, new grades. The file will be formatted like
      *            addAssignments.txt, addStudents.txt, gradesForAssignment1.txt,
      *            and gradesForStudent.txt.
+     * @throws FileNotFoundException 
      */
-    public void processFile(String filename) {
-        //TODO write processFile
+    public void processFile(String filename) throws FileNotFoundException {
+        Scanner scan = new Scanner(new File(filename));
+        while (scan.hasNextLine()) {
+            if (scan.nextLine().equals("ASSIGNMENT")) {
+                new Assignment(scan.nextLine(), scan.nextInt(), 
+                        scan.nextInt());
+            }
+            if (scan.nextLine().equals("STUDENT")) {
+                new Student(scan.nextLine(), scan.nextLine(), scan.nextLine(),
+                        scan.nextLine(), scan.nextInt());
+            }
+            if (scan.nextLine().equals("GRADES_FOR_ASSIGNMENT")) {
+                String a1name = scan.nextLine();
+                Assignment a1 = this.getAssignment(a1name);
+                a1.addAssignmentGrade(scan.nextLine(), scan.nextDouble());
+            }
+            if (scan.nextLine().equals("GRADES_FOR_STUDENT")) {
+                String s1name = scan.nextLine();
+                Student s1 = this.getStudent(s1name);
+                s1.addStudentGrade(this.getAssignment(scan.nextLine()), 
+                        scan.nextDouble());
+            }
+        }
     }
 
     /**
@@ -122,7 +229,28 @@ public class MyGradeBook {
      *            gradesForStudent.txt.
      */
     public void processString(String additionalString) {
-        //TODO write processString
+        // TODO Needs to be tweaked so that it is applicable to strings.
+        /*Scanner scan = new Scanner(additionalString);
+        while (scan.hasNextLine()) {
+            if (scan.next().equals("ASSIGNMENT")) {
+                new Assignment(scan.next(), scan.nextInt(), scan.nextInt());
+            }
+            if (scan.nextLine().equals("STUDENT")) {
+                new Student(scan.next(), scan.next(), scan.next(), scan.next(),
+                        scan.nextInt());
+            }
+            if (scan.nextLine().equals("GRADES_FOR_ASSIGNMENT")) {
+                String a1name = scan.nextLine();
+                Assignment a1 = this.getAssignment(a1name);
+                a1.addAssignmentGrade(scan.next(), scan.nextDouble());
+            }
+            if (scan.nextLine().equals("GRADES_FOR_STUDENT")) {
+                String s1name = scan.nextLine();
+                Student s1 = this.getStudent(s1name);
+                s1.addStudentGrade(this.getAssignment(scan.next()), 
+                        scan.nextDouble());
+            }
+        }*/
     }
 
     /**
@@ -140,8 +268,8 @@ public class MyGradeBook {
      */
     public boolean changeGrade(String assignmentName, String username, 
             double newGrade) {
-        //TODO write changeGrade
-        return false;
+        return this.getAssignment(assignmentName).changeGrade(username, 
+                newGrade);
     }
 
     /**
@@ -152,10 +280,7 @@ public class MyGradeBook {
      * @return the average across all students for assignmentName
      */
     public double average(String assignmentName) {
-        //TODO write average
-        //i think we said we'd have this in assignment
-        // so this could just be a get-assignment then ____.average()
-        return 0;
+        return this.getAssignment(assignmentName).average();
     }
 
     /**
@@ -166,9 +291,7 @@ public class MyGradeBook {
      * @return the median across all students for assignmentName
      */
     public double median(String assignmentName) {
-        //TODO write median
-        // see average for how this oculd work
-        return 0;
+        return this.getAssignment(assignmentName).median();
     }
 
     /**
@@ -179,9 +302,7 @@ public class MyGradeBook {
      * @return the min across all students for assignmentName
      */
     public double min(String assignmentName) {
-        //TODO write min
-        // see average for how this could work
-        return 0;
+        return this.getAssignment(assignmentName).min();
     }
 
     /**
@@ -192,9 +313,7 @@ public class MyGradeBook {
      * @return the max across all students for assignmentName
      */
     public double max(String assignmentName) {
-        //TODO write max
-        // see average for how this could work
-        return 0;
+        return this.getAssignment(assignmentName).max();
     }
 
     /**
@@ -213,8 +332,16 @@ public class MyGradeBook {
      *         times the percent of semester.
      */
     public double currentGrade(String username) {
-        //TODO write currentGrade
-        return 0;
+        int allWeights = 0;
+        double assignGrades = 0;
+        for (int i = 0; i < this.assignments.size(); i++) {
+            double grade = this.assignments.get(i).assignmentGrade(username);
+            int weight = this.assignments.get(i).getWeight();
+            int total = this.assignments.get(i).getTotal();
+            assignGrades += (weight * (grade / total));
+            allWeights += weight;
+        }
+        return (assignGrades / allWeights) * 100;
     }
 
     /**
@@ -233,8 +360,13 @@ public class MyGradeBook {
      *         of semester.
      */
     public HashMap<String, Double> currentGrades() {
-        //TODO write currentGrades
-        return null;
+        HashMap<String, Double> currents = new HashMap<String, Double>();
+        
+        for (int i = 0; i < this.students.size(); i++) {
+            String username = this.students.get(i).getStudentUsername();
+            currents.put(username, this.currentGrade(username));
+        }
+        return currents;
     }
 
     /**
@@ -247,8 +379,7 @@ public class MyGradeBook {
      * @return the grade earned by username for assignmentName
      */
     public double assignmentGrade(String assignmentName, String username) {
-        //TODO write assignmentGrade
-        return 0;
+        return this.getAssignment(assignmentName).assignmentGrade(username);
     }
 
     /**
@@ -297,8 +428,28 @@ public class MyGradeBook {
      *         order as given.
      */
     public String outputAssignmentGrades(String assignName) {
-        //TODO write outputAssignmentGrades
-        return "";
+        String agrades = "";
+        int assignTotal = this.getAssignment(assignName).getTotal();
+        int assignWeight = this.getAssignment(assignName).getWeight();
+        String heading = "ASSIGNMENT_GRADES" + "\n" 
+                + assignName + "\n"
+                + assignTotal + "\n"
+                + assignWeight + "\n"
+                + "----" + "\n";
+        agrades = agrades + heading;
+        for (int i = 0; i < this.students.size(); i++) {
+            String sname = this.students.get(i).getStudentUsername();
+            double grade = this.assignmentGrade(assignName, sname);
+            agrades = agrades.concat(sname + "\t" + grade + "\n");
+        }
+        
+        agrades = agrades + "----" + "\n"
+                + "STATS" + "\n"
+                + "Average" + "\t" + this.average(assignName) + "\n"
+                + "Median" + "\t" + this.median(assignName) + "\n"
+                + "Max" + "\t" + this.max(assignName) + "\n"
+                + "Min" + "\t" + this.min(assignName) + "\n";
+        return agrades;
     }
 
     /**
@@ -311,8 +462,15 @@ public class MyGradeBook {
      *         alphabetically.
      */
     public String outputGradebook() {
-        //TODO write outputGradeBook
-        return "";
+        String gb = "";
+        for (int i = 0; i < this.students.size(); i++) {
+            gb = gb.concat(this.students.get(i).toString());
+        }
+
+        for (int i = 0; i < this.assignments.size(); i++) {
+            gb = gb.concat(this.assignments.get(i).toString());
+        }
+        return gb;
     }
     
     

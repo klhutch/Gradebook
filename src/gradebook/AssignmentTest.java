@@ -1,13 +1,16 @@
 package gradebook;
 import static org.junit.Assert.*;
+
+import java.io.FileNotFoundException;
+
 import org.junit.Test;
 
 public class AssignmentTest {
-    Quiz quiz1 = new Quiz("Quiz 1", 5, 200.0);
-    Quiz fakeQuiz = new Quiz("Homework 1", 1, 10.0);
-    Homework hw1 = new Homework("Homework 1", 1, 10.0);
-    Homework hw2test = new Homework("Homework 1", 1, 10.0);
-
+    Assignment quiz1 = new Assignment("Quiz 1", 200, 5);
+    Assignment fakeQuiz = new Assignment("Homework 1", 10, 1);
+    Assignment hw1 = new Assignment("Homework 1", 10, 1);
+    Assignment hw2test = new Assignment("Homework 1", 10, 1);
+    MyGradeBook gradebook = new MyGradeBook();
 
     public void createAssignmentsGrades() {
         quiz1.addAssignmentGrade("joberste", 42.0);
@@ -35,6 +38,25 @@ public class AssignmentTest {
         assertFalse(hw1.equals(quiz1));
         assertFalse(quiz1.equals(fakeQuiz));
         assertTrue(hw1.equals(hw2test));
+    }
+    
+    @Test
+    public void testInitialize() {
+        //try {
+            //System.out.println(MyGradeBook.initializeWithFile("initial.txt").outputGradebook());
+        //}
+        //catch (FileNotFoundException e) {
+          //  e.printStackTrace();
+        //}
+    }
+    
+    @Test
+    public void testStats() throws FileNotFoundException {
+        System.out.println(MyGradeBook.initializeWithFile("gradebook.txt").average("Test"));
+        MyGradeBook.initializeWithFile("gradebook.txt").average("Test");
+        System.out.println(MyGradeBook.initializeWithFile("gradebook.txt").outputAssignmentGrades("Test"));
+        System.out.println(MyGradeBook.initializeWithFile("gradebook.txt").currentGrade("abetaylor"));
+        System.out.println(MyGradeBook.initializeWithFile("gradebook.txt").currentGrades());
     }
 }
 
