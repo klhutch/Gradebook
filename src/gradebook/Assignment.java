@@ -17,8 +17,8 @@ import java.util.List;
  */
 class Assignment {
     String name;
-    Integer totalPoints;
-    int weight;
+    Double totalPoints;
+    Double weight;
     /**
      * Store a collection of each grade of the assignment. 
      * The String corresponds to the StudentID and the 
@@ -33,7 +33,7 @@ class Assignment {
      * @param weight - the weight of the Assignment
      * @param totalPoints - the total number of points an assignement is worth
      */
-    Assignment(String name, Integer totalPoints, Integer weight) {
+    Assignment(String name, Double totalPoints, Double weight) {
         this.name = name;
         this.totalPoints = totalPoints;
         this.weight = weight;
@@ -70,7 +70,7 @@ class Assignment {
      * 
      * @return String The name of this assignment is returned.
      */
-    int getWeight() {
+    Double getWeight() {
         return this.weight;
     }
     
@@ -79,7 +79,7 @@ class Assignment {
      * 
      * @return String The name of this assignment is returned.
      */
-    int getTotal() {
+    Double getTotal() {
         return this.totalPoints;
     }
     
@@ -105,19 +105,16 @@ class Assignment {
      * @return boolean - "Is 'this' equivalent to obj?"
      */
     public boolean equals(Object obj) {
-        
         if (!(obj instanceof Assignment)) {
             return false;
         }
-        
         Assignment comp = (Assignment) obj;
-        
-        if ( !(this.name.equals(comp.name) && (this.weight == comp.weight) && 
-                (this.grades.equals(comp.grades) &&
-                        (this.totalPoints.equals(comp.totalPoints))))) {
+        if ( !(this.name.equals(comp.name) 
+                && this.weight.equals(comp.weight)
+                && this.grades.equals(comp.grades) 
+                && this.totalPoints.equals(comp.totalPoints))) {
             return false;
         }
-        
         return true;
     }
     

@@ -3,8 +3,11 @@ package gradebook;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 /**Class MyGradebook
  * 
@@ -16,18 +19,18 @@ import java.util.Scanner;
  *
  */
 public class MyGradeBook {
-    //TODO add setters for these?
-    
-    //FIELDS
-    
-    //basic information about the gradebook
+    /** The name of the course that this gradebook hold students for. */
     String courseName = "";
-    String couresNumber = "";
+    /** The CRN for the course that this gradebook hold students for. */
+    String courseNumber = "";
+    /** The teacher's name for the course for this gradebook. */
     String teacherName = "";
+    /** The teacher's username for the course for this gradebook. */
     String teacherId = "";
     
-    //information about the gradebook that will and can change
+    /** A list of students for this gradebook. */
     ArrayList<Student> students;
+    /** A list of assignments for this gradebook. */
     ArrayList<Assignment> assignments;
     
     
@@ -47,21 +50,31 @@ public class MyGradeBook {
     public static MyGradeBook initialize() {
         return new MyGradeBook();
     }
-
-    Scanner convertToInt(Scanner intline) {
-        String ints = "";
-        while (intline.hasNext()) {
-            if (intline.hasNextDouble()) {
-                int i = new Integer((int) intline.nextDouble());
-                ints = ints.concat(i + "\t");
-            }
-            else {
-                ints = ints.concat(intline.nextInt() + "\t");
+    
+    /**
+     * Converts a given file's contents into a string.
+     * 
+     * @param filename
+     *            The name of the given file.
+     * @return String The formatted string of the given file's contents.
+     * @throws FileNotFoundException
+     */
+    private String convertFileToString(String filename) {
+        Scanner filescan;
+        String startingString = "";
+        try {
+            filescan = new Scanner(new File(filename));
+            while (filescan.hasNextLine()) {
+                startingString += filescan.nextLine() + "\n";
             }
         }
-        return new Scanner(ints);
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println(
+                    "InitializeWithFile: The file entered cannot be found.");
+        }
+        return startingString;
     }
-    
     /**
      * Factory method to construct a MyGradebook that contains the grade book
      * from filename
@@ -72,22 +85,34 @@ public class MyGradeBook {
      * @return a MyGradebook that contains the grade book from filename
      * @throws FileNotFoundException 
      */
-    public static MyGradeBook initializeWithFile(String filename) throws FileNotFoundException {
-        Scanner scan = new Scanner(new File(filename));
+    public static MyGradeBook initializeWithFile(String filename) {
+        MyGradeBook mygb = MyGradeBook.initialize();
+        return MyGradeBook.initializeWithString(mygb.convertFileToString(filename));
+    }
+    
+    /**
+     * Factory method to construct a MyGradebook that contains the grade book
+     * from startingString
+     * 
+     * @param startingString
+     *            String that contains the initial grade book, which is
+     *            formatted like initial.txt
+     * @return a MyGradebook that contains the grade book from startingString
+     */
+    public static MyGradeBook initializeWithString(String startingString) {
+        Scanner scan = new Scanner(startingString);
         MyGradeBook mygb = MyGradeBook.initialize();
         scan.nextLine();
         Scanner scanNames = new Scanner(scan.nextLine()).useDelimiter("\t");
         scanNames.skip("\t" + "\t" + "\t" + "\t" + "\t");
         Scanner scanTotals = new Scanner(scan.nextLine());
         Scanner scanWeights = new Scanner(scan.nextLine());
-        //mygb.convertToInt(scanTotals);
-        //mygb.convertToInt(scanWeights);
         while (scanTotals.hasNext()) {
             Assignment newAssignment = 
                     new Assignment(
                             scanNames.next(), 
-                            scanTotals.nextInt(), 
-                            scanWeights.nextInt());
+                            scanTotals.nextDouble(), 
+                            scanWeights.nextDouble());
             mygb.assignments.add(newAssignment);
         }
         while (scan.hasNextLine()) {
@@ -104,39 +129,12 @@ public class MyGradeBook {
                                 scanStudent.nextInt());
                 mygb.students.add(newStudent);
                 for (int i = 0; i < mygb.assignments.size(); i++) {
-                    if (scanStudent.hasNextInt()) {
-                        mygb.assignments.get(i).addAssignmentGrade(susername,
-                                new Double(scanStudent.nextInt()));
-                    }
-                    else {
-                        mygb.assignments.get(i).addAssignmentGrade(susername,
-                                scanStudent.nextDouble());
-                    }
+                    mygb.assignments.get(i).addAssignmentGrade(susername,
+                           scanStudent.nextDouble());
                 }
             }
         }
         return mygb;
-    }
-
-    
-    /**
-     * Factory method to construct a MyGradebook that contains the grade book
-     * from startingString
-     * 
-     * @param startingString
-     *            String that contains the initial grade book, which is
-     *            formatted like initial.txt
-     * @return a MyGradebook that contains the grade book from startingString
-     */
-    public static MyGradeBook initializeWithString(String startingString) {
-        // TODO Needs to be made applicable to strings.
-        /*Scanner scan = new Scanner(startingString);
-        while(scan.hasNext()) {
-            if (scan.hasNext("\n")) {   
-            }
-            
-        }*/
-        return null;
     }
 
     
@@ -192,28 +190,7 @@ public class MyGradeBook {
      * @throws FileNotFoundException 
      */
     public void processFile(String filename) throws FileNotFoundException {
-        Scanner scan = new Scanner(new File(filename));
-        while (scan.hasNextLine()) {
-            if (scan.nextLine().equals("ASSIGNMENT")) {
-                new Assignment(scan.nextLine(), scan.nextInt(), 
-                        scan.nextInt());
-            }
-            if (scan.nextLine().equals("STUDENT")) {
-                new Student(scan.nextLine(), scan.nextLine(), scan.nextLine(),
-                        scan.nextLine(), scan.nextInt());
-            }
-            if (scan.nextLine().equals("GRADES_FOR_ASSIGNMENT")) {
-                String a1name = scan.nextLine();
-                Assignment a1 = this.getAssignment(a1name);
-                a1.addAssignmentGrade(scan.nextLine(), scan.nextDouble());
-            }
-            if (scan.nextLine().equals("GRADES_FOR_STUDENT")) {
-                String s1name = scan.nextLine();
-                Student s1 = this.getStudent(s1name);
-                s1.addStudentGrade(this.getAssignment(scan.nextLine()), 
-                        scan.nextDouble());
-            }
-        }
+        this.processString(this.convertFileToString(filename));
     }
 
     /**
@@ -229,15 +206,17 @@ public class MyGradeBook {
      *            gradesForStudent.txt.
      */
     public void processString(String additionalString) {
-        // TODO Needs to be tweaked so that it is applicable to strings.
-        /*Scanner scan = new Scanner(additionalString);
+        Scanner scan = new Scanner(additionalString);
         while (scan.hasNextLine()) {
             if (scan.next().equals("ASSIGNMENT")) {
-                new Assignment(scan.next(), scan.nextInt(), scan.nextInt());
+                Assignment a1 = new Assignment(scan.next(), 
+                        scan.nextDouble(), scan.nextDouble());
+                this.assignments.add(a1);
             }
             if (scan.nextLine().equals("STUDENT")) {
-                new Student(scan.next(), scan.next(), scan.next(), scan.next(),
-                        scan.nextInt());
+                Student s1 = new Student(scan.next(), scan.next(), scan.next(),
+                        scan.next(), scan.nextInt());
+                this.students.add(s1);
             }
             if (scan.nextLine().equals("GRADES_FOR_ASSIGNMENT")) {
                 String a1name = scan.nextLine();
@@ -250,7 +229,7 @@ public class MyGradeBook {
                 s1.addStudentGrade(this.getAssignment(scan.next()), 
                         scan.nextDouble());
             }
-        }*/
+        }
     }
 
     /**
@@ -336,8 +315,8 @@ public class MyGradeBook {
         double assignGrades = 0;
         for (int i = 0; i < this.assignments.size(); i++) {
             double grade = this.assignments.get(i).assignmentGrade(username);
-            int weight = this.assignments.get(i).getWeight();
-            int total = this.assignments.get(i).getTotal();
+            double weight = this.assignments.get(i).getWeight();
+            double total = this.assignments.get(i).getTotal();
             assignGrades += (weight * (grade / total));
             allWeights += weight;
         }
@@ -361,7 +340,6 @@ public class MyGradeBook {
      */
     public HashMap<String, Double> currentGrades() {
         HashMap<String, Double> currents = new HashMap<String, Double>();
-        
         for (int i = 0; i < this.students.size(); i++) {
             String username = this.students.get(i).getStudentUsername();
             currents.put(username, this.currentGrade(username));
@@ -393,8 +371,19 @@ public class MyGradeBook {
      *         alphabetically.
      */
     public String outputCurrentGrades() {
-        //TODO write outputCurrentGrades
-        return "";
+        String formattedList = "CURRENT_GRADES" + "\n";
+        Set<String> usernameSet = this.currentGrades().keySet();
+        List<String> usernames = new ArrayList<String>();
+        for (String user : usernameSet) {
+            usernames.add(user);
+        }
+        Collections.sort(usernames);
+        for (int i = 0; i < this.currentGrades().size(); i++) {
+            String user = usernames.get(i);
+            formattedList += user + "\t" 
+                    + this.currentGrades().get(user) + "\n";
+        }
+        return formattedList;
     }
 
     /**
@@ -404,13 +393,25 @@ public class MyGradeBook {
      *            username for student
      * @return a String that contains the current grades of username. The String
      *         should be formatted like studentGrades.txt---STUDENT_GRADES
-     *         heading, student info, dividers, each assignment (assignment name
-     *         followed by tab and assignment grade), and current grade.
+     *         heading, student info, dividers, each assignment (assignment
+     *         name followed by tab and assignment grade), and current grade.
      *         Assignments are to remain in the same order as given.
      */
     public String outputStudentGrades(String username) {
-        //TODO write outputStudentGrades
-        return "";
+        String formattedList = "STUDENT_GRADES" + "\n" 
+                + this.getStudent(username).toString();
+        String assignsAndGrades = "";
+        for (int i = 0; i < this.assignments.size(); i++) {
+            String aname = this.assignments.get(i).getAssignmentName();
+            assignsAndGrades += aname + "\t" 
+                    + this.assignmentGrade(aname, username) + "\n";
+        }
+        String current = "CURRENT GRADE" + "\t" + this.currentGrade(username);
+        return formattedList 
+                + "----" + "\n"
+                + assignsAndGrades 
+                + "----" + "\n" 
+                + current;
     }
 
     /**
@@ -428,28 +429,28 @@ public class MyGradeBook {
      *         order as given.
      */
     public String outputAssignmentGrades(String assignName) {
-        String agrades = "";
-        int assignTotal = this.getAssignment(assignName).getTotal();
-        int assignWeight = this.getAssignment(assignName).getWeight();
-        String heading = "ASSIGNMENT_GRADES" + "\n" 
+        double assignTotal = this.getAssignment(assignName).getTotal();
+        double assignWeight = this.getAssignment(assignName).getWeight();
+        String formattedList = "ASSIGNMENT_GRADES" + "\n" 
                 + assignName + "\n"
                 + assignTotal + "\n"
                 + assignWeight + "\n"
                 + "----" + "\n";
-        agrades = agrades + heading;
+        
+        // Print out the grade for each student for the given assignment.
         for (int i = 0; i < this.students.size(); i++) {
             String sname = this.students.get(i).getStudentUsername();
             double grade = this.assignmentGrade(assignName, sname);
-            agrades = agrades.concat(sname + "\t" + grade + "\n");
+            formattedList += sname + "\t" + grade + "\n";
         }
         
-        agrades = agrades + "----" + "\n"
+        formattedList += "----" + "\n"
                 + "STATS" + "\n"
                 + "Average" + "\t" + this.average(assignName) + "\n"
                 + "Median" + "\t" + this.median(assignName) + "\n"
                 + "Max" + "\t" + this.max(assignName) + "\n"
                 + "Min" + "\t" + this.min(assignName) + "\n";
-        return agrades;
+        return formattedList;
     }
 
     /**
@@ -472,34 +473,4 @@ public class MyGradeBook {
         }
         return gb;
     }
-    
-    
-    /* Stuff from defunct GradeBook class
-     * 
-    
-    GradeBook(String courseName, String courseNumber, String teacherName, String teacherId) {
-        this.couresNumber = courseName;
-        this.couresNumber = courseNumber;
-        this.teacherName = teacherName;
-        this.teacherId = teacherId;
-    }
-  
-    
-    ArrayList<Double> getListOfScores(Assignment assignment) {
-//        ArrayList<Double> scores = new ArrayList<Double>();
-//        for (Student s : this.students) {
-//            for (Grade g : s.grades) {
-//                if (g.assignment == assignment) {
-//                    scores.add(g.getScore());
-//                }
-//            }
-//        }
-//        return scores;
-        return null;
-    }
-    
-    
-   
-     */
-    
 }

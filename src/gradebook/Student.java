@@ -35,10 +35,10 @@ class Student {
     }
     
     public String toString() {
-        return this.id + "\t"
-                + this.first + "\t" 
-                + this.last + "\t" 
-                + this.advisor + "\t" 
+        return this.id + "\n" 
+                + this.first + "\n" 
+                + this.last + "\n" 
+                + this.advisor + "\n" 
                 + this.year + "\n";
     }
     
