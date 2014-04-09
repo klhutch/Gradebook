@@ -51,6 +51,22 @@ class Student {
     }
     
     
+    @Override
+    public boolean equals(Object obj) {
+        if ((obj == null) || ( !(obj instanceof Student))) {
+            return false;
+        }
+        
+        Student comp = (Student) obj;
+        
+        return (this.id.equals(comp.getStudentUsername()) && 
+                this.first.equals(comp.getFirstName()) &&
+                this.last.equals(comp.getLastName()) &&
+                this.advisor.equals(comp.getAdvisor()) &&
+                this.year == comp.getGradYear());
+    }
+    
+    
     /**
      * Gets the username of this student.
      * @return String The username of this student is returned.
