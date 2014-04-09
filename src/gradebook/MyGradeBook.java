@@ -21,14 +21,15 @@ import java.util.Set;
  *
  */
 public class MyGradeBook {
+    
     /** The name of the course that this gradebook hold students for. */
-    String courseName = "";
+    //String courseName = "";
     /** The CRN for the course that this gradebook hold students for. */
-    String courseNumber = "";
+    //String courseNumber = "";
     /** The teacher's name for the course for this gradebook. */
-    String teacherName = "";
+    //String teacherName = "";
     /** The teacher's username for the course for this gradebook. */
-    String teacherId = "";
+    //String teacherId = "";
     
     
     /** A list of students for this gradebook. */
@@ -558,5 +559,80 @@ public class MyGradeBook {
         return formattedGB;
     }
     
-    //TODO Equals method for gradebook.
+    
+    /** 
+     * method equals
+     * to determine the equivalence of two objects, one of which is
+     * an assignment
+     * 
+     * @param obj - the Object to compare 'this' to
+     * @return boolean - "Is 'this' equivalent to obj?"
+     */
+    @Override
+    public boolean equals(Object obj) {
+        //TODO do we only care about the assignments and students fields?
+        if ((obj == null) || (!(obj instanceof MyGradeBook))) {
+            return false;
+        }
+       
+        MyGradeBook comp = (MyGradeBook) obj;
+        
+        
+        return (this.hasSameStudents(comp) &&
+                this.hasSameAssignments(comp));
+        
+       
+  
+    }
+
+    //TODO there are two sets of methods below that are way too similar
+    
+    private boolean hasSameAssignments(MyGradeBook comp) {
+        
+        Iterator<Assignment> myiter = comp.assignments.iterator();
+        while (myiter.hasNext()) {
+            if ( !(this.hasAssignment(myiter.next()))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean hasAssignment(Assignment assign) {
+        
+        Iterator<Assignment> myiter = this.assignments.iterator();
+        while (myiter.hasNext()) {
+            if (myiter.next().equals(assign)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean hasSameStudents(MyGradeBook comp) {
+        
+        Iterator<Student> myiter = comp.students.iterator();
+        while (myiter.hasNext()) {
+            if ( !(this.hasStudent(myiter.next()))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean hasStudent(Student stud) {
+        
+        Iterator<Student> myiter = this.students.iterator();
+        while (myiter.hasNext()) {
+            if (myiter.next().equals(stud)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
+    
+    
+    
 }
