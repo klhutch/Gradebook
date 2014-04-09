@@ -15,7 +15,7 @@ import java.util.Set;
  * @author Jesse Oberstein (joberste)
  * @author Nathan Goodman (nmg49)
  * 
- * @version 4-4-14
+ * @version April 8th, 2014
  *
  */
 public class MyGradeBook {
@@ -28,6 +28,7 @@ public class MyGradeBook {
     /** The teacher's username for the course for this gradebook. */
     String teacherId = "";
     
+    // TODO Reimplement arraylists of students and assignments as sets.
     /** A list of students for this gradebook. */
     ArrayList<Student> students;
     /** A list of assignments for this gradebook. */
@@ -99,6 +100,7 @@ public class MyGradeBook {
      *            formatted like initial.txt
      * @return a MyGradebook that contains the grade book from startingString
      */
+    // TODO Needs to be shorter.
     public static MyGradeBook initializeWithString(String startingString) {
         Scanner scan = new Scanner(startingString);
         MyGradeBook mygb = MyGradeBook.initialize();
@@ -136,7 +138,31 @@ public class MyGradeBook {
         }
         return mygb;
     }
-
+    
+    /**
+     * Adds an assignment to this gradebook.
+     * 
+     * @param name The name of a given assignment.
+     * @param weight The weight of the given assignment.
+     * @param totalPts The total points for the given assignment.
+     */
+    void addAssignment(String name, double weight, double totalPts) {
+        this.assignments.add(new Assignment(name, weight, totalPts));
+    }
+    
+    /**
+     * Adds a student to this gradebook.
+     * 
+     * @param username The username of a given student.
+     * @param first The first name of the given student.
+     * @param last The last name of the given student.
+     * @param advisor The advisor of the given student.
+     * @param year The graduation year of the given student.
+     */
+    void addStudent(String username, String first, String last, String advisor,
+            int year) {
+        this.students.add(new Student(username, first, last, advisor, year));
+    }
     
     /**
      * Gets an assignment that has the same name as the given one from this
@@ -462,15 +488,45 @@ public class MyGradeBook {
      *         formatted like gradebook.txt. The usernames will be listed
      *         alphabetically.
      */
+    // TODO Needs to be shorter.
     public String outputGradebook() {
-        String gb = "";
-        for (int i = 0; i < this.students.size(); i++) {
-            gb = gb.concat(this.students.get(i).toString());
-        }
-
+        String formattedGB = "GRADEBOOK" + "\n";
+        String assignTabs = "\t" + "\t" + "\t" + "\t";
+        String assignNames = "";
+        String assignTotals = "";
+        String assignWeights = "";
+        formattedGB += assignTabs;
         for (int i = 0; i < this.assignments.size(); i++) {
-            gb = gb.concat(this.assignments.get(i).toString());
+            assignNames += "\t" + this.assignments.get(i).getAssignmentName();
+            assignTotals += "\t" + this.assignments.get(i).getTotal();
+            assignWeights += "\t" + this.assignments.get(i).getWeight();
         }
-        return gb;
+        formattedGB += assignNames + "\n" + assignTabs + assignTotals + "\n" 
+                + assignTabs + assignWeights + "\n";
+        
+        Set<String> usernameSet = this.currentGrades().keySet();
+        List<String> usernames = new ArrayList<String>();
+        for (String user : usernameSet) {
+            usernames.add(user);
+        }
+        Collections.sort(usernames);
+        String studentList = "";
+        for (int i = 0; i < this.students.size(); i++) {
+            String assignGrades = "";
+            String sname = this.students.get(i).getStudentUsername();
+            Student student = this.getStudent(sname);
+            studentList = sname + "\t" + student.getFirstName() + "\t" 
+                    + student.getLastName() + "\t" 
+                    + student.getAdvisor() + "\t"
+                    + student.getGradYear();
+            for (int j = 0; j < this.assignments.size(); j++) {
+                String aname = this.assignments.get(j).getAssignmentName();
+                assignGrades += "\t" + this.assignmentGrade(aname, sname);
+            }
+            formattedGB += studentList + assignGrades + "\n";
+        }
+        return formattedGB;
     }
+    
+    //TODO Equals method for gradebook.
 }

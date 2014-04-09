@@ -12,7 +12,7 @@ import java.util.List;
  * @author Jesse Oberstein (joberste)
  * @author Nathan Goodman (nmg49)
  * 
- * @version 4-4-14
+ * @version April 8th, 2014
  *
  */
 class Assignment {

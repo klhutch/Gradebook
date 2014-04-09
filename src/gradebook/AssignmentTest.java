@@ -5,6 +5,15 @@ import java.io.FileNotFoundException;
 
 import org.junit.Test;
 
+/**Class AssignmentTest
+ * 
+ * @author Kate Hutchinson (klhutch)
+ * @author Jesse Oberstein (joberste)
+ * @author Nathan Goodman (nmg49)
+ * 
+ * @version April 8th, 2014
+ *
+ */
 public class AssignmentTest {
     Assignment quiz1 = new Assignment("Quiz 1", 200.0, 5.0);
     Assignment fakeQuiz = new Assignment("Homework 1", 10.0, 1.0);
@@ -88,5 +97,7 @@ public class AssignmentTest {
         System.out.println(gradebookFile.currentGrade("abetaylor"));
         System.out.println(gradebookFile.outputCurrentGrades());
         System.out.println(gradebookFile.outputStudentGrades("iaartinez"));
+        System.out.println(gradebookString.outputGradebook());
+        System.out.println(MyGradeBook.initializeWithString(gradebookFile.outputGradebook()).outputGradebook());
     }
 }
