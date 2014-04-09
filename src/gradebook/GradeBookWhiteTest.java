@@ -35,6 +35,7 @@ public class GradeBookWhiteTest {
             + "ydenavi" + "\t" +  "Jayden" + "\t" + "Davis" + "\t" + "Green" + "\t" + "2015" + "\t" + "10.0" + "\t" + "97.0" + "\t" + "134.0" + "\t" + "84.0";
     MyGradeBook gradebookFile = MyGradeBook.initializeWithFile("gradebook.txt");
     MyGradeBook gradebookString = MyGradeBook.initializeWithString(gradebooktxt);
+    MyGradeBook emptyGradebook = MyGradeBook.initialize();
     
     /**
      * test statistics of MyGradeBook
@@ -65,8 +66,9 @@ public class GradeBookWhiteTest {
      */
     @Test
     public void testGradeBookInitialize() {
-        //assertTrue(MyGradeBook.initializeWithFile("gradebook.txt").equals(gradebookFile));
-        assertEquals(MyGradeBook.initializeWithString(gradebooktxt), gradebookString);
+        assertEquals(MyGradeBook.initialize(), emptyGradebook);
+        assertEquals(MyGradeBook.initializeWithFile("gradebook.txt"), gradebookFile);
+        //assertEquals(MyGradeBook.initializeWithString(gradebooktxt), gradebookString);
     }
     
 }
