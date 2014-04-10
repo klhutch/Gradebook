@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -19,28 +21,29 @@ import java.util.Set;
  *
  */
 public class MyGradeBook {
-    /** The name of the course that this gradebook hold students for. */
-    String courseName = "";
-    /** The CRN for the course that this gradebook hold students for. */
-    String courseNumber = "";
-    /** The teacher's name for the course for this gradebook. */
-    String teacherName = "";
-    /** The teacher's username for the course for this gradebook. */
-    String teacherId = "";
     
-    // TODO Reimplement arraylists of students and assignments as sets.
+    /** The name of the course that this gradebook hold students for. */
+    //String courseName = "";
+    /** The CRN for the course that this gradebook hold students for. */
+    //String courseNumber = "";
+    /** The teacher's name for the course for this gradebook. */
+    //String teacherName = "";
+    /** The teacher's username for the course for this gradebook. */
+    //String teacherId = "";
+    
+    
     /** A list of students for this gradebook. */
-    ArrayList<Student> students;
+    Set<Student> students;
     /** A list of assignments for this gradebook. */
-    ArrayList<Assignment> assignments;
+    Set<Assignment> assignments;
     
     
     /** Constructor MyGradeBook
      * returns a basic gradebook with all fields empty
      */
     public MyGradeBook() {
-        this.students = new ArrayList<Student>();
-        this.assignments = new ArrayList<Assignment>();
+        this.students = new HashSet<Student>();
+        this.assignments = new HashSet<Assignment>();
     }
     
     /**
@@ -76,6 +79,8 @@ public class MyGradeBook {
         }
         return startingString;
     }
+    
+    
     /**
      * Factory method to construct a MyGradebook that contains the grade book
      * from filename
@@ -130,8 +135,9 @@ public class MyGradeBook {
                                 scanStudent.next(), 
                                 scanStudent.nextInt());
                 mygb.students.add(newStudent);
-                for (int i = 0; i < mygb.assignments.size(); i++) {
-                    mygb.assignments.get(i).addAssignmentGrade(susername,
+                Iterator<Assignment> myit = mygb.assignments.iterator();
+                while (myit.hasNext()) {
+                    myit.next().addAssignmentGrade(susername,
                            scanStudent.nextDouble());
                 }
             }
@@ -174,11 +180,15 @@ public class MyGradeBook {
      *         student's grades.
      */
     Assignment getAssignment(String aname) {
-        for (int i = 0; i < this.assignments.size(); i++) {
-            if (this.assignments.get(i).getAssignmentName().equals(aname)) {
-                return this.assignments.get(i);
-            }
+        Iterator<Assignment> myit = this.assignments.iterator();
+        
+        while (myit.hasNext()) {
+            Assignment current = myit.next();
+            if (current.getAssignmentName().equals(aname)) {
+                return current;
+            } 
         }
+      
         throw new RuntimeException("Assignment not found");
     }
     
@@ -193,10 +203,13 @@ public class MyGradeBook {
      *         basic information, including username.
      */
     Student getStudent(String sname) {
-        for (int i = 0; i < this.students.size(); i++) {
-            if (this.students.get(i).getStudentUsername().equals(sname)) {
-                return this.students.get(i);
-            }
+        Iterator<Student> myit = this.students.iterator();
+        
+        while (myit.hasNext()) {
+            Student current = myit.next();
+            if (current.getStudentUsername().equals(sname)) {
+                return current;
+            } 
         }
         throw new RuntimeException("Student not found");
     }
@@ -339,10 +352,14 @@ public class MyGradeBook {
     public double currentGrade(String username) {
         int allWeights = 0;
         double assignGrades = 0;
-        for (int i = 0; i < this.assignments.size(); i++) {
-            double grade = this.assignments.get(i).assignmentGrade(username);
-            double weight = this.assignments.get(i).getWeight();
-            double total = this.assignments.get(i).getTotal();
+        
+        Iterator<Assignment> myiter = this.assignments.iterator();
+        
+        while (myiter.hasNext()) {
+            Assignment current = myiter.next();
+            double grade = current.assignmentGrade(username);
+            double weight = current.getWeight();
+            double total = current.getTotal();
             assignGrades += (weight * (grade / total));
             allWeights += weight;
         }
@@ -365,9 +382,12 @@ public class MyGradeBook {
      *         of semester.
      */
     public HashMap<String, Double> currentGrades() {
-        HashMap<String, Double> currents = new HashMap<String, Double>();
-        for (int i = 0; i < this.students.size(); i++) {
-            String username = this.students.get(i).getStudentUsername();
+        HashMap<String, Double> currents = new HashMap<String, Double>(); 
+        Iterator<Student> myiter = this.students.iterator();
+        
+        while (myiter.hasNext()) {
+            Student current = myiter.next();
+            String username = current.getStudentUsername();
             currents.put(username, this.currentGrade(username));
         }
         return currents;
@@ -427,8 +447,11 @@ public class MyGradeBook {
         String formattedList = "STUDENT_GRADES" + "\n" 
                 + this.getStudent(username).toString();
         String assignsAndGrades = "";
-        for (int i = 0; i < this.assignments.size(); i++) {
-            String aname = this.assignments.get(i).getAssignmentName();
+        
+        Iterator<Assignment> myiter = this.assignments.iterator();
+        while (myiter.hasNext()) {
+            Assignment current = myiter.next();
+            String aname = current.getAssignmentName();
             assignsAndGrades += aname + "\t" 
                     + this.assignmentGrade(aname, username) + "\n";
         }
@@ -464,8 +487,10 @@ public class MyGradeBook {
                 + "----" + "\n";
         
         // Print out the grade for each student for the given assignment.
-        for (int i = 0; i < this.students.size(); i++) {
-            String sname = this.students.get(i).getStudentUsername();
+        Iterator<Student> myiter = this.students.iterator();
+        while (myiter.hasNext()) {
+            Student current = myiter.next();
+            String sname = current.getStudentUsername();
             double grade = this.assignmentGrade(assignName, sname);
             formattedList += sname + "\t" + grade + "\n";
         }
@@ -496,10 +521,13 @@ public class MyGradeBook {
         String assignTotals = "";
         String assignWeights = "";
         formattedGB += assignTabs;
-        for (int i = 0; i < this.assignments.size(); i++) {
-            assignNames += "\t" + this.assignments.get(i).getAssignmentName();
-            assignTotals += "\t" + this.assignments.get(i).getTotal();
-            assignWeights += "\t" + this.assignments.get(i).getWeight();
+        
+        Iterator<Assignment> assigniter = this.assignments.iterator();
+        while (assigniter.hasNext()) {
+            Assignment current = assigniter.next();
+            assignNames += "\t" + current.getAssignmentName();
+            assignTotals += "\t" + current.getTotal();
+            assignWeights += "\t" + current.getWeight();
         }
         formattedGB += assignNames + "\n" + assignTabs + assignTotals + "\n" 
                 + assignTabs + assignWeights + "\n";
@@ -511,16 +539,21 @@ public class MyGradeBook {
         }
         Collections.sort(usernames);
         String studentList = "";
-        for (int i = 0; i < this.students.size(); i++) {
+        
+        Iterator<Student> stuiter = this.students.iterator();
+        while (stuiter.hasNext()) {
+            Student curStud = stuiter.next();
             String assignGrades = "";
-            String sname = this.students.get(i).getStudentUsername();
+            String sname = curStud.getStudentUsername();
             Student student = this.getStudent(sname);
             studentList = sname + "\t" + student.getFirstName() + "\t" 
                     + student.getLastName() + "\t" 
                     + student.getAdvisor() + "\t"
                     + student.getGradYear();
-            for (int j = 0; j < this.assignments.size(); j++) {
-                String aname = this.assignments.get(j).getAssignmentName();
+            Iterator<Assignment> myiter = this.assignments.iterator();
+            while (myiter.hasNext()) {
+                Assignment curA = myiter.next();
+                String aname = curA.getAssignmentName();
                 assignGrades += "\t" + this.assignmentGrade(aname, sname);
             }
             formattedGB += studentList + assignGrades + "\n";
@@ -528,5 +561,80 @@ public class MyGradeBook {
         return formattedGB;
     }
     
-    //TODO Equals method for gradebook.
+    
+    /** 
+     * method equals
+     * to determine the equivalence of two objects, one of which is
+     * an assignment
+     * 
+     * @param obj - the Object to compare 'this' to
+     * @return boolean - "Is 'this' equivalent to obj?"
+     */
+    @Override
+    public boolean equals(Object obj) {
+        //TODO do we only care about the assignments and students fields?
+        if ((obj == null) || (!(obj instanceof MyGradeBook))) {
+            return false;
+        }
+       
+        MyGradeBook comp = (MyGradeBook) obj;
+        
+        
+        return (this.hasSameStudents(comp) &&
+                this.hasSameAssignments(comp));
+        
+       
+  
+    }
+
+    //TODO there are two sets of methods below that are way too similar
+    
+    private boolean hasSameAssignments(MyGradeBook comp) {
+        
+        Iterator<Assignment> myiter = comp.assignments.iterator();
+        while (myiter.hasNext()) {
+            if ( !(this.hasAssignment(myiter.next()))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean hasAssignment(Assignment assign) {
+        
+        Iterator<Assignment> myiter = this.assignments.iterator();
+        while (myiter.hasNext()) {
+            if (myiter.next().equals(assign)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean hasSameStudents(MyGradeBook comp) {
+        
+        Iterator<Student> myiter = comp.students.iterator();
+        while (myiter.hasNext()) {
+            if ( !(this.hasStudent(myiter.next()))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean hasStudent(Student stud) {
+        
+        Iterator<Student> myiter = this.students.iterator();
+        while (myiter.hasNext()) {
+            if (myiter.next().equals(stud)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
+    
+    
+    
 }
