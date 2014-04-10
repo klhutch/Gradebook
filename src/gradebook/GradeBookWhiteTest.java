@@ -61,14 +61,136 @@ public class GradeBookWhiteTest {
         System.out.println(MyGradeBook.initializeWithString(gradebookFile.outputGradebook()).outputGradebook());
     }
     */
+    
+    /**
+     * tests the manual addition of assignments
+     */
+    @Test
+    public void testAddAssignment() {
+        //TODO write test for addAssignment
+    }
+    
+    /**
+     * tests the manual addition of students
+     */
+    @Test
+    public void testAddStudent() {
+        //TODO write test for addStudent
+    }
+    
+    /**
+     * tests the getAssignment method in MyGradeBook
+     */
+    @Test
+    public void testGetAssignment() {
+        //TODO write test for getAssignment
+    }
+    
+    /**
+     * tests the GetStudent method in MyGradeBook
+     */
+    @Test
+    public void testGetStudent() {
+        //TODO write test for getStudent
+    }
+    
+    
+    /**
+     * tests the processFile method in MyGradeBook
+     */
+    @Test
+    public void testProcessFile() {
+        //TODO write test for processFile
+    }
+    
+    /**
+     * tests the processString method in MyGradeBook
+     */
+    @Test
+    public void testProcessString() {
+        //TODO write test for processString
+    }
+    
+    /**
+     * tests the changeGrade method of MyGradeBook
+     */
+    @Test
+    public void testChangeGrade() {
+        //TODO write test for changeGrade
+    }
+    
+    /**
+     * tests the average method in MyGradeBook
+     */
+    @Test
+    public void testAverage() {
+        //TODO write test for average
+    }
+    
+    /**
+     * tests the median method in MyGradeBook
+     */
+    @Test
+    public void testMedian() {
+        //TODO write test for median
+    }
+    
+    /**
+     * tests the min function in MyGradeBook
+     */
+    @Test
+    public void testMin() {
+        //TODO write test for min
+    }
+    
+    /**
+     * tests the max function in MyGradeBook
+     */
+    @Test
+    public void testMax() {
+        //TODO write test for max
+    }
+    
+    /**
+     * tests the currentGrade method in MyGradeBook
+     */
+    @Test
+    public void testCurrentGrade() {
+        //TODO write test for currentGrade
+    }
+    
+    /**
+     * tests the currentGrades method in MyGradeBook
+     */
+    @Test
+    public void testCurrentGrades() {
+        //TODO write test for currentGrades
+    }
+    
+    /**
+     * tests the assignmentGrade method in MyGradeBook
+     */
+    @Test
+    public void testAssignmentGrade() {
+        //TODO write test for assignmentGrade
+    }
+    
+    
     /**
      * tests the initialization of a MyGradeBook
      */
     @Test
-    public void testGradeBookInitialize() {
+    public void testInitialize() {
+        //initialize
         assertEquals(MyGradeBook.initialize(), emptyGradebook);
-        assertEquals(MyGradeBook.initializeWithFile("gradebook.txt"), gradebookFile);
+        
+        //initialize with file
+        //assertEquals(MyGradeBook.initializeWithFile("gradebook.txt"), gradebookFile);
+        
+        //initialize with string
         //assertEquals(MyGradeBook.initializeWithString(gradebooktxt), gradebookString);
     }
+    
+    //TODO add tests for the output functions
     
 }

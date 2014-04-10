@@ -19,6 +19,7 @@ class Assignment {
     String name;
     Double totalPoints;
     Double weight;
+    
     /**
      * Store a collection of each grade of the assignment. 
      * The String corresponds to the StudentID and the 
