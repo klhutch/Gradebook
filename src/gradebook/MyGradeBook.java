@@ -2,11 +2,13 @@ package gradebook;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
@@ -33,6 +35,7 @@ public class MyGradeBook {
     
     
     /** A list of students for this gradebook. */
+    //TODO change to TreeSet and change the output method to rely directly on the set
     Set<Student> students;
     /** A list of assignments for this gradebook. */
     Set<Assignment> assignments;
@@ -42,8 +45,8 @@ public class MyGradeBook {
      * returns a basic gradebook with all fields empty
      */
     public MyGradeBook() {
-        this.students = new HashSet<Student>();
-        this.assignments = new HashSet<Assignment>();
+        this.students = new LinkedHashSet<Student>();
+        this.assignments = new LinkedHashSet<Assignment>();
     }
     
     /**
@@ -107,21 +110,28 @@ public class MyGradeBook {
      */
     // TODO Needs to be shorter.
     public static MyGradeBook initializeWithString(String startingString) {
-        Scanner scan = new Scanner(startingString);
         MyGradeBook mygb = MyGradeBook.initialize();
+        
+        //Create a scanner
+        Scanner scan = new Scanner(startingString);
         scan.nextLine();
+        
+        //Create a scanner for the lines with names, weights, and totals
         Scanner scanNames = new Scanner(scan.nextLine()).useDelimiter("\t");
-        scanNames.skip("\t" + "\t" + "\t" + "\t" + "\t");
         Scanner scanTotals = new Scanner(scan.nextLine());
         Scanner scanWeights = new Scanner(scan.nextLine());
+        
+        //Tell the Scanner for names to skip a bunch of tabs
+        scanNames.skip("\t" + "\t" + "\t" + "\t" + "\t");
+        
+        //Add assignments to the GradeBook
         while (scanTotals.hasNext()) {
-            Assignment newAssignment = 
-                    new Assignment(
-                            scanNames.next(), 
-                            scanTotals.nextDouble(), 
-                            scanWeights.nextDouble());
-            mygb.assignments.add(newAssignment);
+            mygb.addAssignment(scanNames.next(), 
+                    scanTotals.nextDouble(), 
+                    scanWeights.nextDouble());
         }
+        
+        //Add Students to the GradeBook
         while (scan.hasNextLine()) {
             Scanner scanStudent = new Scanner(scan.nextLine());
             scanStudent.useDelimiter("\t"); 
@@ -135,6 +145,8 @@ public class MyGradeBook {
                                 scanStudent.next(), 
                                 scanStudent.nextInt());
                 mygb.students.add(newStudent);
+                
+                //Add the created Student's grades to each assignment
                 Iterator<Assignment> myit = mygb.assignments.iterator();
                 while (myit.hasNext()) {
                     myit.next().addAssignmentGrade(susername,
@@ -430,6 +442,27 @@ public class MyGradeBook {
                     + this.currentGrades().get(user) + "\n";
         }
         return formattedList;
+    }
+    
+    /**
+     * writes the result from outputCurrentGrades to a file
+     * 
+     * @param filename The name of the file to ouput to
+     */
+    public String fileOutputCurrentGrades(String filename) {
+        try {
+            PrintWriter file = new PrintWriter(filename, "UTF-8");
+            file.println(outputCurrentGrades());
+            file.close();
+            
+            return "Wrote grades to " + filename;
+        } 
+        catch (FileNotFoundException e) {
+            return filename + " was not found";
+        } 
+        catch (UnsupportedEncodingException e) {
+            return "Cannot write file";
+        }
     }
 
     /**
