@@ -100,7 +100,7 @@ public class Console {
             switch(parsedCommand.get(1)) {
             case "assignment":
             case "a":
-//                this.gradebook.addAssignment();
+//                this.gradebook.
                 System.out.println("Added assignment");
                 break;
             case "student":
