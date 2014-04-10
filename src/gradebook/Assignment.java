@@ -97,28 +97,7 @@ class Assignment {
     
     
     
-    /** 
-     * method equals
-     * to determine the equivalence of two objects, one of which is
-     * an assignment
-     * 
-     * @param obj - the Object to compare 'this' to
-     * @return boolean - "Is 'this' equivalent to obj?"
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if ((obj == null) || ( !(obj instanceof Assignment))) {
-            return false;
-        }
-        
-        Assignment comp = (Assignment) obj;
-        return (this.name.equals(comp.name) &&
-                this.weight.equals(comp.weight) &&
-                this.grades.equals(comp.grades) && //FIXME this may be the problem?
-                this.totalPoints.equals(comp.totalPoints));
-           
-      
-    }
+    
     
     public String toString() {
         return this.name + "\n" 
@@ -242,4 +221,37 @@ class Assignment {
             return false;
         }
     }
+    
+    /** 
+     * method equals
+     * to determine the equivalence of two objects, one of which is
+     * an assignment
+     * 
+     * @param obj - the Object to compare 'this' to
+     * @return boolean - "Is 'this' equivalent to obj?"
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if ((obj == null) || ( !(obj instanceof Assignment))) {
+            return false;
+        }
+        
+        Assignment comp = (Assignment) obj;
+        return (this.name.equals(comp.name) &&
+                this.weight.equals(comp.weight) &&
+                this.grades.equals(comp.grades) && 
+                this.totalPoints.equals(comp.totalPoints));
+           
+      
+    }
+    
+    
+    @Override
+    public int hashCode() {
+       return grades.hashCode() + name.hashCode() + 
+               totalPoints.hashCode() + weight.hashCode();
+    }
+    
+     
+    
 }

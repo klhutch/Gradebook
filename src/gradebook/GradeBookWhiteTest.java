@@ -185,7 +185,7 @@ public class GradeBookWhiteTest {
         assertEquals(MyGradeBook.initialize(), emptyGradebook);
         
         //initialize with file
-        //assertEquals(MyGradeBook.initializeWithFile("gradebook.txt"), gradebookFile);
+        assertEquals(MyGradeBook.initializeWithFile("gradebook.txt"), gradebookFile);
         
         //initialize with string
         //assertEquals(MyGradeBook.initializeWithString(gradebooktxt), gradebookString);
