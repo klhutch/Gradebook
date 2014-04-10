@@ -11,8 +11,8 @@ public class GradeBookWhiteTest {
     
     String gradebooktxt = "GRADEBOOK" + "\n"
             + "\t" + "\t" + "\t" + "\t" + "\t" + "Opening Assignment" + "\t" +  "A2" + "\t" + "First Group Project" + "\t" + "Test" + "\n"
-            + "10.0" + "\t" + "100.0" + "\t" + "150.0" + "\t" + "100.0" + "\n"
-            + "1.0" + "\t" + "5.0" + "\t" + "10.0" + "\t" + "25.0" + "\n"
+            + "\t" + "\t" + "\t" + "\t" + "\t" + "10.0" + "\t" + "100.0" + "\t" + "150.0" + "\t" + "100.0" + "\n"
+            + "\t" + "\t" + "\t" + "\t" + "\t" + "1.0" + "\t" + "5.0" + "\t" + "10.0" + "\t" + "25.0" + "\n"
             + "abetaylor" + "\t" + "Isabella" + "\t" +  "Taylor" + "\t" + "Baker" + "\t" + "2016" + "\t" + "8.0" + "\t" + "71.0" + "\t" + "82.0" + "\t" + "65.0" + "\n"
             + "abethes" + "\t" + "Elizabeth" + "\t" + "White Jones" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "6.0" + "\t" +  "90.0" + "\t" + "92.0" + "\t" + "88.0" + "\n"
             + "acit" + "\t" + "Jacob" + "\t" + "Smith" + "\t" + "Scott" + "\t" + "2014" + "\t" + "8.0" + "\t" +  "79.0" + "\t" + "122.0" + "\t" + "85.0" + "\n"
@@ -33,6 +33,11 @@ public class GradeBookWhiteTest {
             + "vaern" + "\t" + "Ava" + "\t" +  "Hernandez" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "6.0" + "\t" + "91.0" + "\t" + "137.0" + "\t" + "83.0" + "\n"
             + "xaod" + "\t" + "Alexander" + "\t" + "Rodriguez" + "\t" + "Adams" + "\t" + "2017" + "\t" + "6.0" + "\t" + "98.0" + "\t" + "93.0" + "\t" + "91.0" + "\n"
             + "ydenavi" + "\t" +  "Jayden" + "\t" + "Davis" + "\t" + "Green" + "\t" + "2015" + "\t" + "10.0" + "\t" + "97.0" + "\t" + "134.0" + "\t" + "84.0";
+    String shortgradebook = "GRADEBOOK" + "\n"
+            + "\t" + "\t" + "\t" + "\t" + "\t" + "HW 1" + "\t" + "Test1" + "\n"
+            + "\t" + "\t" + "\t" + "\t" + "\t" + "10" + "\t" + "100" + "\n"
+            + "\t" + "\t" + "\t" + "\t" + "\t" + "2" + "\t" + "10" + "\n"
+            + "joberste" + "\t" + "Jesse" + "\t" + "Oberstein";
     MyGradeBook gradebookFile = MyGradeBook.initializeWithFile("gradebook.txt");
     MyGradeBook gradebookString = MyGradeBook.initializeWithString(gradebooktxt);
     MyGradeBook emptyGradebook = MyGradeBook.initialize();
@@ -185,10 +190,10 @@ public class GradeBookWhiteTest {
         assertEquals(MyGradeBook.initialize(), emptyGradebook);
         
         //initialize with file
-        //assertEquals(MyGradeBook.initializeWithFile("gradebook.txt"), gradebookFile);
+        assertEquals(MyGradeBook.initializeWithFile("gradebook.txt"), gradebookFile);
         
         //initialize with string
-        //assertEquals(MyGradeBook.initializeWithString(gradebooktxt), gradebookString);
+        assertEquals(MyGradeBook.initializeWithString(gradebooktxt), gradebookString);
     }
     
     //TODO add tests for the output functions
