@@ -17,24 +17,8 @@ public class Console {
         return INSTANCE;
     }
     
-    private ArrayList<String> parseCommand(String command) {
-        ArrayList<String> parsedString = new ArrayList<String>();
-        char[] chars = command.toCharArray();
-        StringBuilder sb = new StringBuilder();
-        for(char c : chars) {
-            if (c != '-') {
-                sb.append(c);
-            }
-            else {
-                parsedString.add(sb.toString());
-                sb = new StringBuilder();
-            }
-        }
-        parsedString.add(sb.toString());
-        return parsedString;
-    }
-    
-    boolean login(Scanner input) {
+    /************PROTECTED FUNCTIONS TO COMMUNICATE WITH USER CLASS***********/
+    protected boolean login(Scanner input) {
         System.out.println("Welcome to the NuForcer© Gradebook Console:");
         System.out.println("Please enter your teacher ID to continue:");
         String teacherId = input.next();
@@ -46,7 +30,7 @@ public class Console {
         return false;
     }
     
-    boolean getCommand(Scanner input) {
+    protected boolean getCommand(Scanner input) {
         System.out.print("$$$$~ ");
         String command = input.nextLine();
         ArrayList<String> parsedCommand = this.parseCommand(command);
@@ -67,12 +51,12 @@ public class Console {
             case "gb output":
                 this.output(parsedCommand);
                 return false;
-            case "gb remove":
-                this.remove(parsedCommand);
-                return false;
-            case "gb update":
-                this.update(parsedCommand);
-                return false;
+//            case "gb remove":
+//                this.remove(parsedCommand);
+//                return false;
+//            case "gb update":
+//                this.update(parsedCommand);
+//                return false;
             case "gb help":
                 this.help(parsedCommand);
                 return false;
@@ -92,6 +76,24 @@ public class Console {
                         + "type \"gb help\" into the console");
             return false;
         }
+    }
+    
+    /********************GENERAL HELPER FUNCTIONS FOR CONSOLE*****************/
+    private ArrayList<String> parseCommand(String command) {
+        ArrayList<String> parsedString = new ArrayList<String>();
+        char[] chars = command.toCharArray();
+        StringBuilder sb = new StringBuilder();
+        for(char c : chars) {
+            if (c != '-') {
+                sb.append(c);
+            }
+            else {
+                parsedString.add(sb.toString());
+                sb = new StringBuilder();
+            }
+        }
+        parsedString.add(sb.toString());
+        return parsedString;
     }
     
     /******************PRIVATE METHODS EXECUTED FROM CONSOLE******************/ 
@@ -134,9 +136,11 @@ public class Console {
         switch (parsedCommand.get(1)) {
         case "assignment":
         case "a":
+            String assignmentName = parsedCommand.get(2);
             break;
         case "student":
         case "s":
+            String studentName = parsedCommand.get(2);
             break;
         default:
             System.out.println("The first parameter of gb calc must specify a an assignment or a student. Type \"gb help -calc\" for more details");
@@ -214,13 +218,14 @@ public class Console {
             case "output":
                 System.out.println("Outputs data for a student, assignment, or a gradebook to a file");
                 System.out.println("FLAGS:");
+                System.out.println("-file (or -f): specifies which file to use");
                 System.out.println("-student (or -s): prints student data to a file");
                 System.out.println("-assignment (or -a): prints assignment data to a file");
                 System.out.println("-gradebook (or -g): print gradebook data to a file");
                 System.out.println("FORMAT:");
-                System.out.println("IF STUDENT: gb output -s -(studentId)");
-                System.out.println("IF ASSIGNMENT: gb output -a -(assignmentName)");
-                System.out.println("IF GRADEBOOK: gb output -g");
+                System.out.println("IF STUDENT: gb output (fileName) -s -(studentId)");
+                System.out.println("IF ASSIGNMENT: gb output (fileName) -a -(assignmentName)");
+                System.out.println("IF GRADEBOOK: gb output (fileName) -g");
                 break;
             case "print":
                 System.out.println("Prints out data for a student, assignment, or a gradebook");
@@ -269,18 +274,51 @@ public class Console {
     }
     
     private void output(ArrayList<String> parsedCommand) {
-        
+        String fileName = parsedCommand.get(1);
+        if (parsedCommand.size() == 2) {
+            //output entire gradebook to file
+        }
+        switch (parsedCommand.get(2)) {
+            case "assignment":
+            case "a":
+                String assignmentName = parsedCommand.get(3);
+                break;
+            case "student":
+            case "s":
+                String studentName = parsedCommand.get(3);
+                break;
+            default:
+                System.out.println(parsedCommand.get(2) + " is not a valid subcommand for gb output." 
+                        + "Please enter a valid command to continue. For a list of valid commands, "
+                        + "type \"gb help -output\" into the console");
+        }
     }
 
     private void print(ArrayList<String> parsedCommand) {
-        
+        if (parsedCommand.size() == 1) {
+            //print entire gradebook
+        }
+        switch (parsedCommand.get(1)) {
+        case "assignment":
+        case "a":
+            String assignmentName = parsedCommand.get(2);
+            break;
+        case "student":
+        case "s":
+            String studentName = parsedCommand.get(2);
+            break;
+        default:
+            System.out.println(parsedCommand.get(2) + " is not a valid subcommand for gb print." 
+                    + "Please enter a valid command to continue. For a list of valid commands, "
+                    + "type \"gb help -print\" into the console");
+        }
     }
     
-    private void remove(ArrayList<String> parsedCommand) {
-        
-    }
-    
-    private void update(ArrayList<String> parsedCommand) {
-        
-    }
+//    private void remove(ArrayList<String> parsedCommand) {
+//        
+//    }
+//    
+//    private void update(ArrayList<String> parsedCommand) {
+//        
+//    }
 }
