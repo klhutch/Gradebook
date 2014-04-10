@@ -21,11 +21,13 @@ public class User {
         Scanner input = new Scanner(System.in);
         Console console = Console.getInstance();
         boolean login = console.login(input);
+        input.nextLine(); //throw away empty space
         boolean quit = false;
         if (login) {
         System.out.println("Enter a command to begin "
                 + "(type \"gb help\" for a list of commands)");
             while (!quit) {
+                System.out.print("$$$$~ ");
                 quit = console.getCommand(input);
             }
         }

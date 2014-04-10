@@ -20,7 +20,7 @@ public class Console {
     /************PROTECTED FUNCTIONS TO COMMUNICATE WITH USER CLASS***********/
     protected boolean login(Scanner input) {
         System.out.println("Welcome to the NuForcer© Gradebook Console:");
-        System.out.println("Please enter your teacher ID to continue:");
+        System.out.print("Please enter your teacher ID to continue:");
         String teacherId = input.next();
         if (teacherId != null) {
             System.out.println("Authentication Successful!");
@@ -31,26 +31,25 @@ public class Console {
     }
     
     protected boolean getCommand(Scanner input) {
-        System.out.print("$$$$~ ");
         String command = input.nextLine();
         ArrayList<String> parsedCommand = this.parseCommand(command);
         if (!(parsedCommand.isEmpty())) {
             switch(parsedCommand.get(0)) {
             case "gb add":
                 this.add(parsedCommand);
-                return false;
+                break;
             case "gb assign":
                 this.assign(parsedCommand);
-                return false;
+                break;
             case "gb calc":
                 this.calc(parsedCommand);
-                return false;
+                break;
             case "gb print":
                 this.print(parsedCommand);
-                return false;
+                break;
             case "gb output":
                 this.output(parsedCommand);
-                return false;
+                break;
 //            case "gb remove":
 //                this.remove(parsedCommand);
 //                return false;
@@ -59,7 +58,7 @@ public class Console {
 //                return false;
             case "gb help":
                 this.help(parsedCommand);
-                return false;
+                break;
             case "gb quit":
                 return true;
             default:
@@ -67,15 +66,14 @@ public class Console {
                         " is not a valid command. Please enter a valid command "
                         + "to continue. For a list of valid commands, "
                         + "type \"gb help\" into the console");
-                return false;
             }
         }
         else {
             System.out.println("Please enter a valid command "
                         + "to continue. For a list of valid commands, "
                         + "type \"gb help\" into the console");
-            return false;
         }
+        return false;
     }
     
     /********************GENERAL HELPER FUNCTIONS FOR CONSOLE*****************/
@@ -88,11 +86,11 @@ public class Console {
                 sb.append(c);
             }
             else {
-                parsedString.add(sb.toString());
+                parsedString.add(sb.toString().trim());
                 sb = new StringBuilder();
             }
         }
-        parsedString.add(sb.toString());
+        parsedString.add(sb.toString().trim());
         return parsedString;
     }
     
