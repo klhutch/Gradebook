@@ -8,5 +8,6 @@ public class TestFileOutput {
         MyGradeBook init = MyGradeBook.initializeWithFile("initial.txt");
         init.fileOutputCurrentGrades("testOutputCurGrades2.txt");
         
+        System.out.println(init.outputCurrentGrades());
     }
 }
