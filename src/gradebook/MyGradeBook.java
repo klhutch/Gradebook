@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -338,46 +341,17 @@ public class MyGradeBook {
         
         Scanner scan = new Scanner(additionalString);
         String firstLine = scan.nextLine();
-        while (scan.hasNextLine()) {
+        
+        //while (scan.hasNextLine()) {
             
-            System.out.println(firstLine);
+            //System.out.println(firstLine);
             if (firstLine.equals(option1)) {
-                System.out.println("Adding assignment");
-                String name = scan.nextLine();
-                System.out.println(name);
-                Double points = scan.nextDouble();
-                System.out.println("" + points);
-                //System.out.println(scan.nextLine());
-                //System.out.println(scan.nextLine());
-                Double weight = scan.nextDouble();
-                System.out.println(weight);
+                this.processStringAssignments(additionalString);
                 
-                this.addAssignment(name, points, weight);
-                
-                firstLine = scan.next();
             }
-            else if (firstLine.substring(0, 
-                    option2.length()).equals(option2)) {
-                System.out.println("adding student");
-                String user = scan.next();
-                System.out.println(user);
-                String first = scan.next();
-                System.out.println(first);
-                String last = scan.next();
-                System.out.println(last);
-                String advisor = scan.next();
-                System.out.println(advisor);
-                
-                int year = scan.nextInt();
-                System.out.println("" + year);
-                
-                
-                this.addStudent(user, first, last, advisor, year);
-                
-                if (scan.hasNext()) {
-                    scan.nextLine();
-                    firstLine = scan.nextLine();
-                }
+            else if (firstLine.substring(
+                    0, option2.length()).equals(option2)) {
+                this.processStringStudents(additionalString);
             }
             
             else if (firstLine.equals(option3)) {
@@ -395,6 +369,60 @@ public class MyGradeBook {
                 System.out.println(scan.nextLine());
                 Double grade = scan.nextDouble();
                 this.changeGrade(assignName, user, grade);
+            }
+        //}
+        scan.close();
+    }
+
+    private void processStringStudents(String additionalString) {
+        Scanner scan = new Scanner(additionalString);
+        
+        
+        while (scan.hasNextLine()) {
+            scan.nextLine();
+            //System.out.println(firstLine);
+            
+        
+            //System.out.println("adding student");
+            String user = scan.next();
+            //System.out.println("User is " + user);
+            String first = scan.next();
+            //System.out.println(first);
+            String last = scan.next();
+            //System.out.println(last);
+            String advisor = scan.next();
+            //System.out.println(advisor);
+            int year = scan.nextInt();
+            //System.out.println("" + year);
+            
+            
+            this.addStudent(user, first, last, advisor, year);
+            
+            if (scan.hasNextLine()) {
+                scan.nextLine();
+            }
+            
+        }        
+    }
+
+    private void processStringAssignments(String additionalString) {
+        Scanner scan = new Scanner(additionalString);
+        
+        while (scan.hasNextLine()) {
+            scan.nextLine();
+            //System.out.println(firstLine);
+            //System.out.println("Adding assignment");
+            String name = scan.nextLine();
+            //System.out.println(name);
+            Double points = scan.nextDouble();
+            //System.out.println("" + points);
+            Double weight = scan.nextDouble();
+            //System.out.println(weight);
+            
+            this.addAssignment(name, points, weight);
+            
+            if (scan.hasNextLine()) {
+                scan.nextLine();
             }
         }
     }
@@ -498,7 +526,13 @@ public class MyGradeBook {
             assignGrades += (weight * (grade / total));
             allWeights += weight;
         }
-        return (assignGrades / allWeights) * 100;
+        double curGrade = (assignGrades / allWeights) * 100;
+        
+        BigDecimal bGrade = new BigDecimal(curGrade);
+        bGrade = bGrade.setScale(13, BigDecimal.ROUND_FLOOR);
+        curGrade = bGrade.doubleValue();
+        
+        return curGrade; 
     }
 
     /**
