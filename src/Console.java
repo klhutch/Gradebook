@@ -1,5 +1,4 @@
 import gradebook.MyGradeBook;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,9 +7,11 @@ public class Console {
     
     private static final Console INSTANCE = new Console();
     private MyGradeBook gradebook;
+    private Scanner input;
     
     private Console() {
-        gradebook = MyGradeBook.initialize();
+        this.gradebook = MyGradeBook.initialize();
+        input = new Scanner(System.in);
     }
     
     public static Console getInstance() {
@@ -18,50 +19,47 @@ public class Console {
     }
     
     /************PROTECTED FUNCTIONS TO COMMUNICATE WITH USER CLASS***********/
-    protected boolean login(Scanner input) {
+    protected boolean login() {
         System.out.println("Welcome to the NuForcer© Gradebook Console:");
         System.out.print("Please enter your teacher ID to continue:");
-        String teacherId = input.next();
+        String teacherId = this.input.next();
         if (teacherId != null) {
             System.out.println("Authentication Successful!");
+            this.input.nextLine(); //throw away empty space
             return true;
         }
         System.out.println("Sorry, you're ID is invalid");
+        input.nextLine(); //throw away empty space
         return false;
     }
     
-    protected boolean getCommand(Scanner input) {
-        String command = input.nextLine();
+    protected boolean getCommand() {
+        String command = this.input.nextLine();
         ArrayList<String> parsedCommand = this.parseCommand(command);
         if (!(parsedCommand.isEmpty())) {
-            switch(parsedCommand.get(0)) {
-            case "gb add":
+            String firstCommand = parsedCommand.get(0);
+            if (firstCommand.equals("gb add")) {
                 this.add(parsedCommand);
-                break;
-            case "gb assign":
+            }
+            else if (firstCommand.equals("gb assign")) {
                 this.assign(parsedCommand);
-                break;
-            case "gb calc":
+            }
+            else if (firstCommand.equals("gb calc")) {
                 this.calc(parsedCommand);
-                break;
-            case "gb print":
+            }
+            else if (firstCommand.equals("gb print")) {
                 this.print(parsedCommand);
-                break;
-            case "gb output":
+            }
+            else if (firstCommand.equals("gb output")) {
                 this.output(parsedCommand);
-                break;
-//            case "gb remove":
-//                this.remove(parsedCommand);
-//                return false;
-//            case "gb update":
-//                this.update(parsedCommand);
-//                return false;
-            case "gb help":
+            }
+            else if (firstCommand.equals("gb help")) {
                 this.help(parsedCommand);
-                break;
-            case "gb quit":
-                return true;
-            default:
+            }
+            else if (firstCommand.equals("gb quit")) {
+                return false;
+            }
+            else {
                 System.out.println(parsedCommand.get(0) + 
                         " is not a valid command. Please enter a valid command "
                         + "to continue. For a list of valid commands, "
@@ -96,19 +94,57 @@ public class Console {
     
     /******************PRIVATE METHODS EXECUTED FROM CONSOLE******************/ 
     private void add(ArrayList<String> parsedCommand) {
-        if (parsedCommand.size() > 1) {
-            switch(parsedCommand.get(1)) {
-            case "assignment":
-            case "a":
-//                this.gradebook.addAssignment();
+        if (parsedCommand.size() >= 1) {
+            String subCommandAdd = parsedCommand.get(1);
+            if (subCommandAdd.equals("assignment") || subCommandAdd.equals("a")) {
+                String name;
+                Double totalPoints;
+                Double weight;
+                if (parsedCommand.size() == 5) {
+                    name = parsedCommand.get(2);
+                    totalPoints = Double.parseDouble(parsedCommand.get(3));
+                    weight = Double.parseDouble(parsedCommand.get(4));
+                }
+                else {
+                    System.out.print("Assignment Name:");
+                    name = input.nextLine();
+                    System.out.print("Total Points:");
+                    totalPoints = Double.parseDouble(input.nextLine());
+                    System.out.print("weight:");
+                    weight = Double.parseDouble(input.nextLine());
+                }
+                this.gradebook.addAssignment(name, totalPoints, weight);
                 System.out.println("Added assignment");
-                break;
-            case "student":
-            case "s":
-//                this.gradebook.addStudent();
+            }
+            else if(subCommandAdd.equals("student") || subCommandAdd.equals("s")) {
+                String username;
+                String first;
+                String last;
+                String advisor;
+                Integer year;
+                if (parsedCommand.size() == 7) {
+                    username = parsedCommand.get(2);
+                    first = parsedCommand.get(3);
+                    last = parsedCommand.get(4);
+                    advisor = parsedCommand.get(5);
+                    year = Integer.parseInt(parsedCommand.get(6));
+                }
+                else {
+                    System.out.print("Student ID: ");
+                    username = input.nextLine();
+                    System.out.print("First Name: ");
+                    first = input.nextLine();
+                    System.out.print("Last Name: ");
+                    last = input.nextLine();
+                    System.out.print("Advisor: ");
+                    advisor = input.nextLine();
+                    System.out.print("Year: ");
+                    year = Integer.parseInt(input.nextLine());
+                }
+                this.gradebook.addStudent(username, first, last, advisor, year);
                 System.out.println("Added student");
-                break;
-            default:
+            }
+            else {
                 System.out.println(parsedCommand.get(1) + " is not a valid sub-command for gb add. "
                     + "Please enter a valid command to continue. For a list of valid commands, "
                     + "type \"gb help -add\" into the console");
@@ -131,16 +167,14 @@ public class Console {
     }
     
     private void calc(ArrayList<String> parsedCommand) {
-        switch (parsedCommand.get(1)) {
-        case "assignment":
-        case "a":
+        String subCommandCalc = parsedCommand.get(1);
+        if (subCommandCalc.equals("assignment") || subCommandCalc.equals("a")) {
             String assignmentName = parsedCommand.get(2);
-            break;
-        case "student":
-        case "s":
+        }
+        else if (subCommandCalc.equals("student") || subCommandCalc.equals("s")) {
             String studentName = parsedCommand.get(2);
-            break;
-        default:
+        }
+        else {
             System.out.println("The first parameter of gb calc must specify a an assignment or a student. Type \"gb help -calc\" for more details");
         }
         
@@ -173,9 +207,9 @@ public class Console {
             System.out.println("gb help");
             System.out.println("gb quit");
         }
-        if (parsedCommand.size() >= 2) {
-            switch (parsedCommand.get(1)) {
-            case "add":
+        else if (parsedCommand.size() >= 2) {
+            String subCommandHelp = parsedCommand.get(1);
+            if (subCommandHelp.equals("add")) {
                 System.out.println("Adds a student or assignment to the gradebook");
                 System.out.println("FLAGS:");
                 System.out.println("-student (or -s): Add a student");
@@ -183,12 +217,12 @@ public class Console {
                 System.out.println("FORMAT:");
                 System.out.println("IF STUDENT: gb add -s (StudentId) (StudentFirstName) (StudentLastName) (Advisor) (Year)");
                 System.out.println("IF ASSIGNMENT: gb add -a");
-                break;
-            case "assign":
+            }
+            else if (subCommandHelp.equals("assign")) {
                 System.out.println("Assign a grade to a student on a particular assignment");
                 System.out.println("FORMAT: gb assign (assignmentName) (StudentId) (grade)");
-                break;
-            case "calc":
+            }
+            else if (subCommandHelp.equals("calc")) {
                 System.out.println("Calculate stats for a student or an assignment");
                 System.out.println("FLAGS:");
                 System.out.println("-student (or -s): Calculate stats for a student");
@@ -196,8 +230,8 @@ public class Console {
                 System.out.println("FORMAT:");
                 System.out.println("IF STUDENT: gb calc -(studentId)");
                 System.out.println("IF ASSIGNMENT: gb calc -(assignmentName)");
-                break;
-            case "help":
+            }
+            else if (subCommandHelp.equals("help")) {
                 System.out.println("Displays help information:");
                 System.out.println("FLAGS:");
                 System.out.println("(none): prints out general help information");
@@ -212,8 +246,8 @@ public class Console {
                 System.out.println("-update: prints out specific information for update");
                 System.out.println("FORMAT:");
                 System.out.println("Example Usage: gb help -add");
-                break;
-            case "output":
+            }
+            else if (subCommandHelp.equals("output")) {
                 System.out.println("Outputs data for a student, assignment, or a gradebook to a file");
                 System.out.println("FLAGS:");
                 System.out.println("-file (or -f): specifies which file to use");
@@ -224,8 +258,8 @@ public class Console {
                 System.out.println("IF STUDENT: gb output (fileName) -s -(studentId)");
                 System.out.println("IF ASSIGNMENT: gb output (fileName) -a -(assignmentName)");
                 System.out.println("IF GRADEBOOK: gb output (fileName) -g");
-                break;
-            case "print":
+            }
+            else if (subCommandHelp.equals("print")) {
                 System.out.println("Prints out data for a student, assignment, or a gradebook");
                 System.out.println("FLAGS:");
                 System.out.println("-student (or -s): prints student data to the console");
@@ -235,35 +269,35 @@ public class Console {
                 System.out.println("IF STUDENT: gb print -s -(studentId)");
                 System.out.println("IF ASSIGNMENT: gb print -a -(assignmentName)");
                 System.out.println("IF GRADEBOOK: gb print -g");
-                break;
-            case "quit":
+            }
+            else if (subCommandHelp.equals("quit")) {
                 System.out.println("Quits the program");
                 System.out.println("FLAGS:");
                 System.out.println("(none)");
                 System.out.println("FORMAT:");
                 System.out.println("gb quit");
-                break;
-            case "remove":
-                System.out.println("Remove a student or assignment from the gradebook");
-                System.out.println("FLAGS:");
-                System.out.println("-student (or -s): Remove student from the gradebook");
-                System.out.println("-assignment (or -a): Remove assignment from the gradebook");
-                System.out.println("FORMAT:");
-                System.out.println("IF STUDENT: gb remove -s -(studentId)");
-                System.out.println("IF ASSIGNMENT: gb remove -a -(assignmentName)");
-                break;
-            case "update":
-                System.out.println("Updates information about a student, assignment, or a gradebook.");
-                System.out.println("FLAGS:");
-                System.out.println("-student (or -s): prints student data to a file");
-                System.out.println("-assignment (or -a): prints assignment data to a file");
-                System.out.println("-gradebook (or -g): print gradebook data to a file");
-                System.out.println("FORMAT:");
-                System.out.println("IF STUDENT: gb update -s -(studentId)");
-                System.out.println("IF ASSIGNMENT: gb output -a -(assignmentName)");
-                System.out.println("IF GRADEBOOK: gb output -g");
-                break;
-            default:
+            }
+//            case "remove":
+//                System.out.println("Remove a student or assignment from the gradebook");
+//                System.out.println("FLAGS:");
+//                System.out.println("-student (or -s): Remove student from the gradebook");
+//                System.out.println("-assignment (or -a): Remove assignment from the gradebook");
+//                System.out.println("FORMAT:");
+//                System.out.println("IF STUDENT: gb remove -s -(studentId)");
+//                System.out.println("IF ASSIGNMENT: gb remove -a -(assignmentName)");
+//                break;
+//            case "update":
+//                System.out.println("Updates information about a student, assignment, or a gradebook.");
+//                System.out.println("FLAGS:");
+//                System.out.println("-student (or -s): prints student data to a file");
+//                System.out.println("-assignment (or -a): prints assignment data to a file");
+//                System.out.println("-gradebook (or -g): print gradebook data to a file");
+//                System.out.println("FORMAT:");
+//                System.out.println("IF STUDENT: gb update -s -(studentId)");
+//                System.out.println("IF ASSIGNMENT: gb output -a -(assignmentName)");
+//                System.out.println("IF GRADEBOOK: gb output -g");
+//                break;
+            else {
                 System.out.println(parsedCommand.get(1) + " is not a valid sub-command for gb help. "
                         + "Please enter a valid command to continue. For a list of valid commands, "
                         + "type \"gb help -help\" into the console");
@@ -276,39 +310,41 @@ public class Console {
         if (parsedCommand.size() == 2) {
             //output entire gradebook to file
         }
-        switch (parsedCommand.get(2)) {
-            case "assignment":
-            case "a":
+        else {
+            String subCommandOutput = parsedCommand.get(1);
+            if (subCommandOutput.equals("assignment") || subCommandOutput.equals("a")) {
                 String assignmentName = parsedCommand.get(3);
-                break;
-            case "student":
-            case "s":
+            }
+            else if (subCommandOutput.equals("student") || subCommandOutput.equals("s")) {
                 String studentName = parsedCommand.get(3);
-                break;
-            default:
+            }
+            else {
                 System.out.println(parsedCommand.get(2) + " is not a valid subcommand for gb output." 
-                        + "Please enter a valid command to continue. For a list of valid commands, "
-                        + "type \"gb help -output\" into the console");
+                    + "Please enter a valid command to continue. For a list of valid commands, "
+                    + "type \"gb help -output\" into the console");
+            }
         }
     }
 
     private void print(ArrayList<String> parsedCommand) {
         if (parsedCommand.size() == 1) {
-            //print entire gradebook
+            System.out.print(gradebook.outputGradebook());
         }
-        switch (parsedCommand.get(1)) {
-        case "assignment":
-        case "a":
-            String assignmentName = parsedCommand.get(2);
-            break;
-        case "student":
-        case "s":
-            String studentName = parsedCommand.get(2);
-            break;
-        default:
-            System.out.println(parsedCommand.get(2) + " is not a valid subcommand for gb print." 
-                    + "Please enter a valid command to continue. For a list of valid commands, "
-                    + "type \"gb help -print\" into the console");
+        else {
+            String subCommandPrint = parsedCommand.get(0);
+            if (subCommandPrint.equals("assignment") || subCommandPrint.equals("a")) {
+                String assignmentName = parsedCommand.get(2);
+                System.out.print(gradebook.outputAssignmentGrades(assignmentName));
+            }
+            else if (subCommandPrint.equals("student") || subCommandPrint.equals("s")) {
+                String username = parsedCommand.get(2);
+                System.out.print(gradebook.outputStudentGrades(username));
+            }
+            else {
+                System.out.println(parsedCommand.get(2) + " is not a valid subcommand for gb print." 
+                        + "Please enter a valid command to continue. For a list of valid commands, "
+                        + "type \"gb help -print\" into the console");
+            }
         }
     }
     
