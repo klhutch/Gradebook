@@ -151,7 +151,7 @@ class Assignment {
                 ans = ((gradelist.get(half - 1) + gradelist.get(half))) / 2;
             }
             else {
-                ans = gradelist.get(half - 1);
+                ans = gradelist.get(half);
             }
             return ans;
     }
