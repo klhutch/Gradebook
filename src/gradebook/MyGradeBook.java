@@ -233,6 +233,7 @@ public class MyGradeBook {
      *            The name of the assignment in question.
      * @return Assignment A way to represent an assignment that contains
      *         student's grades.
+     * @throws RuntimeException if Assignment is not found
      */
     Assignment getAssignment(String aname) throws RuntimeException {
         Iterator<Assignment> myit = this.assignments.iterator();
@@ -256,6 +257,7 @@ public class MyGradeBook {
      *            The username of the student in question.
      * @return Student A way to represent a student that contains a student's
      *         basic information, including username.
+     * @throws RuntimeException if Student is not found
      */
     Student getStudent(String sname) throws RuntimeException {
         Iterator<Student> myit = this.students.iterator();
@@ -298,6 +300,7 @@ public class MyGradeBook {
      *            The String will be formatted like addAssignments.txt,
      *            addStudents.txt, gradesForAssignment1.txt, and
      *            gradesForStudent.txt.
+     * @throws Runtime Exception if header is not equal to one of the options
      */
     public void processString(String additionalString) 
         throws RuntimeException {
@@ -348,7 +351,6 @@ public class MyGradeBook {
     private void processStringGradesAssignments(String additionalString) {
         Scanner scan = new Scanner(additionalString);
         String firstLine = scan.nextLine();
-        System.out.println(firstLine);
 
         String assignName = scan.nextLine();
         
@@ -357,12 +359,10 @@ public class MyGradeBook {
             
             while (scan.hasNextLine()) {
                 String user = scan.nextLine();
-                System.out.println(user);
                 if (user.equals(firstLine)) {
                     break;
                 }
                 Double grade = scan.nextDouble();
-                System.out.println(grade);
                 this.changeGrade(assignName, user, grade);
                 
                 if (scan.hasNextLine()) {
@@ -385,13 +385,10 @@ public class MyGradeBook {
         Scanner scan = new Scanner(additionalString);
         scan.nextLine();
         String user = scan.nextLine();
-        System.out.println(user);
         
         while (scan.hasNextLine()) {
             String aName = scan.nextLine();
-            System.out.println(aName);
             double grade = scan.nextDouble();
-            System.out.println(grade);
             this.changeGrade(aName, user, grade);
             
             if (scan.hasNextLine()) {
