@@ -14,6 +14,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.sun.xml.internal.txw2.IllegalAnnotationException;
+
 /**Class MyGradebook
  * 
  * @author Kate Hutchinson (klhutch)
@@ -330,8 +332,8 @@ public class MyGradeBook {
      *            addStudents.txt, gradesForAssignment1.txt, and
      *            gradesForStudent.txt.
      */
-    public void processString(String additionalString) {
-        String assignName = "";
+    public void processString(String additionalString) 
+        throws RuntimeException {
         
         String option1 = "ASSIGNMENT";
         String option2 = "STUDENT";
@@ -342,59 +344,97 @@ public class MyGradeBook {
         Scanner scan = new Scanner(additionalString);
         String firstLine = scan.nextLine();
         
-        //while (scan.hasNextLine()) {
+    
+        if (firstLine.equals(option1)) {
+            //ASSIGNMENT
+            this.processStringAssignments(additionalString);
             
-            //System.out.println(firstLine);
-            if (firstLine.equals(option1)) {
-                this.processStringAssignments(additionalString);
+        }
+        else if (firstLine.substring(
+                0, option2.length()).equals(option2)) {
+            //STUDENT
+            this.processStringStudents(additionalString);
+        }
+        
+        else if (firstLine.equals(option3)) {
+            //GRADES_FOR_STUDENT
+            this.processStringGradesStudents(additionalString);
+           
+        }
+        else if (firstLine.equals(option4)) { 
+            //GRADES_FOR_ASSIGNMENT 
+            this.processStringGradesAssignments(additionalString);
+        }
+        else {
+            throw new RuntimeException("wrong format");
+        }
+            
+        
+        scan.close();
+    }
+
+    private void processStringGradesAssignments(String additionalString)
+            throws RuntimeException {
+        Scanner scan = new Scanner(additionalString);
+        String firstLine = scan.nextLine();
+        System.out.println(firstLine);
+
+        String assignName = scan.nextLine();
+        
+        
+        while (scan.hasNextLine()) {
+            
+            while (scan.hasNextLine()) {
+                String user = scan.nextLine();
+                System.out.println(user);
+                if (user.equals(firstLine)) {
+                    break;
+                }
+                Double grade = scan.nextDouble();
+                System.out.println(grade);
+                this.changeGrade(assignName, user, grade);
+                
+                if (scan.hasNextLine()) {
+                    scan.nextLine();
+                }
                 
             }
-            else if (firstLine.substring(
-                    0, option2.length()).equals(option2)) {
-                this.processStringStudents(additionalString);
-            }
             
-            else if (firstLine.equals(option3)) {
-                String s1name = scan.nextLine();
-                Student s1 = this.getStudent(s1name);
-                s1.addStudentGrade(this.getAssignment(scan.next()), 
-                        scan.nextDouble());
+        }
+            
+    }
+
+    private void processStringGradesStudents(String additionalString) {
+        
+        Scanner scan = new Scanner(additionalString);
+        scan.nextLine();
+        String user = scan.nextLine();
+        System.out.println(user);
+        
+        while (scan.hasNextLine()) {
+            String aName = scan.nextLine();
+            System.out.println(aName);
+            double grade = scan.nextDouble();
+            System.out.println(grade);
+            this.changeGrade(aName, user, grade);
+            
+            if (scan.hasNextLine()) {
+                scan.nextLine();
             }
-            else { //firstLine.equals("GRADES_FOR_ASSIGNMENT" 
-                if (firstLine.equals(option4)) {
-                    assignName = scan.next();
-                }
-                System.out.println(scan.nextLine());
-                String user = scan.next();
-                System.out.println(scan.nextLine());
-                Double grade = scan.nextDouble();
-                this.changeGrade(assignName, user, grade);
-            }
-        //}
-        scan.close();
+        }  
     }
 
     private void processStringStudents(String additionalString) {
         Scanner scan = new Scanner(additionalString);
         
-        
         while (scan.hasNextLine()) {
             scan.nextLine();
-            //System.out.println(firstLine);
-            
         
-            //System.out.println("adding student");
             String user = scan.next();
-            //System.out.println("User is " + user);
             String first = scan.next();
-            //System.out.println(first);
             String last = scan.next();
-            //System.out.println(last);
             String advisor = scan.next();
-            //System.out.println(advisor);
             int year = scan.nextInt();
-            //System.out.println("" + year);
-            
             
             this.addStudent(user, first, last, advisor, year);
             
@@ -410,14 +450,9 @@ public class MyGradeBook {
         
         while (scan.hasNextLine()) {
             scan.nextLine();
-            //System.out.println(firstLine);
-            //System.out.println("Adding assignment");
             String name = scan.nextLine();
-            //System.out.println(name);
             Double points = scan.nextDouble();
-            //System.out.println("" + points);
             Double weight = scan.nextDouble();
-            //System.out.println(weight);
             
             this.addAssignment(name, points, weight);
             
@@ -448,7 +483,8 @@ public class MyGradeBook {
             return assign.changeGrade(username, newGrade);
         }
         catch (RuntimeException e) {
-            return false; // assignment is not there or student is not there
+            // assignment is not there or student is not there
+            return false; 
         }
         
     }

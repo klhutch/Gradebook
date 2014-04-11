@@ -127,7 +127,7 @@ class Assignment {
      * 
      * @return List<Double> Returns a sorted list of grades.
      */
-    List<Double> sortGrades() {
+    private List<Double> sortGrades() {
         List<Double> gradelist = new ArrayList<Double>();
         for (double grade : this.grades.values()) {
             gradelist.add(grade);
