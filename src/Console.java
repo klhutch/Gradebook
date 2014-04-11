@@ -94,7 +94,7 @@ public class Console {
     
     /******************PRIVATE METHODS EXECUTED FROM CONSOLE******************/ 
     private void add(ArrayList<String> parsedCommand) {
-        if (parsedCommand.size() >= 1) {
+        if (parsedCommand.size() > 1) {
             String subCommandAdd = parsedCommand.get(1);
             if (subCommandAdd.equals("assignment") || subCommandAdd.equals("a")) {
                 String name;
@@ -106,11 +106,11 @@ public class Console {
                     weight = Double.parseDouble(parsedCommand.get(4));
                 }
                 else {
-                    System.out.print("Assignment Name:");
+                    System.out.print("Assignment Name: ");
                     name = input.nextLine();
-                    System.out.print("Total Points:");
+                    System.out.print("Total Points: ");
                     totalPoints = Double.parseDouble(input.nextLine());
-                    System.out.print("weight:");
+                    System.out.print("weight: ");
                     weight = Double.parseDouble(input.nextLine());
                 }
                 this.gradebook.addAssignment(name, totalPoints, weight);
@@ -333,15 +333,36 @@ public class Console {
         else {
             String subCommandPrint = parsedCommand.get(1);
             if (subCommandPrint.equals("assignment") || subCommandPrint.equals("a")) {
-                String assignmentName = parsedCommand.get(2);
-                System.out.print(gradebook.outputAssignmentGrades(assignmentName));
+                if (parsedCommand.size() > 2) {
+                    String assignmentName = parsedCommand.get(2);
+                    try {
+                        System.out.print(gradebook.outputAssignmentGrades(assignmentName));
+                    }
+                    catch (RuntimeException ex) {
+                        System.out.println("The assignment name you looked up does not exist!");
+                    }
+                }
+                else {
+                    System.out.println("The assignment name you entered is not valid");
+                }
+                
             }
             else if (subCommandPrint.equals("student") || subCommandPrint.equals("s")) {
-                String username = parsedCommand.get(2);
-                System.out.print(gradebook.outputStudentGrades(username));
+                if (parsedCommand.size() > 2) {
+                    String username = parsedCommand.get(2);
+                    try {
+                        System.out.print(gradebook.outputStudentGrades(username));
+                    }
+                    catch (RuntimeException ex) {
+                        System.out.println("The student name you entered is not valid");
+                    }
+                }
+                else {
+                    System.out.println("You must enter a a student name");
+                }
             }
             else {
-                System.out.println(parsedCommand.get(2) + " is not a valid subcommand for gb print." 
+                System.out.println(parsedCommand.get(1) + " is not a valid subcommand for gb print." 
                         + "Please enter a valid command to continue. For a list of valid commands, "
                         + "type \"gb help -print\" into the console");
             }
