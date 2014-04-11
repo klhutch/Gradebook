@@ -33,7 +33,6 @@ public class MyGradeBook {
     
     
     /** A list of students for this gradebook. */
-    //TODO change to TreeSet and change the output method to rely directly on the set
     Set<Student> students;
     /** A list of assignments for this gradebook. */
     Set<Assignment> assignments;
@@ -447,10 +446,10 @@ public class MyGradeBook {
     public String fileOutputCurrentGrades(String filename) {
         try {
             PrintWriter file = new PrintWriter(filename, "UTF-8");
-            file.println(outputCurrentGrades());
+            file.println(this.outputCurrentGrades());
             file.close();
             
-            return "Wrote grades to " + filename;
+            return "Wrote current grades to " + filename;
         } 
         catch (FileNotFoundException e) {
             return filename + " was not found";
@@ -489,6 +488,28 @@ public class MyGradeBook {
                 + assignsAndGrades 
                 + "----" + "\n" 
                 + current;
+    }
+    
+    /**
+     * writes the result from outputCurrentGrades to a file
+     * 
+     * @param user The username of the Student to get grades of
+     * @param filename The name of the file to ouput to
+     */
+    public String fileOutputStudentGrades(String user, String filename) {
+        try {
+            PrintWriter file = new PrintWriter(filename, "UTF-8");
+            file.println(this.outputStudentGrades(user));
+            file.close();
+            
+            return "Wrote student grades to " + filename;
+        } 
+        catch (FileNotFoundException e) {
+            return filename + " was not found";
+        } 
+        catch (UnsupportedEncodingException e) {
+            return "Cannot write file";
+        }
     }
 
     /**
@@ -531,6 +552,28 @@ public class MyGradeBook {
                 + "Min" + "\t" + this.min(assignName) + "\n";
         return formattedList;
     }
+    
+    /**
+     * writes the result from outputAssignmentGrades to a file
+     * 
+     * @param aName The name of the Assignment to get grades of
+     * @param fName The name of the file to ouput to
+     */
+    public String fileOutputAssignmentGrades(String aName, String fName) {
+        try {
+            PrintWriter file = new PrintWriter(fName, "UTF-8");
+            file.println(this.outputAssignmentGrades(aName));
+            file.close();
+            
+            return "Wrote assignment grades to " + file;
+        } 
+        catch (FileNotFoundException e) {
+            return fName + " was not found";
+        } 
+        catch (UnsupportedEncodingException e) {
+            return "Cannot write file";
+        }
+    }
 
     /**
      * Provide a String that contains the current grade book. This String could
@@ -560,12 +603,7 @@ public class MyGradeBook {
         formattedGB += assignNames + "\n" + assignTabs + assignTotals + "\n" 
                 + assignTabs + assignWeights + "\n";
         
-        /*Set<String> usernameSet = this.currentGrades().keySet();
-        List<String> usernames = new ArrayList<String>();
-        for (String user : usernameSet) {
-            usernames.add(user);
-        }
-        Collections.sort(usernames);*/
+
         String studentList = "";
         
         Iterator<Student> stuiter = this.students.iterator();
@@ -590,6 +628,27 @@ public class MyGradeBook {
     }
     
     
+    /**
+     * writes the result from outputGradebook to a file
+     * 
+     * @param filename The name of the file to ouput to
+     */
+    public String fileOutputGradebook(String filename) {
+        try {
+            PrintWriter file = new PrintWriter(filename, "UTF-8");
+            file.println(this.outputGradebook());
+            file.close();
+            
+            return "Wrote gradebook to " + filename;
+        } 
+        catch (FileNotFoundException e) {
+            return filename + " was not found";
+        } 
+        catch (UnsupportedEncodingException e) {
+            return "Cannot write file";
+        }
+    }
+    
     /** 
      * method equals
      * to determine the equivalence of two objects, one of which is
@@ -600,7 +659,6 @@ public class MyGradeBook {
      */
     @Override
     public boolean equals(Object obj) {
-        //TODO do we only care about the assignments and students fields?
         if ((obj == null) || (!(obj instanceof MyGradeBook))) {
             return false;
         }
