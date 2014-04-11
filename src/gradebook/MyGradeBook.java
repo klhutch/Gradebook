@@ -4,12 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
@@ -431,19 +428,7 @@ public class MyGradeBook {
      */
     public String outputCurrentGrades() {
         String formattedList = "CURRENT_GRADES" + "\n";
-        /*Set<String> usernameSet = this.currentGrades().keySet();
-        List<String> usernames = new ArrayList<String>();
-        for (String user : usernameSet) {
-            usernames.add(user);
-        }
-        Collections.sort(usernames);
-        for (int i = 0; i < this.currentGrades().size(); i++) {
-            String user = usernames.get(i);
-            formattedList += user + "\t" 
-                    + this.currentGrades().get(user) + "\n";
-        }
-        return formattedList;
-        */
+        
         Iterator<Student> myiter = this.students.iterator();
         while (myiter.hasNext()) {
             String user = myiter.next().getStudentUsername();
@@ -575,12 +560,12 @@ public class MyGradeBook {
         formattedGB += assignNames + "\n" + assignTabs + assignTotals + "\n" 
                 + assignTabs + assignWeights + "\n";
         
-        Set<String> usernameSet = this.currentGrades().keySet();
+        /*Set<String> usernameSet = this.currentGrades().keySet();
         List<String> usernames = new ArrayList<String>();
         for (String user : usernameSet) {
             usernames.add(user);
         }
-        Collections.sort(usernames);
+        Collections.sort(usernames);*/
         String studentList = "";
         
         Iterator<Student> stuiter = this.students.iterator();
