@@ -28,7 +28,7 @@ public class Console {
     /**
      * Returns a final instance of the Console 
      * class to ensure that only one Console is created
-     * @return
+     * @return a single instance of the console class
      */
     public static Console getInstance() {
         return INSTANCE;
@@ -122,7 +122,7 @@ public class Console {
         ArrayList<String> parsedString = new ArrayList<String>();
         char[] chars = command.toCharArray();
         StringBuilder sb = new StringBuilder();
-        for(char c : chars) {
+        for (char c : chars) {
             if (c != '-') {
                 sb.append(c);
             }
@@ -165,7 +165,7 @@ public class Console {
                 this.gradebook.addAssignment(name, totalPoints, weight);
                 System.out.println("Added assignment");
             }
-            else if(subCommandAdd.equals("student") 
+            else if (subCommandAdd.equals("student") 
                     || subCommandAdd.equals("s")) {
                 String username;
                 String first;
