@@ -12,6 +12,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**Class MyGradebook
  * 
@@ -45,7 +46,7 @@ public class MyGradeBook {
      * returns a basic gradebook with all fields empty
      */
     public MyGradeBook() {
-        this.students = new LinkedHashSet<Student>();
+        this.students = new TreeSet<Student>(new MyStudentComparator());
         this.assignments = new LinkedHashSet<Assignment>();
     }
     
