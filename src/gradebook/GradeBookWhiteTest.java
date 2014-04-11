@@ -91,6 +91,17 @@ public class GradeBookWhiteTest {
             + "nmg149" + "\t" + "Nathan" + "\t" + "Goodman" + "\t" + "Hughes"
             + "\t" + "2017" + "\t" + "5" + "\t" + "85";
     
+    private String shortGradebookOut = "GRADEBOOK" + "\n"
+            + "\t" + "\t" + "\t" + "\t" + "\t" + "HW1" + "\t" + "Test1" + "\n"
+            + "\t" + "\t" + "\t" + "\t" + "\t" + "10.0" + "\t" + "100.0" + "\n"
+            + "\t" + "\t" + "\t" + "\t" + "\t" + "2.0" + "\t" + "10.0" + "\n"
+            + "joberste" + "\t" + "Jesse" + "\t" + "Oberstein" + "\t" + "Mazor"
+            + "\t" + "2017" + "\t" + "8.0" + "\t" + "95.0" + "\n"
+            + "klhutch" + "\t" + "Kate" + "\t" + "Hutchinson" + "\t" + "Hughes"
+            + "\t" + "2016" + "\t" + "10.0" + "\t" + "100.0" + "\n"
+            + "nmg149" + "\t" + "Nathan" + "\t" + "Goodman" + "\t" + "Hughes"
+            + "\t" + "2017" + "\t" + "5.0" + "\t" + "85.0" + "\n";
+    
     private String currentGradebook = "CURRENT_GRADES" + "\n" +
             "abetaylor" + "\t" + "63.5772357723577" + "\n" +
             "abethes" + "\t" + "81.0569105691057" + "\n" +
@@ -127,13 +138,35 @@ public class GradeBookWhiteTest {
             + "gailarti" + "\t" + "Abigail" + "\t" + "Martin" + "\t" + "Green" + "\t" + "2015" + "\t" + "7" + "\t" + "79" + "\n"
             + "marson" + "\t" + "Emma" + "\t" + "Anderson" + "\t" + "Green" + "\t" + "2015" + "\t" + "7" + "\t" + "81" + "\n"
             + "michaeia" + "\t" + "Michael" + "\t" + "Garcia" + "\t" + "Baker" + "\t" + "2016" + "\t" + "5" + "\t" + "100" + "\n"
-            + "mijacks" + "\t" +  "Mia Jackson" + "\t" + "Baker" + "\t" + "2016" + "\t" + "5" + "\t" + "50" + "\n"
+            + "mijacks" + "\t" +  "Mia" + "\t" + "Jackson" + "\t" + "Baker" + "\t" + "2016" + "\t" + "5" + "\t" + "50" + "\n"
             + "oliviaas" + "\t" + "Olivia" + "\t" + "Thomas" + "\t" + "Adams" + "\t" + "2017" + "\t" + "6" + "\t" + "94" + "\n"
             + "onon" + "\t" + "Mason" + "\t" + "Johnson" + "\t" + "Green" + "\t" + "2015" + "\t" + "10" + "\t" + "81" + "\n"
             + "onson" + "\t" + "Madison" + "\t" + "Thompson" + "\t" + "Adams" + "\t" + "2017" + "\t" + "9" + "\t" + "89" + "\n"
             + "thms" + "\t" + "Ethan" + "\t" + "Williams" + "\t" + "Baker" + "\t" + "2016" + "\t" + "8" + "\t" + "89" + "\n"
             + "vaern" + "\t" + "Ava" + "\t" +  "Hernandez" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "6" + "\t" + "91" + "\n"
             + "ydenavi" + "\t" + "Jayden" + "\t" + "Davis" + "\t" + "Green" + "\t" + "2015" + "\t" + "10" + "\t" + "97" + "\n";
+    
+    private String initialtxtOut = "GRADEBOOK" + "\n" + "\t" + "\t" + "\t" + "\t"
+            + "\t" + "Opening Assignment" + "\t" + "A2" + "\n" + "\t" + "\t"
+            + "\t" + "\t" + "\t" + "10.0" + "\t" + "100.0" + "\n" + "\t" + "\t"
+            + "\t" + "\t" + "\t" + "1.0" + "\t" + "5.0" + "\n"
+            + "abetaylor" + "\t" + "Isabella" + "\t" + "Taylor" + "\t" + "Baker" + "\t" + "2016" + "\t" + "8.0" + "\t" + "71.0" + "\n"
+            + "abethes" + "\t" + "Elizabeth" + "\t" + "White Jones" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "6.0" + "\t" + "90.0" + "\n"
+            + "acit" + "\t" + "Jacob" + "\t" + "Smith" + "\t" + "Scott" + "\t" + "2014" + "\t" + "8.0" + "\t" + "79.0" + "\n"
+            + "ahrown" + "\t" + "Noah" + "\t" + "Brown" + "\t" + "Adams" + "\t" + "2017" + "\t" + "8.0" + "\t" + "85.0" + "\n"
+            + "amller" + "\t" + "Liam" + "\t" + "Miller" + "\t" + "Scott" + "\t" + "2014" + "\t" + "5.0" + "\t" + "74.0" + "\n"
+            + "are" + "\t" + "Emily Ann" + "\t" + "Moore" + "\t" + "Scott" + "\t" + "2014" + "\t" + "9.0" + "\t" + "58.0" + "\n"
+            + "enwilson" + "\t" + "Aiden" + "\t" + "Wilson" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "8.0" + "\t" + "83.0" + "\n"
+            + "gailarti" + "\t" + "Abigail" + "\t" + "Martin" + "\t" + "Green" + "\t" + "2015" + "\t" + "7.0" + "\t" + "79.0" + "\n"
+            + "marson" + "\t" + "Emma" + "\t" + "Anderson" + "\t" + "Green" + "\t" + "2015" + "\t" + "7.0" + "\t" + "81.0" + "\n"
+            + "michaeia" + "\t" + "Michael" + "\t" + "Garcia" + "\t" + "Baker" + "\t" + "2016" + "\t" + "5.0" + "\t" + "100.0" + "\n"
+            + "mijacks" + "\t" +  "Mia" + "\t" + "Jackson" + "\t" + "Baker" + "\t" + "2016" + "\t" + "5.0" + "\t" + "50.0" + "\n"
+            + "oliviaas" + "\t" + "Olivia" + "\t" + "Thomas" + "\t" + "Adams" + "\t" + "2017" + "\t" + "6.0" + "\t" + "94.0" + "\n"
+            + "onon" + "\t" + "Mason" + "\t" + "Johnson" + "\t" + "Green" + "\t" + "2015" + "\t" + "10.0" + "\t" + "81.0" + "\n"
+            + "onson" + "\t" + "Madison" + "\t" + "Thompson" + "\t" + "Adams" + "\t" + "2017" + "\t" + "9.0" + "\t" + "89.0" + "\n"
+            + "thms" + "\t" + "Ethan" + "\t" + "Williams" + "\t" + "Baker" + "\t" + "2016" + "\t" + "8.0" + "\t" + "89.0" + "\n"
+            + "vaern" + "\t" + "Ava" + "\t" +  "Hernandez" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "6.0" + "\t" + "91.0" + "\n"
+            + "ydenavi" + "\t" + "Jayden" + "\t" + "Davis" + "\t" + "Green" + "\t" + "2015" + "\t" + "10.0" + "\t" + "97.0" + "\n";
 
     // Example Gradebooks
     private MyGradeBook emptyGradebook = MyGradeBook.initialize();
@@ -483,8 +516,8 @@ public class GradeBookWhiteTest {
     public void testAssignmentGrade() {
         assertEquals(gradebookFile.outputGradebook(), gradebooktxt);
         assertEquals(gradebookString.outputGradebook(), gradebooktxt);
-        assertEquals(initialFile.outputGradebook(), initialtxt);
-        assertEquals(shortGradebookString.outputGradebook(), shortGradebook);
+        assertEquals(initialFile.outputGradebook(), initialtxtOut);
+        assertEquals(shortGradebookString.outputGradebook(), shortGradebookOut);
     }
     
     //TODO add tests for the output functions
