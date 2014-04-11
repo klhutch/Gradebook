@@ -267,20 +267,26 @@ public class MyGradeBook {
     public void processString(String additionalString) {
         Scanner scan = new Scanner(additionalString);
         while (scan.hasNextLine()) {
-            if (scan.next().equals("ASSIGNMENT")) {
-                this.addAssignment(scan.next(), 
-                        scan.nextDouble(), scan.nextDouble());
+            String firstLine = scan.nextLine();
+            if (firstLine.equals("ASSIGNMENT")) {
+                String name = scan.next();
+                scan.nextLine();
+                Double points = scan.nextDouble();
+                scan.nextLine();
+                Double weight = scan.nextDouble();
+                
+                this.addAssignment(name, points, weight);
             }
-            if (scan.nextLine().equals("STUDENT")) {
+            if (firstLine.equals("STUDENT")) {
                 this.addStudent(scan.next(), scan.next(), scan.next(),
                         scan.next(), scan.nextInt());
             }
-            if (scan.nextLine().equals("GRADES_FOR_ASSIGNMENT")) {
+            if (firstLine.equals("GRADES_FOR_ASSIGNMENT")) {
                 String a1name = scan.nextLine();
                 Assignment a1 = this.getAssignment(a1name);
                 a1.addAssignmentGrade(scan.next(), scan.nextDouble());
             }
-            if (scan.nextLine().equals("GRADES_FOR_STUDENT")) {
+            if (firstLine.equals("GRADES_FOR_STUDENT")) {
                 String s1name = scan.nextLine();
                 Student s1 = this.getStudent(s1name);
                 s1.addStudentGrade(this.getAssignment(scan.next()), 
