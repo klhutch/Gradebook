@@ -377,21 +377,26 @@ public class MyGradeBook {
             throws RuntimeException {
         Scanner scan = new Scanner(additionalString);
         String firstLine = scan.nextLine();
-        scan.nextLine();
-        String assignName = scan.next();
+        System.out.println(firstLine);
+
+        String assignName = scan.nextLine();
         
         
         while (scan.hasNextLine()) {
             
             while (scan.hasNextLine()) {
-                String user = scan.next();
-                
+                String user = scan.nextLine();
+                System.out.println(user);
                 if (user.equals(firstLine)) {
                     break;
                 }
-                scan.nextLine();
                 Double grade = scan.nextDouble();
+                System.out.println(grade);
                 this.changeGrade(assignName, user, grade);
+                
+                if (scan.hasNextLine()) {
+                    scan.nextLine();
+                }
                 
             }
             
