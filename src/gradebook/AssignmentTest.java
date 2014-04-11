@@ -15,31 +15,28 @@ import org.junit.Test;
  *
  */
 public class AssignmentTest {
-    Assignment quiz1 = new Assignment("Quiz 1", 200.0, 5.0);
-    Assignment fakeQuiz = new Assignment("Homework 1", 10.0, 1.0);
-    Assignment hw1 = new Assignment("Homework 1", 10.0, 1.0);
-    Assignment hw2test = new Assignment("Homework 1", 10.0, 1.0);
-    
+    Assignment hw1 = new Assignment("HW1", 10.0, 2.0);
+    Assignment hw1copy = new Assignment("HW1", 10.0, 2.0);
+    Assignment test1 = new Assignment("Test1", 100.0, 10.0);
     
     /**
      * creates grades to be used in the assignments
      */
-    private void createAssignmentsGrades() {
-        quiz1.addAssignmentGrade("joberste", 42.0);
-        quiz1.addAssignmentGrade("nmg146", 100.0);
-        quiz1.addAssignmentGrade("klhutch", 200.0);
-
-        fakeQuiz.addAssignmentGrade("joberste", 42.0);
-        fakeQuiz.addAssignmentGrade("nmg146", 100.0);
-        fakeQuiz.addAssignmentGrade("klhutch", 200.0);
-
-        hw1.addAssignmentGrade("joberste", 42.0);
-        hw1.addAssignmentGrade("nmg146", 100.0);
-        hw1.addAssignmentGrade("klhutch", 200.0);
-
-        hw2test.addAssignmentGrade("joberste", 42.0);
-        hw2test.addAssignmentGrade("nmg146", 100.0);
-        hw2test.addAssignmentGrade("klhutch", 200.0);
+    @Test
+    public void testAssignmentAccessor() {
+        assertEquals(hw1.getAssignmentName(), "HW1");
+        assertTrue(hw1.getTotal().equals(10.0));
+        assertTrue(hw1.getWeight().equals(2.0));
+        
+        assertEquals(test1.getAssignmentName(), "Test1");
+        assertTrue(test1.getTotal().equals(100.0));
+        assertTrue(test1.getWeight().equals(10.0));
+    }
+    
+    @Test
+    public void testAddGrades() {
+        test1.addAssignmentGrade("joberste", 87.0);
+        assertTrue(test1.grades.get("joberste").equals(87.0));
     }
 
     /** 
@@ -47,10 +44,7 @@ public class AssignmentTest {
      */
     @Test
     public void testAssignmentEquals() {
-        assertFalse(hw1.equals(quiz1));
-        assertFalse(quiz1.equals(fakeQuiz));
-        assertTrue(hw1.equals(hw2test));
+        assertTrue(hw1.equals(hw1));
+        assertFalse(test1.equals(hw1));
     }
-    
-  
 }
