@@ -726,6 +726,12 @@ public class MyGradeBook {
         return false;
     }
     
+    @Override
+    public String toString() {
+        return this.outputGradebook();
+        
+    }
+    
     
     
     
