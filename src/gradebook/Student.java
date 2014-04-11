@@ -38,6 +38,7 @@ class Student {
         this.year = year;
     }
     
+    @Override
     public String toString() {
         return this.id + "\n" 
                 + this.first + "\n" 
