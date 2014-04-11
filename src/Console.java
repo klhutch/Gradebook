@@ -19,8 +19,8 @@ public class Console {
     }
     
     /************PROTECTED FUNCTIONS TO COMMUNICATE WITH USER CLASS***********/
-    protected boolean login() {
-        System.out.println("Welcome to the NuForcer© Gradebook Console:");
+    boolean login() {
+        System.out.println("Welcome to the KAKO© GBS Console:");
         System.out.print("Please enter your teacher ID to continue:");
         String teacherId = this.input.next();
         if (teacherId != null) {
@@ -33,7 +33,7 @@ public class Console {
         return false;
     }
     
-    protected boolean getCommand() {
+    boolean getCommand() {
         String command = this.input.nextLine();
         ArrayList<String> parsedCommand = this.parseCommand(command);
         if (!(parsedCommand.isEmpty())) {
@@ -157,9 +157,10 @@ public class Console {
     
     private void assign(ArrayList<String> parsedCommand) {
         if (parsedCommand.size() == 4) {
-            String assignment = parsedCommand.get(1);
-            String studentId = parsedCommand.get(2);
-            Double grade = Double.parseDouble(parsedCommand.get(3));
+            String assignmentName = parsedCommand.get(1);
+            String username = parsedCommand.get(2);
+            Double newGrade = Double.parseDouble(parsedCommand.get(3));
+            this.gradebook.changeGrade(assignmentName, username, newGrade);
         }
         else {
             System.out.println("gb assign must take an assignment, studentId, and grade. Please enter the correct parameters. Type \"gb help -assign\" for more details");
@@ -170,28 +171,32 @@ public class Console {
         String subCommandCalc = parsedCommand.get(1);
         if (subCommandCalc.equals("assignment") || subCommandCalc.equals("a")) {
             String assignmentName = parsedCommand.get(2);
+            String statsField = parsedCommand.get(3);
+            if (statsField == "mean") {
+                System.out.println(this.gradebook.average(assignmentName));
+            }
+            else if (statsField == "median") {
+                System.out.println(this.gradebook.median(assignmentName));
+            }
+            else if (statsField == "min") {
+                System.out.println(this.gradebook.min(assignmentName));
+            }
+            else if (statsField == "max") {
+                System.out.println(this.gradebook.max(assignmentName));
+            }
+            else {
+                System.out.println(parsedCommand.get(3) + " is not a valid sub-command for gb calc. "
+                        + "Please enter a valid command to continue. For a list of valid commands, "
+                        + "type \"gb help -calc\" into the console");
+            }
         }
         else if (subCommandCalc.equals("student") || subCommandCalc.equals("s")) {
             String studentName = parsedCommand.get(2);
+            
         }
         else {
             System.out.println("The first parameter of gb calc must specify a an assignment or a student. Type \"gb help -calc\" for more details");
         }
-        
-//        switch (parsedCommand.get(1)) {
-//        case "mean":
-//            break;
-//        case "median":
-//            break;
-//        case "min":
-//            break;
-//        case "max":
-//            break;
-//        case "range":
-//            break;
-//        default:
-//            System.out.println();
-//        }
     }
     
     private void help(ArrayList<String> parsedCommand) {
@@ -308,7 +313,7 @@ public class Console {
     private void output(ArrayList<String> parsedCommand) {
         String fileName = parsedCommand.get(1);
         if (parsedCommand.size() == 2) {
-            //output entire gradebook to file
+//            this.gradebook.
         }
         else {
             String subCommandOutput = parsedCommand.get(1);
