@@ -5,16 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
-
-import com.sun.xml.internal.txw2.IllegalAnnotationException;
 
 /**Class MyGradebook
  * 
@@ -98,7 +94,8 @@ public class MyGradeBook {
      */
     public static MyGradeBook initializeWithFile(String filename) {
         MyGradeBook mygb = MyGradeBook.initialize();
-        return MyGradeBook.initializeWithString(mygb.convertFileToString(filename));
+        return MyGradeBook.initializeWithString(mygb.
+                convertFileToString(filename));
     }
     
     /**
@@ -110,7 +107,6 @@ public class MyGradeBook {
      *            formatted like initial.txt
      * @return a MyGradebook that contains the grade book from startingString
      */
-    // TODO Needs to be shorter.
     public static MyGradeBook initializeWithString(String startingString) {
         MyGradeBook mygb = MyGradeBook.initialize();
         
@@ -118,53 +114,10 @@ public class MyGradeBook {
         Scanner scan = new Scanner(startingString);
         scan.nextLine();
         
-        //Separate the next three lines for names, totals, and weights
-        //String names = scan.nextLine();
-        //String totals = scan.nextLine();
-        //String weights = scan.nextLine();
-        
-        initializeWithStringAssignments(mygb, scan);
-        
-        //Create a scanner for the lines with names, weights, and totals
-       // Scanner scanNames = new Scanner(names).useDelimiter("\t");
-       // Scanner scanTotals = new Scanner(totals);
-       // Scanner scanWeights = new Scanner(weights);
-        
+        //Initialize Assignments & Students
+        initializeWithStringAssignments(mygb, scan);      
         initializeWithStringStudents(mygb, scan);
-        
-        //Tell the Scanner for names to skip a bunch of tabs
-       // scanNames.skip("\t" + "\t" + "\t" + "\t" + "\t");
-        
-        //Add assignments to the GradeBook
-       /* while (scanTotals.hasNext()) {
-            mygb.addAssignment(scanNames.next(), 
-                    scanTotals.nextDouble(), 
-                    scanWeights.nextDouble());
-        }*/
-        
-        //Add Students to the GradeBook
-        /*while (scan.hasNextLine()) {
-            Scanner scanStudent = new Scanner(scan.nextLine());
-            scanStudent.useDelimiter("\t"); 
-            while (scanStudent.hasNext()) {
-                String susername = scanStudent.next();
-                Student newStudent = 
-                        new Student(
-                                susername,
-                                scanStudent.next(),
-                                scanStudent.next(),
-                                scanStudent.next(), 
-                                scanStudent.nextInt());
-                mygb.students.add(newStudent);
-                
-                //Add the created Student's grades to each assignment
-                Iterator<Assignment> myit = mygb.assignments.iterator();
-                while (myit.hasNext()) {
-                    myit.next().addAssignmentGrade(susername,
-                           scanStudent.nextDouble());
-                }
-            }
-        }*/
+              
         return mygb;
     }
     
