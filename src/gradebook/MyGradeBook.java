@@ -377,14 +377,14 @@ public class MyGradeBook {
             throws RuntimeException {
         Scanner scan = new Scanner(additionalString);
         String firstLine = scan.nextLine();
-        String assignName = scan.nextLine();
+        scan.nextLine();
+        String assignName = scan.next();
         
         
         while (scan.hasNextLine()) {
             
             while (scan.hasNextLine()) {
                 String user = scan.next();
-                System.out.println(user);
                 
                 if (user.equals(firstLine)) {
                     break;
@@ -400,17 +400,22 @@ public class MyGradeBook {
     }
 
     private void processStringGradesStudents(String additionalString) {
-        System.out.println("adding assign grades");
-        Scanner scan = new Scanner(additionalString);
         
+        Scanner scan = new Scanner(additionalString);
+        scan.nextLine();
         String user = scan.nextLine();
         System.out.println(user);
         
         while (scan.hasNextLine()) {
             String aName = scan.nextLine();
+            System.out.println(aName);
             double grade = scan.nextDouble();
-            
+            System.out.println(grade);
             this.changeGrade(aName, user, grade);
+            
+            if (scan.hasNextLine()) {
+                scan.nextLine();
+            }
         }  
     }
 
