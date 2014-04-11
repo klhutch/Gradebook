@@ -2,6 +2,8 @@ package gradebook;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,6 +35,7 @@ public class MyGradeBook {
     
     
     /** A list of students for this gradebook. */
+    //TODO change to TreeSet and change the output method to rely directly on the set
     Set<Student> students;
     /** A list of assignments for this gradebook. */
     Set<Assignment> assignments;
@@ -161,7 +164,7 @@ public class MyGradeBook {
      * @param weight The weight of the given assignment.
      * @param totalPts The total points for the given assignment.
      */
-    void addAssignment(String name, double weight, double totalPts) {
+    public void addAssignment(String name, double weight, double totalPts) {
         this.assignments.add(new Assignment(name, weight, totalPts));
     }
     
@@ -174,7 +177,7 @@ public class MyGradeBook {
      * @param advisor The advisor of the given student.
      * @param year The graduation year of the given student.
      */
-    void addStudent(String username, String first, String last, String advisor,
+    public void addStudent(String username, String first, String last, String advisor,
             int year) {
         this.students.add(new Student(username, first, last, advisor, year));
     }
@@ -439,6 +442,27 @@ public class MyGradeBook {
                     + this.currentGrades().get(user) + "\n";
         }
         return formattedList;
+    }
+    
+    /**
+     * writes the result from outputCurrentGrades to a file
+     * 
+     * @param filename The name of the file to ouput to
+     */
+    public String fileOutputCurrentGrades(String filename) {
+        try {
+            PrintWriter file = new PrintWriter(filename, "UTF-8");
+            file.println(outputCurrentGrades());
+            file.close();
+            
+            return "Wrote grades to " + filename;
+        } 
+        catch (FileNotFoundException e) {
+            return filename + " was not found";
+        } 
+        catch (UnsupportedEncodingException e) {
+            return "Cannot write file";
+        }
     }
 
     /**
