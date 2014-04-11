@@ -334,6 +334,7 @@ public class GradeBookWhiteTest {
         this.resetGradebooks();
         emptyGradebook.processFile("addStudents.txt");
         emptyGradebook.processFile("addAssignments.txt");
+        //emptyGradebook.processFile(filename)
         assertEquals(emptyGradebook.getStudent("iaartinez"),
                 new Student("iaartinez", "Sophia", "Martinez", "Scott", 2014));
         assertEquals(emptyGradebook.getStudent("illines"),
