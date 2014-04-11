@@ -201,14 +201,14 @@ public class Console {
     
     private void help(ArrayList<String> parsedCommand) {
         if (parsedCommand.size() == 1) {
-            System.out.println("gb add -s (student) -a (assignment) -g (gradebook))");
+            System.out.println("gb add -a(assignment) -s(student) ");
             System.out.println("gb assign -(assignmentName) -(StudentId) -(grade)");
-            System.out.println("gb calc -student OR -assignment OR -gradebook "
-                    + "AND ONEOF(-mean, -median, -min, -max, -range)");
-            System.out.println("gb print -student OR -assignment OR -gradebook");
-            System.out.println("gb output - student OR -assignment OR -gradebook");
-            System.out.println("gb remove -student OR -assignment OR -gradebook");
-            System.out.println("gb update -student OR -assignment OR -gradebook");
+            System.out.println("gb calc [-(studentName) -(assignmentName)] "
+                    + "AND ONEOF[(-mean, -median, -min, -max)]");
+            System.out.println("gb print -a(assignment) -s(student)");
+            System.out.println("gb output -(fileName) -a(assignment) -s(student)");
+//            System.out.println("gb remove -student OR -assignment OR -gradebook");
+//            System.out.println("gb update -student OR -assignment OR -gradebook");
             System.out.println("gb help");
             System.out.println("gb quit");
         }
