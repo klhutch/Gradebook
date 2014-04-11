@@ -161,8 +161,14 @@ public class MyGradeBook {
      * @param weight The weight of the given assignment.
      * @param totalPts The total points for the given assignment.
      */
-    public void addAssignment(String name, double weight, double totalPts) {
-        this.assignments.add(new Assignment(name, weight, totalPts));
+    public void addAssignment(String name, double totalPoints, double weight) {
+        Assignment newAssign = new Assignment(name, totalPoints, weight);
+        this.assignments.add(newAssign);
+        
+        Iterator<Student> myiter = this.students.iterator();
+        while (myiter.hasNext()) {
+            newAssign.changeGrade(myiter.next().getStudentUsername(), 0);
+        }
     }
     
     /**
@@ -177,6 +183,11 @@ public class MyGradeBook {
     public void addStudent(String username, String first, String last, String advisor,
             int year) {
         this.students.add(new Student(username, first, last, advisor, year));
+        
+        Iterator<Assignment> myiter = this.assignments.iterator();
+        while (myiter.hasNext()) {
+            myiter.next().changeGrade(username, 0);
+        }
     }
     
     /**
@@ -257,14 +268,12 @@ public class MyGradeBook {
         Scanner scan = new Scanner(additionalString);
         while (scan.hasNextLine()) {
             if (scan.next().equals("ASSIGNMENT")) {
-                Assignment a1 = new Assignment(scan.next(), 
+                this.addAssignment(scan.next(), 
                         scan.nextDouble(), scan.nextDouble());
-                this.assignments.add(a1);
             }
             if (scan.nextLine().equals("STUDENT")) {
-                Student s1 = new Student(scan.next(), scan.next(), scan.next(),
+                this.addStudent(scan.next(), scan.next(), scan.next(),
                         scan.next(), scan.nextInt());
-                this.students.add(s1);
             }
             if (scan.nextLine().equals("GRADES_FOR_ASSIGNMENT")) {
                 String a1name = scan.nextLine();
