@@ -1,9 +1,14 @@
 package gradebook;
+
 import static org.junit.Assert.*;
+
 import java.io.FileNotFoundException;
+
 import org.junit.Test;
 
 public class GradeBookWhiteTest {
+    
+    
     String gradebooktxt = "GRADEBOOK" + "\n"
             + "\t" + "\t" + "\t" + "\t" + "\t" + "Opening Assignment" + "\t" +  "A2" + "\t" + "First Group Project" + "\t" + "Test" + "\n"
             + "\t" + "\t" + "\t" + "\t" + "\t" + "10.0" + "\t" + "100.0" + "\t" + "150.0" + "\t" + "100.0" + "\n"
@@ -134,7 +139,20 @@ public class GradeBookWhiteTest {
                 "Hughes", 2016);
         emptyGradebook.addStudent("nmg149", "Nathan", "Goodman",
                 "Hughes", 2017);
+        emptyGradebook.getAssignment("HW1").addAssignmentGrade(
+                "joberste", 10.0);
+        emptyGradebook.getAssignment("HW1").addAssignmentGrade(
+                "klhutch", 7.0);
+        emptyGradebook.getAssignment("HW1").addAssignmentGrade(
+                "nmg149", 3.0);
+        emptyGradebook.getAssignment("Test1").addAssignmentGrade(
+                "joberste", 10.0);
+        emptyGradebook.getAssignment("Test1").addAssignmentGrade(
+                "klhutch", 7.0);
+        emptyGradebook.getAssignment("Test1").addAssignmentGrade(
+                "nmg149", 3.0);
         
+        System.out.println(emptyGradebook.outputGradebook());
         //assertTrue(emptyGradebook.students.contains(jesseOberstein));
         //assertTrue(emptyGradebook.students.contains(kateHutchinson));
         //assertTrue(emptyGradebook.students.contains(nathanGoodman));
