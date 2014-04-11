@@ -1,7 +1,3 @@
-import java.util.Scanner;
-
-
-
 /**Class User
  * 
  * @author Kate Hutchinson (klhutch)
