@@ -334,13 +334,13 @@ public class GradeBookWhiteTest {
         this.resetGradebooks();
         emptyGradebook.processFile("addStudents.txt");
         emptyGradebook.processFile("addAssignments.txt");
-        //emptyGradebook.processFile(filename)
-        assertEquals(emptyGradebook.getStudent("iaartinez"),
+        emptyGradebook.processFile("gradesForAssignment3.txt");
+        /*assertEquals(emptyGradebook.getStudent("iaartinez"),
                 new Student("iaartinez", "Sophia", "Martinez", "Scott", 2014));
         assertEquals(emptyGradebook.getStudent("illines"),
                 new Student("illines", "William", "Jones", "Nelson", 2014));
         assertEquals(emptyGradebook.getStudent("xaod"),
-                new Student("xaod", "Alexander", "Rodriguez", "Adams", 2017));
+                new Student("xaod", "Alexander", "Rodriguez", "Adams", 2017));*/
     }
     
     /**
@@ -429,7 +429,7 @@ public class GradeBookWhiteTest {
         assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("iaartinez")));
         assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("illines")));
         assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("xaod")));
-        assertTrue(emptyGradebook.assignmentGrade("A2", "iaartinez") == 51.0);
+        assertTrue(emptyGradebook.assignmentGrade("Opening Assignment", "iaartinez") == 51.0);
     }
     
     /**
@@ -510,6 +510,14 @@ public class GradeBookWhiteTest {
                 == 63.5772357723577);
         assertTrue(gradebookString.currentGrade("michaeia")
                 == 68.4552845528455);
+    }
+    
+    /**
+     * tests the currentGrade method in MyGradeBook
+     */
+    @Test
+    public void testCurrentGrades() {
+        this.addSamplesToGB();
     }
     
     /**
