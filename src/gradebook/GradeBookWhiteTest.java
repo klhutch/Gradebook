@@ -136,9 +136,12 @@ public class GradeBookWhiteTest {
             + "\t" + "Opening Assignment" + "\t" + "A2" + "\n" + "\t" + "\t"
             + "\t" + "\t" + "\t" + "10" + "\t" + "100" + "\n" + "\t" + "\t"
             + "\t" + "\t" + "\t" + "1" + "\t" + "5" + "\n"
-            + "abetaylor" + "\t" + "Isabella" + "\t" + "Taylor" + "\t" + "Baker" + "\t" + "2016" + "\t" + "8" + "\t" + "71" + "\n"
-            + "abethes" + "\t" + "Elizabeth" + "\t" + "White Jones" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "6" + "\t" + "90" + "\n"
-            + "acit" + "\t" + "Jacob" + "\t" + "Smith" + "\t" + "Scott" + "\t" + "2014" + "\t" + "8" + "\t" + "79" + "\n"
+            + "abetaylor" + "\t" + "Isabella" + "\t" + "Taylor" + "\t" 
+            + "Baker" + "\t" + "2016" + "\t" + "8" + "\t" + "71" + "\n"
+            + "abethes" + "\t" + "Elizabeth" + "\t" + "White Jones" + "\t" 
+            + "Nelson" + "\t" + "2014" + "\t" + "6" + "\t" + "90" + "\n"
+            + "acit" + "\t" + "Jacob" + "\t" + "Smith" + "\t" + "Scott" + "\t"
+            + "2014" + "\t" + "8" + "\t" + "79" + "\n"
             + "ahrown" + "\t" + "Noah" + "\t" + "Brown" + "\t" + "Adams" + "\t" + "2017" + "\t" + "8" + "\t" + "85" + "\n"
             + "amller" + "\t" + "Liam" + "\t" + "Miller" + "\t" + "Scott" + "\t" + "2014" + "\t" + "5" + "\t" + "74" + "\n"
             + "are" + "\t" + "Emily Ann" + "\t" + "Moore" + "\t" + "Scott" + "\t" + "2014" + "\t" + "9" + "\t" + "58" + "\n"
@@ -176,24 +179,33 @@ public class GradeBookWhiteTest {
             + "vaern" + "\t" + "Ava" + "\t" +  "Hernandez" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "6.0" + "\t" + "91.0" + "\n"
             + "ydenavi" + "\t" + "Jayden" + "\t" + "Davis" + "\t" + "Green" + "\t" + "2015" + "\t" + "10.0" + "\t" + "97.0" + "\n";
     
-    private String assignmentAdd = "STUDENT" + "\n" +
-            "iaartinez" + "\n" +
-            "Sophia" + "\n" +
-            "Martinez" + "\n" +
-            "Scott" + "\n" +
-            "2014" + "\n" +
-            "STUDENT" + "\n" +
-            "illines" + "\n" +
-            "William" + "\n" +
-            "Jones" + "\n" +
-            "Nelson" + "\n" +
-            "2014" + "\n" +
-            "STUDENT" + "\n" +
-            "xaod" + "\n" +
-            "Alexander" + "\n" +
-            "Rodriguez" + "\n" +
-            "Adams" + "\n" +
-            "2017";
+    private String addStudents = "STUDENT" + "\n" + "iaartinez" + "\n"
+            + "Sophia" + "\n" + "Martinez" + "\n" + "Scott" + "\n" + "2014" 
+            + "\n" + "STUDENT" + "\n" + "illines" + "\n" + "William" + "\n"
+            + "Jones" + "\n" + "Nelson" + "\n" + "2014" + "\n" + "STUDENT"
+            + "\n" + "xaod" + "\n" + "Alexander" + "\n" + "Rodriguez" + "\n"
+            + "Adams" + "\n" + "2017";
+    
+    private String addAssignments = "ASSIGNMENT" + "\n" + "First Group Project"
+            + "\n" + "150.0" + "\n" + "10.0" + "\n" + "ASSIGNMENT" + "\n" +
+            "Test" + "\n" + "100.0" + "\n" + "25.0";
+    
+    private String gradesForStudent = "GRADES_FOR_STUDENT" + "\n" + "iaartinez"
+            + "\n" + "Opening Assignment" + "\n" + "6" + "\n" + "A2" + "\n"
+            + "51";
+    
+    private String gradesForAssignment = "GRADES_FOR_ASSIGNMENT" + "\n"
+            + "First Group Project"  + "\n" + "abetaylor" + "\n" + "82" + "\n"
+            + "abethes" + "\n" + "92" + "\n" + "acit" + "\n" + "122" + "\n"
+            + "ahrown" + "\n" + "146" + "\n" + "amller" + "\n" +"100" + "\n"
+            + "are" + "\n" + "99" + "\n" + "enwilson" + "\n" + "123" + "\n"
+            + "gailarti" + "\n" + "132"  + "\n" + "iaartinez" + "\n" + "79"
+            + "\n" + "illines" + "\n" + "128" + "\n" + "marson" + "\n"
+            + "136" + "\n" + "michaeia" + "\n" + "121" + "\n" + "mijacks" 
+            + "\n" + "93" + "\n" + "oliviaas" + "\n" + "78" + "\n" + "onon" 
+            + "\n" + "136" + "\n" + "onson" + "\n" + "133" + "\n" + "thms" 
+            + "\n" + "111" + "\n" + "vaern" + "\n" + "137" + "\n" + "xaod" 
+            + "\n" + "93" + "\n" + "ydenavi" + "\n" + "134";
     
     // Example Gradebooks
     private MyGradeBook emptyGradebook = MyGradeBook.initialize();
@@ -349,87 +361,20 @@ public class GradeBookWhiteTest {
     @Test
     public void testProcessString() {
         this.addSamplesToGB();
-        emptyGradebook.processString("STUDENT" + "\n" +
-                "iaartinez" + "\n" +
-                "Sophia" + "\n" +
-                "Martinez" + "\n" +
-                "Scott" + "\n" +
-                "2014" + "\n" +
-                "STUDENT" + "\n" +
-                "illines" + "\n" +
-                "William" + "\n" +
-                "Jones" + "\n" +
-                "Nelson" + "\n" +
-                "2014" + "\n" +
-                "STUDENT" + "\n" +
-                "xaod" + "\n" +
-                "Alexander" + "\n" +
-                "Rodriguez" + "\n" +
-                "Adams" + "\n" +
-                "2017");
-        emptyGradebook.processString("ASSIGNMENT" + "\n" +
-                "First Group Project" + "\n" +
-                "150.0" + "\n" +
-                "10.0" + "\n" +
-                "ASSIGNMENT" + "\n" +
-                "Test" + "\n" +
-                "100.0" + "\n" +
-                "25.0");
-        emptyGradebook.processString("GRADES_FOR_STUDENT" + "\n" +
-                "iaartinez" + "\n" +
-                "Opening Assignment" + "\n" +
-                "6" + "\n" +
-                "A2" + "\n" +
-                "51");
-        emptyGradebook.processString("GRADES_FOR_ASSIGNMENT" + "\n" +
-                "First Group Project"  + "\n" +
-                "abetaylor" + "\n" +
-                "82" + "\n" +
-                "abethes" + "\n" +
-                "92" + "\n" +
-                "acit" + "\n" +
-                "122" + "\n" +
-                "ahrown" + "\n" +
-                "146" + "\n" +
-                "amller" + "\n" +
-                "100" + "\n" +
-                "are" + "\n" +
-                "99" + "\n" +
-                "enwilson" + "\n" +
-                "123" + "\n" +
-                "gailarti" + "\n" +
-                "132"  + "\n" +
-                "iaartinez" + "\n" +
-                "79" + "\n" +
-                "illines" + "\n" +
-                "128" + "\n" +
-                "marson" + "\n" +
-                "136" + "\n" +
-                "michaeia" + "\n" +
-                "121" + "\n" +
-                "mijacks" + "\n" +
-                "93" + "\n" +
-                "oliviaas" + "\n" +
-                "78" + "\n" +
-                "onon" + "\n" +
-                "136" + "\n" +
-                "onson" + "\n" +
-                "133" + "\n" +
-                "thms" + "\n" +
-                "111" + "\n" +
-                "vaern" + "\n" +
-                "137" + "\n" +
-                "xaod" + "\n" +
-                "93" + "\n" +
-                "ydenavi" + "\n" +
-                "134");
+        emptyGradebook.processString(addStudents);
+        emptyGradebook.processString(addAssignments);
+        emptyGradebook.processString(gradesForStudent);
+        emptyGradebook.processString(gradesForAssignment);
         assertTrue(emptyGradebook.hasAssignment(emptyGradebook.getAssignment("Test")));
         assertTrue(emptyGradebook.hasAssignment(emptyGradebook.getAssignment(
                 "First Group Project")));
         assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("iaartinez")));
         assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("illines")));
         assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("xaod")));
-        assertTrue(emptyGradebook.assignmentGrade("Opening Assignment", "iaartinez") == 51.0);
+        
+        initialFile.processString(addStudents);
+        initialFile.processString(gradesForStudent);
+        assertTrue(initialFile.assignmentGrade("Opening Assignment", "iaartinez") == 6.0);
     }
     
     /**

@@ -64,13 +64,19 @@ public class Console {
         if (!(parsedCommand.isEmpty())) {
             String firstCommand = parsedCommand.get(0);
             if (firstCommand.equals("gb add")) {
-                this.add(parsedCommand);
+                if (this.add(parsedCommand)) {
+                    System.out.println("gb add failed :(");
+                }
             }
             else if (firstCommand.equals("gb assign")) {
-                this.assign(parsedCommand);
+                if (this.assign(parsedCommand)) {
+                    System.out.println("gb assign failed :(");
+                }
             }
             else if (firstCommand.equals("gb calc")) {
-                this.calc(parsedCommand);
+                if (this.calc(parsedCommand)) {
+                    System.out.println("gb calc failed :(");
+                }
             }
             else if (firstCommand.equals("gb import")) {
                 this.importFormFile(parsedCommand);
@@ -133,8 +139,9 @@ public class Console {
     /**
      * Add a Student or an Assignment to the gradebook
      * @param parsedCommand - a list of strings that contains the data to add
+     * @return true if error, false if no error
      */
-    private void add(ArrayList<String> parsedCommand) {
+    private boolean add(ArrayList<String> parsedCommand) {
         if (parsedCommand.size() > 1) {
             String subCommandAdd = parsedCommand.get(1);
             if (subCommandAdd.equals("assignment") 
@@ -182,7 +189,13 @@ public class Console {
                     System.out.print("Advisor: ");
                     advisor = input.nextLine();
                     System.out.print("Year: ");
-                    year = Integer.parseInt(input.nextLine());
+                    try {
+                        year = Integer.parseInt(input.nextLine());
+                    }
+                    catch (NumberFormatException ex) {
+                        System.out.println("Year must be a whole number");
+                        return true;
+                    }
                 }
                 this.gradebook.addStudent(
                         username, first, last, advisor, year);
@@ -194,25 +207,36 @@ public class Console {
                     + "Please enter a valid command to continue. "
                     + "For a list of valid commands, "
                     + "type \"gb help -add\" into the console");
+                return true;
             }
         }
         else {
             System.out.println(
                     "You must specify what you wish to add. "
                     + "Type \"gb help -add\" for move details");
+            return true;
         }
+        return false;
     }
     
     /**
      * Assign a grade to a gradebook
      * @param parsedCommand - a list of strings that 
      * contains the data to assign grade
+     * @return true if error, false if no error
      */
-    private void assign(ArrayList<String> parsedCommand) {
+    private boolean assign(ArrayList<String> parsedCommand) {
         if (parsedCommand.size() == 4) {
             String assignmentName = parsedCommand.get(1);
             String username = parsedCommand.get(2);
-            Double newGrade = Double.parseDouble(parsedCommand.get(3));
+            Double newGrade;
+            try {
+                newGrade = Double.parseDouble(parsedCommand.get(3));
+            }
+            catch (NumberFormatException ex) {
+                System.out.println("Grade must be a number");
+                return true;
+            }
             this.gradebook.changeGrade(assignmentName, username, newGrade);
             System.out.println("Grade assigned successfully");
         }
@@ -221,15 +245,18 @@ public class Console {
                     "gb assign must take an assignment, studentId, and grade. "
                     + "Please enter the correct parameters. "
                     + "Type \"gb help -assign\" for more details");
+            return true;
         }
+        return false;
     }
     
     /**
      * Calculate stats for an assignment
      * @param parsedCommand - a list of strings that contains 
      * the data to calculate stats
+     * @return true if error, false if no error
      */
-    private void calc(ArrayList<String> parsedCommand) {
+    private boolean calc(ArrayList<String> parsedCommand) {
         if (parsedCommand.size() > 1) {
             if (parsedCommand.size() > 2) {
                 String assignmentName = parsedCommand.get(1);
@@ -252,6 +279,7 @@ public class Console {
                             + "Please enter a valid command to continue. "
                             + "For a list of valid commands, "
                             + "type \"gb help -calc\" into the console");
+                    return true;
                 }
             }
             else {
@@ -259,14 +287,16 @@ public class Console {
                         "You must specify which calculation you "
                         + "wish to perform. Choices are "
                         + "-mean, -median, -min, or -max");
+                return true;
             }
-            
         }
         else {
             System.out.println(
                     "The command \" gb calc \" cannot be called without flags."
                     + " Please type \" gb help -calc \" for more information");
+            return true;
         }
+        return false;
     }
     
     /**
