@@ -1,5 +1,8 @@
 package gradebook;
 import static org.junit.Assert.*;
+
+import java.io.FileNotFoundException;
+
 import org.junit.Test;
 
 /**Class MyGradebook
@@ -12,6 +15,11 @@ import org.junit.Test;
 *
 */
 public class GradeBookWhiteTest {
+    
+    ////////////////////////////////////////////////////////////////////
+    ///////        Examples for MyGradeBook             ////////////////
+    ////////////////////////////////////////////////////////////////////
+    
     // Example gradebook strings.
     private String gradebooktxt = "GRADEBOOK" + "\n" + "\t" + "\t" + "\t"
             + "\t" + "\t" + "Opening Assignment" + "\t" + "A2" + "\t"
@@ -167,21 +175,36 @@ public class GradeBookWhiteTest {
             + "thms" + "\t" + "Ethan" + "\t" + "Williams" + "\t" + "Baker" + "\t" + "2016" + "\t" + "8.0" + "\t" + "89.0" + "\n"
             + "vaern" + "\t" + "Ava" + "\t" +  "Hernandez" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "6.0" + "\t" + "91.0" + "\n"
             + "ydenavi" + "\t" + "Jayden" + "\t" + "Davis" + "\t" + "Green" + "\t" + "2015" + "\t" + "10.0" + "\t" + "97.0" + "\n";
-
+    
+    private String assignmentAdd = "STUDENT" + "\n" +
+            "iaartinez" + "\n" +
+            "Sophia" + "\n" +
+            "Martinez" + "\n" +
+            "Scott" + "\n" +
+            "2014" + "\n" +
+            "STUDENT" + "\n" +
+            "illines" + "\n" +
+            "William" + "\n" +
+            "Jones" + "\n" +
+            "Nelson" + "\n" +
+            "2014" + "\n" +
+            "STUDENT" + "\n" +
+            "xaod" + "\n" +
+            "Alexander" + "\n" +
+            "Rodriguez" + "\n" +
+            "Adams" + "\n" +
+            "2017";
+    
     // Example Gradebooks
     private MyGradeBook emptyGradebook = MyGradeBook.initialize();
     private MyGradeBook gradebookFile = 
             MyGradeBook.initializeWithFile("gradebook.txt");
     private MyGradeBook initialFile = 
             MyGradeBook.initializeWithFile("initial.txt");
-    
-    //TODO MyGradeBook initialString = 
-    //         MyGradeBook.initializeWithString("");
+    private MyGradeBook initialString = 
+            MyGradeBook.initializeWithString(initialtxt);
     private MyGradeBook gradebookString = 
             MyGradeBook.initializeWithString(gradebooktxt);
-    //TODO MyGradeBook shortGradebookFile = 
-    //        MyGradeBook.initializeWithFile("");
-    
     private MyGradeBook shortGradebookString = 
             MyGradeBook.initializeWithString(shortGradebook);
     
@@ -197,30 +220,13 @@ public class GradeBookWhiteTest {
     private Assignment hw1 = new Assignment("HW1", 10.0, 2.0);
     private Assignment test1 = new Assignment("Test1", 100.0, 10.0);
     
-    /**
-     * test statistics of MyGradeBook
-     * @throws FileNotFoundException
-     */
-    /*@Test
-    public void testGradeBookStats() throws FileNotFoundException {
-        //TODO web-cat requires the usage of "Assert" functions
-        System.out.println(gradebookString.average("Test"));
-        System.out.println(gradebookString.median("Test"));
-        System.out.println(gradebookString.min("Test"));
-        System.out.println(gradebookString.max("Test"));
-        System.out.println(gradebookString.outputAssignmentGrades("Test"));
-        System.out.println(gradebookString.currentGrade("abetaylor"));
-        System.out.println(gradebookString.currentGrades());
-        
-        System.out.println(gradebookFile.average("Test"));
-        System.out.println(gradebookFile.outputAssignmentGrades("Test"));
-        System.out.println(gradebookFile.currentGrade("abetaylor"));
-        System.out.println(gradebookFile.outputCurrentGrades());
-        System.out.println(gradebookFile.outputStudentGrades("iaartinez"));
-        System.out.println(gradebookString.outputGradebook());
-        System.out.println(MyGradeBook.initializeWithString(gradebookFile.outputGradebook()).outputGradebook());
-    }
-    */
+    
+    
+    
+    ////////////////////////////////////////////////////////////////////
+    ///////     JUnit Test Cases for MyGradeBook        ////////////////
+    ////////////////////////////////////////////////////////////////////
+    
     /**
      * Resets all the gradebooks to their example state.
      */
@@ -228,7 +234,8 @@ public class GradeBookWhiteTest {
         emptyGradebook = MyGradeBook.initialize();
         gradebookFile = MyGradeBook.initializeWithFile("gradebook.txt");
         gradebookString = MyGradeBook.initializeWithString(gradebooktxt);
-        //TODO shortGradebookFile = MyGradeBook.initializeWithFile("");
+        initialFile = MyGradeBook.initializeWithFile("initial.txt");
+        initialString = MyGradeBook.initializeWithString(initialtxt);
         shortGradebookString = MyGradeBook.initializeWithString(shortGradebook);
     }
     
@@ -237,14 +244,16 @@ public class GradeBookWhiteTest {
      */
     @Test
     public void testInitialize() {
-        //initialize
+        // Initializes an empty gradebook.
         assertEquals(MyGradeBook.initialize(), emptyGradebook);
         
-        //initialize with file
+        // Initialize with file
         assertEquals(MyGradeBook.initializeWithFile("gradebook.txt"), gradebookFile);
+        assertEquals(MyGradeBook.initializeWithFile("initial.txt"), initialFile);
         
         //initialize with string
         assertEquals(MyGradeBook.initializeWithString(gradebooktxt), gradebookString);
+        assertEquals(MyGradeBook.initializeWithString(initialtxt), initialString);
         assertEquals(MyGradeBook.initializeWithString(shortGradebook), shortGradebookString);
     }
     
@@ -309,24 +318,28 @@ public class GradeBookWhiteTest {
     
     /**
      * tests the processFile method in MyGradeBook
+     * @throws FileNotFoundException 
      */
     @Test
-    public void testProcessFile() {
+    public void testProcessFile() throws FileNotFoundException {
         this.addSamplesToGB();
-        /*emptyGradebook.processString("addStudents.txt");
-        emptyGradebook.processString("addAssignments.txt");
+        emptyGradebook.addAssignment("Test1", 100.0, 10.0);
         
         System.out.println(emptyGradebook.outputGradebook());
-        assertEquals(emptyGradebook.getAssignment("Test"),
-                new Assignment("Test", 150.0, 10.0));
-        assertEquals(emptyGradebook.getAssignment("First Group Project"),
-                new Assignment("First Group Project", 100.0, 25.0));
+        assertEquals(emptyGradebook.getAssignment("Test1"),
+                test1);
+        assertEquals(emptyGradebook.getAssignment("HW1"),
+                hw1);
+        
+        this.resetGradebooks();
+        emptyGradebook.processFile("addStudents.txt");
+        emptyGradebook.processFile("addAssignments.txt");
         assertEquals(emptyGradebook.getStudent("iaartinez"),
                 new Student("iaartinez", "Sophia", "Martinez", "Scott", 2014));
         assertEquals(emptyGradebook.getStudent("illines"),
                 new Student("illines", "William", "Jones", "Nelson", 2014));
         assertEquals(emptyGradebook.getStudent("xaod"),
-                new Student("xaod", "Alexander", "Rodriguez", "Adams", 2017));*/
+                new Student("xaod", "Alexander", "Rodriguez", "Adams", 2017));
     }
     
     /**
@@ -334,8 +347,8 @@ public class GradeBookWhiteTest {
      */
     @Test
     public void testProcessString() {
-        //this.addSamplesToGB();
-        /*emptyGradebook.processString("STUDENT" + "\n" +
+        this.addSamplesToGB();
+        emptyGradebook.processString("STUDENT" + "\n" +
                 "iaartinez" + "\n" +
                 "Sophia" + "\n" +
                 "Martinez" + "\n" +
@@ -361,6 +374,12 @@ public class GradeBookWhiteTest {
                 "Test" + "\n" +
                 "100.0" + "\n" +
                 "25.0");
+        emptyGradebook.processString("GRADES_FOR_STUDENT" + "\n" +
+                "iaartinez" + "\n" +
+                "Opening Assignment" + "\n" +
+                "6" + "\n" +
+                "A2" + "\n" +
+                "51");
         emptyGradebook.processString("GRADES_FOR_ASSIGNMENT" + "\n" +
                 "First Group Project"  + "\n" +
                 "abetaylor" + "\n" +
@@ -403,19 +422,13 @@ public class GradeBookWhiteTest {
                 "93" + "\n" +
                 "ydenavi" + "\n" +
                 "134");
-        emptyGradebook.equals("GRADES_FOR_STUDENT" + "\n" +
-                "iaartinez" + "\n" +
-                "Opening Assignment" + "\n" +
-                "6" + "\n" +
-                "A2" + "\n" +
-                "51");
         assertTrue(emptyGradebook.hasAssignment(emptyGradebook.getAssignment("Test")));
         assertTrue(emptyGradebook.hasAssignment(emptyGradebook.getAssignment(
                 "First Group Project")));
         assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("iaartinez")));
         assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("illines")));
         assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("xaod")));
-        assertTrue(emptyGradebook.assignmentGrade("A2", "iaartinez") == 51.0);*/
+        assertTrue(emptyGradebook.assignmentGrade("A2", "iaartinez") == 51.0);
     }
     
     /**
@@ -423,7 +436,6 @@ public class GradeBookWhiteTest {
      */
     @Test
     public void testChangeGrade() {
-        //resetGradebooks();
         assertEquals(gradebookFile.changeGrade("First Group Project", 
                 "abetaylor", 95), true);
         assertTrue(gradebookFile.assignmentGrade("First Group Project", "abetaylor") == 95);
@@ -431,8 +443,6 @@ public class GradeBookWhiteTest {
         assertEquals(gradebookFile.changeGrade("Blargh", "natalia42", -4), false);
         assertEquals(gradebookFile.changeGrade("First Group Project", "natalia42", 
                 100), false);
-        //assertEquals(shortGradebook.changeGrade("Test", "", newGrade))
-        //assertEquals(gradebookFile.changeGrade());
     }
     
     /**
@@ -505,21 +515,25 @@ public class GradeBookWhiteTest {
      * tests the currentGrades method in MyGradeBook
      */
     @Test
-    public void testOutputCurrentGrades() {
-        //assertEquals(gradebookFile.outputCurrentGrades(), currentGradebook);
+    public void assignmentGrade() {
+        assertTrue(gradebookFile.assignmentGrade("A2", "gailarti") == 79.0);
+        assertTrue(gradebookString.assignmentGrade("A2", "gailarti") == 79.0);
+        assertTrue(initialFile.assignmentGrade("Opening Assignment", "are")
+                == 9.0);
+        assertTrue(initialString.assignmentGrade("Opening Assignment", "are")
+                == 9.0);
+        assertTrue(shortGradebookString.assignmentGrade("Test1", "nmg149") == 85.0);
     }
     
     /**
-     * tests the assignmentGrade method in MyGradeBook
+     * tests the outputGradebook method in MyGradeBook
      */
     @Test
-    public void testAssignmentGrade() {
+    public void testOutputGradebook() {
         assertEquals(gradebookFile.outputGradebook(), gradebooktxt);
         assertEquals(gradebookString.outputGradebook(), gradebooktxt);
         assertEquals(initialFile.outputGradebook(), initialtxtOut);
         assertEquals(shortGradebookString.outputGradebook(), shortGradebookOut);
     }
-    
-    //TODO add tests for the output functions
     
 }
