@@ -2,6 +2,7 @@ package gradebook;
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 import org.junit.Test;
 
@@ -239,6 +240,11 @@ public class GradeBookWhiteTest {
             + "\n" + "111" + "\n" + "vaern" + "\n" + "137" + "\n" + "xaod" 
             + "\n" + "93" + "\n" + "ydenavi" + "\n" + "134";
     
+    private String currentShortGradebook = "CURRENT_GRADES" + "\n"
+            + "joberste" + "\t" + "91.6666666666666" + "\n"
+            + "klhutch" + "\t" + "74.1666666666666" + "\n"
+            + "nmg149" + "\t" + "71.6666666666666" + "\n";
+    
     // Example Gradebooks
     private MyGradeBook emptyGradebook = MyGradeBook.initialize();
     private MyGradeBook gradebookFile = 
@@ -292,13 +298,13 @@ public class GradeBookWhiteTest {
         // Initializes an empty gradebook.
         assertEquals(MyGradeBook.initialize(), emptyGradebook);
         
-        // Initialize with file
+        // Initialize gradebook with a File.
         assertEquals(MyGradeBook.initializeWithFile("gradebook.txt"), 
                 gradebookFile);
         assertEquals(MyGradeBook.initializeWithFile("initial.txt"), 
                 initialFile);
         
-        //initialize with string
+        // Initialize gradebook with a String.
         assertEquals(MyGradeBook.initializeWithString(gradebooktxt), 
                 gradebookString);
         assertEquals(MyGradeBook.initializeWithString(initialtxt), 
@@ -307,6 +313,9 @@ public class GradeBookWhiteTest {
                 shortGradebookString);
     }
     
+    /**
+     * Adds some examples to an empty gradebook.
+     */
     public void addSamplesToGB() {
         // Add assignments to the empty gradebook.
         emptyGradebook.addAssignment("HW1", 10.0, 2.0);
@@ -343,7 +352,7 @@ public class GradeBookWhiteTest {
     @Test
     public void testAddAssignment() {
         this.addSamplesToGB();
-        System.out.println(emptyGradebook.outputGradebook());
+        
         assertTrue(emptyGradebook.hasAssignment(
                 emptyGradebook.getAssignment("HW1")));
         assertTrue(emptyGradebook.hasAssignment(
@@ -375,11 +384,8 @@ public class GradeBookWhiteTest {
         this.addSamplesToGB();
         emptyGradebook.addAssignment("Test1", 100.0, 10.0);
         
-        System.out.println(emptyGradebook.outputGradebook());
-        assertEquals(emptyGradebook.getAssignment("Test1"),
-                test1);
-        assertEquals(emptyGradebook.getAssignment("HW1"),
-                hw1);
+        assertEquals(emptyGradebook.getAssignment("Test1"), test1);
+        assertEquals(emptyGradebook.getAssignment("HW1"), hw1);
         
         this.resetGradebooks();
         emptyGradebook.processFile("addStudents.txt");
@@ -417,8 +423,8 @@ public class GradeBookWhiteTest {
         
         initialFile.processString(addStudents);
         initialFile.processString(gradesForStudent);
-        assertTrue(initialFile.assignmentGrade("Opening Assignment", 
-                "iaartinez") == 6.0);
+        assertEquals(new Double(initialFile.assignmentGrade(
+                "Opening Assignment", "iaartinez")), new Double(6.0));
     }
     
     /**
@@ -426,16 +432,14 @@ public class GradeBookWhiteTest {
      */
     @Test
     public void testChangeGrade() {
-        assertEquals(gradebookFile.changeGrade("First Group Project", 
-                "abetaylor", 95), true);
-        assertTrue(gradebookFile.assignmentGrade("First Group Project", 
-                "abetaylor") == 95);
-        assertEquals(gradebookFile.changeGrade("Blargh", "abetaylor", 100),
-                false);
-        assertEquals(gradebookFile.changeGrade("Blargh", "natalia42", -4),
-                false);
-        assertEquals(gradebookFile.changeGrade("First Group Project", "natalia42", 
-                100), false);
+        assertTrue(gradebookFile.changeGrade("First Group Project", 
+                "abetaylor", 95));
+        assertEquals(new Double(gradebookFile.assignmentGrade(
+                "First Group Project", "abetaylor")), new Double(95));
+        assertFalse(gradebookFile.changeGrade("Blargh", "abetaylor", 100));
+        assertFalse(gradebookFile.changeGrade("Blargh", "natalia42", -4));
+        assertFalse(gradebookFile.changeGrade("First Group Project",
+                "natalia42", 100));
     }
     
     /**
@@ -444,12 +448,13 @@ public class GradeBookWhiteTest {
     @Test
     public void testAverage() {
         this.addSamplesToGB();
-        assertTrue(emptyGradebook.getAssignment("HW1").average() == 
-                6.666666666666667);
-        assertTrue(hw1.average() == 6.666666666666667);
-        assertTrue(test1.average() == 81.66666666666667);
-        assertTrue(emptyGradebook.getAssignment("Test1").average() ==
-                81.66666666666667);
+        assertEquals(new Double(emptyGradebook.getAssignment("HW1").average()), 
+                new Double(6.666666666666667));
+        assertEquals(new Double(hw1.average()), new Double(6.666666666666667));
+        assertEquals(new Double(test1.average()), 
+                new Double(81.66666666666667));
+        assertEquals(new Double(emptyGradebook.getAssignment(
+                "Test1").average()), new Double(81.66666666666667));
     }
     
     /**
@@ -458,10 +463,12 @@ public class GradeBookWhiteTest {
     @Test
     public void testMedian() {
         this.addSamplesToGB();
-        assertTrue(emptyGradebook.getAssignment("HW1").median() == 7.0);
-        assertTrue(hw1.median() == 7.0);
-        assertTrue(test1.median() == 80.0);
-        assertTrue(emptyGradebook.getAssignment("Test1").median() == 80.0);
+        assertEquals(new Double(emptyGradebook.getAssignment("HW1").median()),
+                new Double(7.0));
+        assertEquals(new Double(hw1.median()), new Double(7.0));
+        assertEquals(new Double(test1.median()), new Double(80.0));
+        assertEquals(new Double(emptyGradebook.getAssignment(
+                "Test1").median()), new Double(80.0));
     }
     
     /**
@@ -470,10 +477,12 @@ public class GradeBookWhiteTest {
     @Test
     public void testMin() {
         this.addSamplesToGB();
-        assertTrue(emptyGradebook.getAssignment("HW1").min() == 3.0);
-        assertTrue(hw1.min() == 3.0);
-        assertTrue(test1.min() == 75.0);
-        assertTrue(emptyGradebook.getAssignment("Test1").min() == 75.0);
+        assertEquals(new Double(emptyGradebook.getAssignment("HW1").min()),
+                new Double(3.0));
+        assertEquals(new Double(hw1.min()), new Double(3.0));
+        assertEquals(new Double(test1.min()), new Double(75.0));
+        assertEquals(new Double(emptyGradebook.getAssignment("Test1").min()), 
+                new Double(75.0));
     }
     
     /**
@@ -482,10 +491,12 @@ public class GradeBookWhiteTest {
     @Test
     public void testMax() {
         this.addSamplesToGB();
-        assertTrue(emptyGradebook.getAssignment("HW1").max() == 10.0);
-        assertTrue(hw1.max() == 10.0);
-        assertTrue(test1.max() == 90.0);
-        assertTrue(emptyGradebook.getAssignment("Test1").max() == 90.0);
+        assertEquals(new Double(emptyGradebook.getAssignment("HW1").max()),
+                new Double(10.0));
+        assertEquals(new Double(hw1.max()), new Double(10.0));
+        assertEquals(new Double(test1.max()), new Double(90.0));
+        assertEquals(new Double(emptyGradebook.getAssignment("Test1").max()),
+                new Double(90.0));
     }
     
     /**
@@ -494,14 +505,16 @@ public class GradeBookWhiteTest {
     @Test
     public void testCurrentGrade() {
         this.addSamplesToGB();
-        assertTrue(emptyGradebook.currentGrade("joberste") 
-                == 91.6666666666666);
-        assertTrue(emptyGradebook.currentGrade("klhutch")
-                == 74.1666666666666);
-        assertTrue(gradebookFile.currentGrade("abetaylor")
-                == 63.5772357723577);
-        assertTrue(gradebookString.currentGrade("michaeia")
-                == 68.4552845528455);
+        assertEquals(new Double(emptyGradebook.currentGrade("joberste")),
+                new Double(91.6666666666666));
+        assertEquals(new Double(emptyGradebook.currentGrade("klhutch")),
+                new Double(74.1666666666666));
+        assertEquals(new Double(emptyGradebook.currentGrade("nmg149")),
+                new Double(71.6666666666666));
+        assertEquals(new Double(gradebookFile.currentGrade("abetaylor")),
+                new Double(63.5772357723577));
+        assertEquals(new Double(gradebookString.currentGrade("michaeia")),
+                new Double(68.4552845528455));
     }
     
     /**
@@ -510,6 +523,12 @@ public class GradeBookWhiteTest {
     @Test
     public void testCurrentGrades() {
         this.addSamplesToGB();
+        assertEquals(emptyGradebook.outputCurrentGrades(), 
+                currentShortGradebook);
+        //assertEquals(gradebookFile.outputCurrentGrades(),
+        //        currentGradebook);
+        assertEquals(gradebookString.outputCurrentGrades(), 
+                currentGradebook);
     }
     
     /**
@@ -517,13 +536,16 @@ public class GradeBookWhiteTest {
      */
     @Test
     public void assignmentGrade() {
-        assertSame(gradebookFile.assignmentGrade("A2", "gailarti"), 79.0);
-        assertSame(gradebookString.assignmentGrade("A2", "gailarti"), 79.0);
-        assertSame(initialFile.assignmentGrade("Opening Assignment", "are"),
-                9.0);
-        assertSame(initialString.assignmentGrade("Opening Assignment", "are"),
-                9.0);
-        assertSame(shortGradebookString.assignmentGrade("Test1", "nmg149"), 85.0);
+        assertEquals(new Double(gradebookFile.assignmentGrade("A2", "gailarti")),
+                new Double(79));
+        assertEquals(new Double(gradebookString.assignmentGrade("A2", 
+                "gailarti")), new Double(79));
+        assertEquals(new Double(initialFile.assignmentGrade(
+                "Opening Assignment", "are")), new Double(9.0));
+        assertEquals(new Double(initialString.assignmentGrade(
+                "Opening Assignment", "are")), new Double(9.0));
+        assertEquals(new Double(shortGradebookString.assignmentGrade("Test1",
+                "nmg149")), new Double(85.0));
     }
     
     /**
