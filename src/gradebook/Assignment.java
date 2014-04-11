@@ -148,7 +148,7 @@ class Assignment {
         double ans = 0;
         int half = (gradelist.size() / 2);
             if (gradelist.size() % 2 == 0) {
-                ans = (gradelist.get(half - 1) + gradelist.get(half)) / 2;
+                ans = ((gradelist.get(half - 1) + gradelist.get(half))) / 2;
             }
             else {
                 ans = gradelist.get(half - 1);

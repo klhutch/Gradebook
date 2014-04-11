@@ -119,18 +119,16 @@ public class GradeBookWhiteTest {
         emptyGradebook.addAssignment("Test1", 100.0, 10.0);
         
         // Add assignment grades to the empty gradebook.
-        emptyGradebook.getAssignment("HW1").addAssignmentGrade(
-                "joberste", 10.0);
-        emptyGradebook.getAssignment("HW1").addAssignmentGrade(
-                "klhutch", 7.0);
-        emptyGradebook.getAssignment("HW1").addAssignmentGrade(
-                "nmg149", 3.0);
-        emptyGradebook.getAssignment("Test1").addAssignmentGrade(
-                "joberste", 10.0);
-        emptyGradebook.getAssignment("Test1").addAssignmentGrade(
-                "klhutch", 7.0);
-        emptyGradebook.getAssignment("Test1").addAssignmentGrade(
-                "nmg149", 3.0);
+        emptyGradebook.changeGrade("HW1", "joberste", 10.0);
+        emptyGradebook.changeGrade("HW1", "klhutch", 7.0);
+        emptyGradebook.changeGrade("HW1", "nmg149", 3.0);
+        emptyGradebook.changeGrade("Test1", "joberste", 90.0);
+        emptyGradebook.changeGrade("Test1", "klhutch", 75.0);
+        emptyGradebook.changeGrade("Test1", "nmg149", 80.0);
+        
+        hw1.changeGrade("joberste", 10.0);
+        hw1.changeGrade("klhutch", 7.0);
+        hw1.changeGrade("nmg149", 3.0);
         
         // Add students to the empty gradebook.
         emptyGradebook.addStudent("joberste", "Jesse",
@@ -154,9 +152,6 @@ public class GradeBookWhiteTest {
                 emptyGradebook.getAssignment("Test1")));
         
         Assignment hw1copy = emptyGradebook.getAssignment("HW1");
-        hw1.addAssignmentGrade("joberste", 10.0);
-        hw1.addAssignmentGrade("klhutch", 7.0);
-        hw1.addAssignmentGrade("nmg149", 3.0);
         
         assertFalse(hw1copy.equals(test1));
         assertTrue(emptyGradebook.hasAssignment(hw1));
@@ -178,6 +173,7 @@ public class GradeBookWhiteTest {
      */
     @Test
     public void testProcessFile() {
+        this.addSamplesToGB();
         /*emptyGradebook.processString("addStudents.txt");
         emptyGradebook.processString("addAssignments.txt");
         
@@ -199,6 +195,7 @@ public class GradeBookWhiteTest {
      */
     @Test
     public void testProcessString() {
+        this.addSamplesToGB();
         /*emptyGradebook.processString("STUDENT" + "\n" +
                 "iaartinez" + "\n" +
                 "Sophia" + "\n" +
@@ -290,7 +287,7 @@ public class GradeBookWhiteTest {
      */
     @Test
     public void testChangeGrade() {
-        /*resetGradebooks();
+        //resetGradebooks();
         assertEquals(gradebookFile.changeGrade("First Group Project", 
                 "abetaylor", 95), true);
         assertTrue(gradebookFile.assignmentGrade("First Group Project", "abetaylor") == 95);
@@ -298,8 +295,8 @@ public class GradeBookWhiteTest {
         assertEquals(gradebookFile.changeGrade("Blargh", "natalia42", -4), false);
         assertEquals(gradebookFile.changeGrade("First Group Project", "natalia42", 
                 100), false);
-        assertEquals(shortGradebook.changeGrade("Test", "", newGrade))
-        assertEquals(gradebookFile.changeGrade())*/
+        //assertEquals(shortGradebook.changeGrade("Test", "", newGrade))
+        //assertEquals(gradebookFile.changeGrade());
     }
     
     /**
@@ -307,7 +304,12 @@ public class GradeBookWhiteTest {
      */
     @Test
     public void testAverage() {
-        //TODO write test for average
+        
+        this.addSamplesToGB();
+        
+        assertTrue(emptyGradebook.getAssignment("HW1").average() == 
+                6.666666666666667);
+        System.out.println(hw1.average());
     }
     
     /**
