@@ -331,7 +331,7 @@ public class Console {
             System.out.print(gradebook.outputGradebook());
         }
         else {
-            String subCommandPrint = parsedCommand.get(0);
+            String subCommandPrint = parsedCommand.get(1);
             if (subCommandPrint.equals("assignment") || subCommandPrint.equals("a")) {
                 String assignmentName = parsedCommand.get(2);
                 System.out.print(gradebook.outputAssignmentGrades(assignmentName));
