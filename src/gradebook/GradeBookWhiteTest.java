@@ -136,9 +136,12 @@ public class GradeBookWhiteTest {
             + "\t" + "Opening Assignment" + "\t" + "A2" + "\n" + "\t" + "\t"
             + "\t" + "\t" + "\t" + "10" + "\t" + "100" + "\n" + "\t" + "\t"
             + "\t" + "\t" + "\t" + "1" + "\t" + "5" + "\n"
-            + "abetaylor" + "\t" + "Isabella" + "\t" + "Taylor" + "\t" + "Baker" + "\t" + "2016" + "\t" + "8" + "\t" + "71" + "\n"
-            + "abethes" + "\t" + "Elizabeth" + "\t" + "White Jones" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "6" + "\t" + "90" + "\n"
-            + "acit" + "\t" + "Jacob" + "\t" + "Smith" + "\t" + "Scott" + "\t" + "2014" + "\t" + "8" + "\t" + "79" + "\n"
+            + "abetaylor" + "\t" + "Isabella" + "\t" + "Taylor" + "\t" 
+            + "Baker" + "\t" + "2016" + "\t" + "8" + "\t" + "71" + "\n"
+            + "abethes" + "\t" + "Elizabeth" + "\t" + "White Jones" + "\t" 
+            + "Nelson" + "\t" + "2014" + "\t" + "6" + "\t" + "90" + "\n"
+            + "acit" + "\t" + "Jacob" + "\t" + "Smith" + "\t" + "Scott" + "\t"
+            + "2014" + "\t" + "8" + "\t" + "79" + "\n"
             + "ahrown" + "\t" + "Noah" + "\t" + "Brown" + "\t" + "Adams" + "\t" + "2017" + "\t" + "8" + "\t" + "85" + "\n"
             + "amller" + "\t" + "Liam" + "\t" + "Miller" + "\t" + "Scott" + "\t" + "2014" + "\t" + "5" + "\t" + "74" + "\n"
             + "are" + "\t" + "Emily Ann" + "\t" + "Moore" + "\t" + "Scott" + "\t" + "2014" + "\t" + "9" + "\t" + "58" + "\n"
@@ -368,7 +371,10 @@ public class GradeBookWhiteTest {
         assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("iaartinez")));
         assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("illines")));
         assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("xaod")));
-        assertTrue(emptyGradebook.assignmentGrade("Opening Assignment", "iaartinez") == 6.0);
+        
+        initialFile.processString(addStudents);
+        initialFile.processString(gradesForStudent);
+        assertTrue(initialFile.assignmentGrade("Opening Assignment", "iaartinez") == 6.0);
     }
     
     /**
