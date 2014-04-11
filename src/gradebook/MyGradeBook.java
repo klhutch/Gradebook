@@ -90,12 +90,12 @@ public class MyGradeBook {
      *            the filename for the file that contains the initial grade
      *            book, which is formatted like initial.txt
      * @return a MyGradebook that contains the grade book from filename
-     * @throws FileNotFoundException 
      */
     public static MyGradeBook initializeWithFile(String filename) {
         MyGradeBook mygb = MyGradeBook.initialize();
-        return MyGradeBook.initializeWithString(mygb.
-                convertFileToString(filename));
+        String file = mygb.convertFileToString(filename);
+        
+        return MyGradeBook.initializeWithString(file);
     }
     
     /**
@@ -121,6 +121,13 @@ public class MyGradeBook {
         return mygb;
     }
     
+    /**
+     * Helper method for initializeWithString
+     * adds students to the gradebook from a string initialization
+     * 
+     * @param mygb the gradebook to add students to
+     * @param scan the scanner containing the student information
+     */
     private static void initializeWithStringStudents(MyGradeBook mygb,
             Scanner scan) {
         //Add Students to the GradeBook
@@ -147,7 +154,14 @@ public class MyGradeBook {
             }
         }        
     }
-
+    
+    /**
+     * Helper method for initializeWithString
+     * adds assignments to the gradebook from a string initialization
+     * 
+     * @param mygb the gradebook to add students to
+     * @param scan the scanner containing the assignment information
+     */
     private static void initializeWithStringAssignments(MyGradeBook mygb,
             Scanner scan) {
         //Separate the next three lines for names, totals, and weights
@@ -179,8 +193,8 @@ public class MyGradeBook {
      * Adds an assignment to this gradebook.
      * 
      * @param name The name of a given assignment.
+     * @param totalPoints The total points for the given assignment.
      * @param weight The weight of the given assignment.
-     * @param totalPts The total points for the given assignment.
      */
     public void addAssignment(String name, double totalPoints, double weight) {
         Assignment newAssign = new Assignment(name, totalPoints, weight);
@@ -201,8 +215,8 @@ public class MyGradeBook {
      * @param advisor The advisor of the given student.
      * @param year The graduation year of the given student.
      */
-    public void addStudent(String username, String first, String last, String advisor,
-            int year) {
+    public void addStudent(String username, String first, String last, 
+            String advisor, int year) {
         this.students.add(new Student(username, first, last, advisor, year));
         
         Iterator<Assignment> myiter = this.assignments.iterator();
@@ -325,9 +339,13 @@ public class MyGradeBook {
         
         scan.close();
     }
-
-    private void processStringGradesAssignments(String additionalString)
-            throws RuntimeException {
+    
+    /**
+     * helper method for processString
+     * processes a String with the header "GRADES_FOR_ASSIGNMENT
+     * @param additionalString the String to be processed
+     */
+    private void processStringGradesAssignments(String additionalString) {
         Scanner scan = new Scanner(additionalString);
         String firstLine = scan.nextLine();
         System.out.println(firstLine);
@@ -356,7 +374,12 @@ public class MyGradeBook {
         }
             
     }
-
+    
+    /**
+     * helper method for processString
+     * processes a String with the header "GRADES_FOR_STUDENT"
+     * @param additionalString the String to be processed
+     */
     private void processStringGradesStudents(String additionalString) {
         
         Scanner scan = new Scanner(additionalString);
@@ -376,7 +399,12 @@ public class MyGradeBook {
             }
         }  
     }
-
+    
+    /**
+     * helper method for processString
+     * processes a String with the header "STUDENT"
+     * @param additionalString the String to be processed
+     */
     private void processStringStudents(String additionalString) {
         Scanner scan = new Scanner(additionalString);
         
@@ -397,7 +425,12 @@ public class MyGradeBook {
             
         }        
     }
-
+    
+    /**
+     * helper method for processString
+     * processes a String with the header "ASSIGNMENT"
+     * @param additionalString the String to be processed
+     */
     private void processStringAssignments(String additionalString) {
         Scanner scan = new Scanner(additionalString);
         
@@ -596,9 +629,8 @@ public class MyGradeBook {
         try {
             PrintWriter file = new PrintWriter(filename, "UTF-8");
             file.println(this.outputCurrentGrades());
-            file.close();
+            file.close();    
             
-            return "Wrote current grades to " + filename;
         } 
         catch (FileNotFoundException e) {
             return filename + " was not found";
@@ -606,6 +638,7 @@ public class MyGradeBook {
         catch (UnsupportedEncodingException e) {
             return "Cannot write file";
         }
+        return "Wrote current grades to " + filename;
     }
 
     /**
@@ -649,9 +682,7 @@ public class MyGradeBook {
         try {
             PrintWriter file = new PrintWriter(filename, "UTF-8");
             file.println(this.outputStudentGrades(user));
-            file.close();
-            
-            return "Wrote student grades to " + filename;
+            file.close();                
         } 
         catch (FileNotFoundException e) {
             return filename + " was not found";
@@ -659,6 +690,8 @@ public class MyGradeBook {
         catch (UnsupportedEncodingException e) {
             return "Cannot write file";
         }
+        
+        return "Wrote student grades to " + filename;
     }
 
     /**
@@ -709,12 +742,11 @@ public class MyGradeBook {
      * @param fName The name of the file to ouput to
      */
     public String fileOutputAssignmentGrades(String aName, String fName) {
+        PrintWriter file;
         try {
-            PrintWriter file = new PrintWriter(fName, "UTF-8");
+            file = new PrintWriter(fName, "UTF-8");
             file.println(this.outputAssignmentGrades(aName));
-            file.close();
-            
-            return "Wrote assignment grades to " + file;
+            file.close();  
         } 
         catch (FileNotFoundException e) {
             return fName + " was not found";
@@ -722,6 +754,7 @@ public class MyGradeBook {
         catch (UnsupportedEncodingException e) {
             return "Cannot write file";
         }
+        return "Wrote assignment grades to " + file;
     }
 
     /**
@@ -822,8 +855,11 @@ public class MyGradeBook {
   
     }
 
-    //TODO there are two sets of methods below that are way too similar
-    
+    /**
+     * checks to see if two MyGradeBooks have the same Assignments
+     * @param comp the MyGradeBook to check against 'this'
+     * @return do 'this' and comp have the same Assignments?
+     */
     private boolean hasSameAssignments(MyGradeBook comp) {
         
         Iterator<Assignment> myiter = comp.assignments.iterator();
@@ -834,7 +870,12 @@ public class MyGradeBook {
         }
         return true;
     }
-
+    
+    /**
+     * checks to see if an Assignment is in 'this' MyGradeBook
+     * @param assign the Assignment to look for
+     * @return does 'this' have the Assignment assign?
+     */
     boolean hasAssignment(Assignment assign) {
         
         Iterator<Assignment> myiter = this.assignments.iterator();
@@ -845,7 +886,12 @@ public class MyGradeBook {
         }
         return false;
     }
-
+    
+    /**
+     * checks to see if two MyGradeBooks have the same Students
+     * @param comp the MyGradeBook to check against 'this'
+     * @return do 'this' and comp have the same Students?
+     */
     private boolean hasSameStudents(MyGradeBook comp) {
         
         Iterator<Student> myiter = comp.students.iterator();
@@ -856,7 +902,12 @@ public class MyGradeBook {
         }
         return true;
     }
-
+    
+    /**
+     * checks to see if a Student is in 'this' MyGradeBook
+     * @param stud The student to look for
+     * @return does 'this' contain stud?
+     */
     boolean hasStudent(Student stud) {
         
         Iterator<Student> myiter = this.students.iterator();
@@ -868,6 +919,11 @@ public class MyGradeBook {
         return false;
     }
     
+    /**
+     * converts 'this' MyGradeBook to a String
+     * @return the result from outputGradebook
+     * 
+     */
     @Override
     public String toString() {
         return this.outputGradebook();
