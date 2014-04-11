@@ -1,0 +1,7 @@
+Nathan Goodman: Wrote the console and User Classes. Designed and tested (manually) the CLI (command line interface).
+
+Kate Hutchinson: Designed and implemented the Assignment and User classes. Also, added functionality to the MyGradeBook class. Also wrote File I/O methods.
+
+Jesse Obestein: Designed the MyGradebook class. Also wrote tests for Assignment, Student, and MyGradebook classes.
+
+Everyone: Determined requirements and designed UML

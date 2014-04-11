@@ -1,0 +1,15 @@
+The following are a set of requirements that KAKO© GBS must implement:
+
+CREATE A NEW GRADEBOOK: The user be able to create a new gradebook, both from the console and from a file. The includes creating an empty instance of a gradebook, and initilizing a new gradebook with information from a file.
+
+ADDING TO THE GRADEBOOK: The user must be to add students and assignments to the gradebook. A student must be able to initilize all Student and Assignment fields. This must be able to be done from both the console and a file.
+
+DEALING WITH GRADES: When a new assignment is created, all students in the gradebook are automatically assigned a grade of 0. When a new student is created, all assignments for that student are initialized to 0 by default. The user must be able change a grade for each student, in both the console and from a file.
+
+GETTING STATISTICS: The gradebook ystem must be able to provide the user with important statistical information. This includes, but is not limmited to, the mean, median, minimum, and maximum scores for each assignment.
+
+PRINTING GRADEBOOK: The user must be able to print student information, assignment information, and gradebook information, either to the console or to a file.
+
+INTERACTING WITH THE GRADEBOOK: The user must be able to dynamically inteact with the gradebook via a commandline interface.
+
+DETERMINING EQUIVILANCE: The gradebook must be able to determine equivilance for two students, two assignments, or two gradebooks. The gradebook will only keep one copy of each Student or Assignment - should be user add a duplicate Student or Assignment, the gradebook will only keep one of them.
