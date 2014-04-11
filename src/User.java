@@ -18,19 +18,16 @@ public class User {
      * program execution and calls other functions
      */
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
         Console console = Console.getInstance();
-        boolean login = console.login(input);
-        input.nextLine(); //throw away empty space
+        boolean login = console.login();
         boolean quit = false;
         if (login) {
         System.out.println("Enter a command to begin "
                 + "(type \"gb help\" for a list of commands)");
             while (!quit) {
                 System.out.print("$$$$~ ");
-                quit = console.getCommand(input);
+                quit = console.getCommand();
             }
         }
-        input.close();
     }
 }

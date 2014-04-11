@@ -164,7 +164,7 @@ public class MyGradeBook {
      * @param weight The weight of the given assignment.
      * @param totalPts The total points for the given assignment.
      */
-    void addAssignment(String name, double weight, double totalPts) {
+    public void addAssignment(String name, double weight, double totalPts) {
         this.assignments.add(new Assignment(name, weight, totalPts));
     }
     
@@ -177,7 +177,7 @@ public class MyGradeBook {
      * @param advisor The advisor of the given student.
      * @param year The graduation year of the given student.
      */
-    void addStudent(String username, String first, String last, String advisor,
+    public void addStudent(String username, String first, String last, String advisor,
             int year) {
         this.students.add(new Student(username, first, last, advisor, year));
     }
