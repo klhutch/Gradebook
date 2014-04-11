@@ -213,13 +213,8 @@ class Assignment {
      *         assignment/student combination exists, returns false otherwise
      */
     boolean changeGrade(String username, double newGrade) {
-        if (this.grades.containsKey(username)) {
             this.grades.put(username, newGrade);
             return true;
-        }
-        else {
-            return false;
-        }
     }
     
     /** 
