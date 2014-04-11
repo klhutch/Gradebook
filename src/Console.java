@@ -54,7 +54,8 @@ public class Console {
     }
     
     /**
-     * Takes in the user data from the console. Calls parseCommand which converts a command into an ArrayList of Strings
+     * Takes in the user data from the console. Calls parseCommand which 
+     * converts a command into an ArrayList of Strings
      * @return true if quit, otherwise false
      */
     boolean getCommand() {
@@ -84,7 +85,8 @@ public class Console {
                 this.help(parsedCommand);
             }
             else if (firstCommand.equals("gb quit")) {
-                System.out.println("Thank you for using the KAKO© GBS Console. Goodbye!");
+                System.out.println(
+                        "Thank you for using the KAKO© GBS Console. Goodbye!");
                 return true;
             }
             else {
@@ -105,7 +107,8 @@ public class Console {
     
     /********************GENERAL HELPER FUNCTIONS FOR CONSOLE*****************/
     /**
-     * Parses comandline input. Converts multiple fields into an ArrayList of Strings
+     * Parses comandline input. Converts multiple fields 
+     * into an ArrayList of Strings
      * @param command - the command to parse
      * @return an ArrayList of Strings containing the parsed command
      */
@@ -202,7 +205,8 @@ public class Console {
     
     /**
      * Assign a grade to a gradebook
-     * @param parsedCommand - a list of strings that contains the data to assign grade
+     * @param parsedCommand - a list of strings that 
+     * contains the data to assign grade
      */
     private void assign(ArrayList<String> parsedCommand) {
         if (parsedCommand.size() == 4) {
@@ -221,8 +225,9 @@ public class Console {
     }
     
     /**
-     * Calculate 
-     * @param parsedCommand
+     * Calculate stats for an assignment
+     * @param parsedCommand - a list of strings that contains 
+     * the data to calculate stats
      */
     private void calc(ArrayList<String> parsedCommand) {
         if (parsedCommand.size() > 1) {
@@ -258,11 +263,17 @@ public class Console {
             
         }
         else {
-            System.out.println("The command \" gb calc \" cannot be called without flags. "
-                    + "Please type \" gb help -calc \" for more information");
+            System.out.println(
+                    "The command \" gb calc \" cannot be called without flags."
+                    + " Please type \" gb help -calc \" for more information");
         }
     }
     
+    /**
+     * Display help information
+     * @param parsedCommand - a list of strings that contains 
+     * the data to display help information
+     */
     private void help(ArrayList<String> parsedCommand) {
         if (parsedCommand.size() == 1) {
             System.out.println(
@@ -273,7 +284,8 @@ public class Console {
                     "gb calc [-(studentName) -(assignmentName)] "
                     + "AND ONEOF[(-mean, -median, -min, -max)]");
             System.out.println("gb help");
-            System.out.println("gb import (filename) -s(student) -a(assignment)");
+            System.out.println(""
+                    + "gb import (filename) -s(student) -a(assignment)");
             System.out.println(
                     "gb output -(fileName) -a(assignment) -s(student)");
             System.out.println(
@@ -343,39 +355,72 @@ public class Console {
                         "Example Usage: gb help -add");
             }
             else if (subCommandHelp.equals("import")) {
-                System.out.println("Imports data for a student, assignment, or a gradebook from file");
+                System.out.println(
+                        "Imports data for a student, "
+                        + "assignment, or a gradebook from file");
                 System.out.println("FLAGS:");
-                System.out.println("-(fileName): specifies which file to use");
-                System.out.println("-student (or -s): prints student data to a file");
-                System.out.println("-assignment (or -a): prints assignment data to a file");
-                System.out.println("-gradebook (or -g): print gradebook data to a file");
+                System.out.println(
+                        "-(fileName): specifies which file to use");
+                System.out.println(
+                        "-student (or -s): prints student data to a file");
+                System.out.println(
+                        "-assignment (or -a): "
+                        + "prints assignment data to a file");
+                System.out.println(
+                        "-gradebook (or -g): print gradebook data to a file");
                 System.out.println("FORMAT:");
-                System.out.println("IF STUDENT: gb import (fileName) -s(studentId)");
-                System.out.println("IF ASSIGNMENT: gb import (fileName) -a(assignmentName) ");
-                System.out.println("IF GRADEBOOK: gb import (fileName)");
+                System.out.println(
+                        "IF STUDENT: gb import (fileName) -s(studentId)");
+                System.out.println(
+                        "IF ASSIGNMENT: gb import "
+                        + "(fileName) -a(assignmentName) ");
+                System.out.println(
+                        "IF GRADEBOOK: gb import (fileName)");
             }
             else if (subCommandHelp.equals("output")) {
-                System.out.println("Outputs data for a student, assignment, or a gradebook to a file");
+                System.out.println(
+                        "Outputs data for a student, "
+                        + "assignment, or a gradebook to a file");
                 System.out.println("FLAGS:");
-                System.out.println("-file (or -f): specifies which file to use");
-                System.out.println("-student (or -s): prints student data to a file");
-                System.out.println("-assignment (or -a): prints assignment data to a file");
-                System.out.println("-gradebook (or -g): print gradebook data to a file");
+                System.out.println(
+                        "-file (or -f): specifies which file to use");
+                System.out.println(
+                        "-student (or -s): prints student data to a file");
+                System.out.println(
+                        "-assignment (or -a): "
+                        + "prints assignment data to a file");
+                System.out.println(
+                        "-gradebook (or -g): print gradebook data to a file");
                 System.out.println("FORMAT:");
-                System.out.println("IF STUDENT: gb output (fileName) -s -(studentId)");
-                System.out.println("IF ASSIGNMENT: gb output (fileName) -a -(assignmentName)");
-                System.out.println("IF GRADEBOOK: gb output (fileName) -g");
+                System.out.println(
+                        "IF STUDENT: gb output (fileName) -s -(studentId)");
+                System.out.println(
+                        "IF ASSIGNMENT: "
+                        + "gb output (fileName) -a -(assignmentName)");
+                System.out.println(
+                        "IF GRADEBOOK: gb output (fileName) -g");
             }
             else if (subCommandHelp.equals("print")) {
-                System.out.println("Prints out data for a student, assignment, or a gradebook");
+                System.out.println(
+                        "Prints out data for a student, "
+                        + "assignment, or a gradebook");
                 System.out.println("FLAGS:");
-                System.out.println("-student (or -s): prints student data to the console");
-                System.out.println("-assignment (or -a): prints assignment data to the console");
-                System.out.println("-gradebook (or -g): print gradebook data to the console");
+                System.out.println(
+                        "-student (or -s): "
+                        + "prints student data to the console");
+                System.out.println(
+                        "-assignment (or -a): "
+                        + "prints assignment data to the console");
+                System.out.println(
+                        "-gradebook (or -g): "
+                        + "print gradebook data to the console");
                 System.out.println("FORMAT:");
-                System.out.println("IF STUDENT: gb print -s -(studentId)");
-                System.out.println("IF ASSIGNMENT: gb print -a -(assignmentName)");
-                System.out.println("IF GRADEBOOK: gb print -g");
+                System.out.println(
+                        "IF STUDENT: gb print -s -(studentId)");
+                System.out.println(
+                        "IF ASSIGNMENT: gb print -a -(assignmentName)");
+                System.out.println(
+                        "IF GRADEBOOK: gb print -g");
             }
             else if (subCommandHelp.equals("quit")) {
                 System.out.println("Quits the program");
@@ -384,34 +429,21 @@ public class Console {
                 System.out.println("FORMAT:");
                 System.out.println("gb quit");
             }
-//            case "remove":
-//                System.out.println("Remove a student or assignment from the gradebook");
-//                System.out.println("FLAGS:");
-//                System.out.println("-student (or -s): Remove student from the gradebook");
-//                System.out.println("-assignment (or -a): Remove assignment from the gradebook");
-//                System.out.println("FORMAT:");
-//                System.out.println("IF STUDENT: gb remove -s -(studentId)");
-//                System.out.println("IF ASSIGNMENT: gb remove -a -(assignmentName)");
-//                break;
-//            case "update":
-//                System.out.println("Updates information about a student, assignment, or a gradebook.");
-//                System.out.println("FLAGS:");
-//                System.out.println("-student (or -s): prints student data to a file");
-//                System.out.println("-assignment (or -a): prints assignment data to a file");
-//                System.out.println("-gradebook (or -g): print gradebook data to a file");
-//                System.out.println("FORMAT:");
-//                System.out.println("IF STUDENT: gb update -s -(studentId)");
-//                System.out.println("IF ASSIGNMENT: gb output -a -(assignmentName)");
-//                System.out.println("IF GRADEBOOK: gb output -g");
-//                break;
             else {
-                System.out.println(parsedCommand.get(1) + " is not a valid sub-command for gb help. "
-                        + "Please enter a valid command to continue. For a list of valid commands, "
+                System.out.println(parsedCommand.get(1) + " "
+                        + "is not a valid sub-command for gb help. "
+                        + "Please enter a valid command to continue. "
+                        + "For a list of valid commands, "
                         + "type \"gb help -help\" into the console");
             }
         }
     }
     
+    /**
+     * Output gradebook data the a file
+     * @param parsedCommand - a list of strings that contains 
+     * the data to output to a file
+     */
     private void output(ArrayList<String> parsedCommand) {
         String fileName = parsedCommand.get(1);
         if (parsedCommand.size() == 2) {
@@ -419,49 +451,68 @@ public class Console {
         }
         else {
             String subCommandOutput = parsedCommand.get(1);
-            if (subCommandOutput.equals("assignment") || subCommandOutput.equals("a")) {
+            if (subCommandOutput.equals("assignment") 
+                    || subCommandOutput.equals("a")) {
                 String assignmentName = parsedCommand.get(3);
             }
-            else if (subCommandOutput.equals("student") || subCommandOutput.equals("s")) {
+            else if (subCommandOutput.equals("student") 
+                    || subCommandOutput.equals("s")) {
                 String studentName = parsedCommand.get(3);
             }
             else {
-                System.out.println(parsedCommand.get(2) + " is not a valid subcommand for gb output." 
-                    + "Please enter a valid command to continue. For a list of valid commands, "
+                System.out.println(parsedCommand.get(2) + 
+                        " is not a valid subcommand for gb output." 
+                    + "Please enter a valid command to continue. "
+                    + "For a list of valid commands, "
                     + "type \"gb help -output\" into the console");
             }
         }
     }
 
+    /**
+     * Print gradebook data to console
+     * @param parsedCommand - a list of strings that contains 
+     * the data to print data to console
+     */
     private void print(ArrayList<String> parsedCommand) {
         if (parsedCommand.size() == 1) {
             System.out.print(gradebook.outputGradebook());
         }
         else {
             String subCommandPrint = parsedCommand.get(1);
-            if (subCommandPrint.equals("assignment") || subCommandPrint.equals("a")) {
+            if (subCommandPrint.equals("assignment") 
+                    || subCommandPrint.equals("a")) {
                 if (parsedCommand.size() > 2) {
                     String assignmentName = parsedCommand.get(2);
                     try {
-                        System.out.print(gradebook.outputAssignmentGrades(assignmentName));
+                        System.out.print(
+                                gradebook.outputAssignmentGrades(
+                                        assignmentName));
+                        
                     }
                     catch (RuntimeException ex) {
-                        System.out.println("The assignment name you looked up does not exist!");
+                        System.out.println(
+                                "The assignment name you looked "
+                                + "up does not exist!");
                     }
                 }
                 else {
-                    System.out.println("The assignment name you entered is not valid");
+                    System.out.println(
+                            "The assignment name you entered is not valid");
                 }
                 
             }
-            else if (subCommandPrint.equals("student") || subCommandPrint.equals("s")) {
+            else if (subCommandPrint.equals("student") 
+                    || subCommandPrint.equals("s")) {
                 if (parsedCommand.size() > 2) {
                     String username = parsedCommand.get(2);
                     try {
-                        System.out.print(gradebook.outputStudentGrades(username));
+                        System.out.print(
+                                gradebook.outputStudentGrades(username));
                     }
                     catch (RuntimeException ex) {
-                        System.out.println("The student name you entered is not valid");
+                        System.out.println(
+                                "The student name you entered is not valid");
                     }
                 }
                 else {
@@ -469,21 +520,29 @@ public class Console {
                 }
             }
             else {
-                System.out.println(parsedCommand.get(1) + " is not a valid subcommand for gb print." 
-                        + "Please enter a valid command to continue. For a list of valid commands, "
+                System.out.println(parsedCommand.get(1) 
+                        + " is not a valid subcommand for gb print." 
+                        + "Please enter a valid command to continue. "
+                        + "For a list of valid commands, "
                         + "type \"gb help -print\" into the console");
             }
         }
     }
     
+    /**
+     * Import a gradebook or information from a file
+     * @param parsedCommand - a list of strings that contains the 
+     * data to import gradebook information
+     */
     private void importFormFile(ArrayList<String> parsedCommand) {
-        
+        if (parsedCommand.size() > 0) {
+            String fileName = parsedCommand.get(1);
+        }
+        else {
+            System.out.println(
+                    "The command \" gb import \" cannot "
+                    + "be called without flags. Please type "
+                    + "\" gb help -import \" for more information");
+        }
     }
-//    private void remove(ArrayList<String> parsedCommand) {
-//        
-//    }
-//    
-//    private void update(ArrayList<String> parsedCommand) {
-//        
-//    }
 }
