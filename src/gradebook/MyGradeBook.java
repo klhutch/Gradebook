@@ -265,6 +265,8 @@ public class MyGradeBook {
      *            gradesForStudent.txt.
      */
     public void processString(String additionalString) {
+        String assignName = "";
+        
         Scanner scan = new Scanner(additionalString);
         while (scan.hasNextLine()) {
             String firstLine = scan.nextLine();
@@ -277,20 +279,35 @@ public class MyGradeBook {
                 
                 this.addAssignment(name, points, weight);
             }
-            if (firstLine.equals("STUDENT")) {
-                this.addStudent(scan.next(), scan.next(), scan.next(),
-                        scan.next(), scan.nextInt());
+            else if (firstLine.equals("STUDENT")) {
+                String user = scan.next();
+                scan.nextLine();
+                String first = scan.next();
+                scan.nextLine();
+                String last = scan.next();
+                scan.nextLine();
+                String advisor = scan.next();
+                scan.nextLine();
+                int year = scan.nextInt();
+                
+                this.addStudent(user, first, last, advisor, year);
             }
-            if (firstLine.equals("GRADES_FOR_ASSIGNMENT")) {
-                String a1name = scan.nextLine();
-                Assignment a1 = this.getAssignment(a1name);
-                a1.addAssignmentGrade(scan.next(), scan.nextDouble());
-            }
-            if (firstLine.equals("GRADES_FOR_STUDENT")) {
+            
+            else if (firstLine.equals("GRADES_FOR_STUDENT")) {
                 String s1name = scan.nextLine();
                 Student s1 = this.getStudent(s1name);
                 s1.addStudentGrade(this.getAssignment(scan.next()), 
                         scan.nextDouble());
+            }
+            else { //firstLine.equals("GRADES_FOR_ASSIGNMENT" 
+                if (firstLine.equals("GRADES_FOR_ASSIGNMENT")) {
+                    assignName = scan.next();
+                }
+                scan.nextLine();
+                String user = scan.next();
+                scan.nextLine();
+                Double grade = scan.nextDouble();
+                this.changeGrade(assignName, user, grade);
             }
         }
     }
