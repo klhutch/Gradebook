@@ -142,42 +142,73 @@ public class GradeBookWhiteTest {
             + "Nelson" + "\t" + "2014" + "\t" + "6" + "\t" + "90" + "\n"
             + "acit" + "\t" + "Jacob" + "\t" + "Smith" + "\t" + "Scott" + "\t"
             + "2014" + "\t" + "8" + "\t" + "79" + "\n"
-            + "ahrown" + "\t" + "Noah" + "\t" + "Brown" + "\t" + "Adams" + "\t" + "2017" + "\t" + "8" + "\t" + "85" + "\n"
-            + "amller" + "\t" + "Liam" + "\t" + "Miller" + "\t" + "Scott" + "\t" + "2014" + "\t" + "5" + "\t" + "74" + "\n"
-            + "are" + "\t" + "Emily Ann" + "\t" + "Moore" + "\t" + "Scott" + "\t" + "2014" + "\t" + "9" + "\t" + "58" + "\n"
-            + "enwilson" + "\t" + "Aiden" + "\t" + "Wilson" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "8" + "\t" + "83" + "\n"
-            + "gailarti" + "\t" + "Abigail" + "\t" + "Martin" + "\t" + "Green" + "\t" + "2015" + "\t" + "7" + "\t" + "79" + "\n"
-            + "marson" + "\t" + "Emma" + "\t" + "Anderson" + "\t" + "Green" + "\t" + "2015" + "\t" + "7" + "\t" + "81" + "\n"
-            + "michaeia" + "\t" + "Michael" + "\t" + "Garcia" + "\t" + "Baker" + "\t" + "2016" + "\t" + "5" + "\t" + "100" + "\n"
-            + "mijacks" + "\t" +  "Mia" + "\t" + "Jackson" + "\t" + "Baker" + "\t" + "2016" + "\t" + "5" + "\t" + "50" + "\n"
-            + "oliviaas" + "\t" + "Olivia" + "\t" + "Thomas" + "\t" + "Adams" + "\t" + "2017" + "\t" + "6" + "\t" + "94" + "\n"
-            + "onon" + "\t" + "Mason" + "\t" + "Johnson" + "\t" + "Green" + "\t" + "2015" + "\t" + "10" + "\t" + "81" + "\n"
-            + "onson" + "\t" + "Madison" + "\t" + "Thompson" + "\t" + "Adams" + "\t" + "2017" + "\t" + "9" + "\t" + "89" + "\n"
-            + "thms" + "\t" + "Ethan" + "\t" + "Williams" + "\t" + "Baker" + "\t" + "2016" + "\t" + "8" + "\t" + "89" + "\n"
-            + "vaern" + "\t" + "Ava" + "\t" +  "Hernandez" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "6" + "\t" + "91" + "\n"
-            + "ydenavi" + "\t" + "Jayden" + "\t" + "Davis" + "\t" + "Green" + "\t" + "2015" + "\t" + "10" + "\t" + "97" + "\n";
+            + "ahrown" + "\t" + "Noah" + "\t" + "Brown" + "\t" + "Adams" + "\t"
+            + "2017" + "\t" + "8" + "\t" + "85" + "\n"
+            + "amller" + "\t" + "Liam" + "\t" + "Miller" + "\t" + "Scott"
+            + "\t" + "2014" + "\t" + "5" + "\t" + "74" + "\n"
+            + "are" + "\t" + "Emily Ann" + "\t" + "Moore" + "\t" + "Scott"
+            + "\t" + "2014" + "\t" + "9" + "\t" + "58" + "\n"
+            + "enwilson" + "\t" + "Aiden" + "\t" + "Wilson" + "\t" + "Nelson"
+            + "\t" + "2014" + "\t" + "8" + "\t" + "83" + "\n"
+            + "gailarti" + "\t" + "Abigail" + "\t" + "Martin" + "\t" + "Green"
+            + "\t" + "2015" + "\t" + "7" + "\t" + "79" + "\n"
+            + "marson" + "\t" + "Emma" + "\t" + "Anderson" + "\t" + "Green"
+            + "\t" + "2015" + "\t" + "7" + "\t" + "81" + "\n"
+            + "michaeia" + "\t" + "Michael" + "\t" + "Garcia" + "\t" + "Baker"
+            + "\t" + "2016" + "\t" + "5" + "\t" + "100" + "\n"
+            + "mijacks" + "\t" +  "Mia" + "\t" + "Jackson" + "\t" + "Baker"
+            + "\t" + "2016" + "\t" + "5" + "\t" + "50" + "\n"
+            + "oliviaas" + "\t" + "Olivia" + "\t" + "Thomas" + "\t" + "Adams"
+            + "\t" + "2017" + "\t" + "6" + "\t" + "94" + "\n"
+            + "onon" + "\t" + "Mason" + "\t" + "Johnson" + "\t" + "Green" + "\t"
+            + "2015" + "\t" + "10" + "\t" + "81" + "\n"
+            + "onson" + "\t" + "Madison" + "\t" + "Thompson" + "\t" + "Adams"
+            + "\t" + "2017" + "\t" + "9" + "\t" + "89" + "\n"
+            + "thms" + "\t" + "Ethan" + "\t" + "Williams" + "\t" + "Baker" + "\t"
+            + "2016" + "\t" + "8" + "\t" + "89" + "\n"
+            + "vaern" + "\t" + "Ava" + "\t" +  "Hernandez" + "\t" + "Nelson" + "\t"
+            + "2014" + "\t" + "6" + "\t" + "91" + "\n"
+            + "ydenavi" + "\t" + "Jayden" + "\t" + "Davis" + "\t" + "Green" + "\t"
+            + "2015" + "\t" + "10" + "\t" + "97" + "\n";
     
     private String initialtxtOut = "GRADEBOOK" + "\n" + "\t" + "\t" + "\t" + "\t"
             + "\t" + "Opening Assignment" + "\t" + "A2" + "\n" + "\t" + "\t"
             + "\t" + "\t" + "\t" + "10.0" + "\t" + "100.0" + "\n" + "\t" + "\t"
             + "\t" + "\t" + "\t" + "1.0" + "\t" + "5.0" + "\n"
-            + "abetaylor" + "\t" + "Isabella" + "\t" + "Taylor" + "\t" + "Baker" + "\t" + "2016" + "\t" + "8.0" + "\t" + "71.0" + "\n"
-            + "abethes" + "\t" + "Elizabeth" + "\t" + "White Jones" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "6.0" + "\t" + "90.0" + "\n"
-            + "acit" + "\t" + "Jacob" + "\t" + "Smith" + "\t" + "Scott" + "\t" + "2014" + "\t" + "8.0" + "\t" + "79.0" + "\n"
-            + "ahrown" + "\t" + "Noah" + "\t" + "Brown" + "\t" + "Adams" + "\t" + "2017" + "\t" + "8.0" + "\t" + "85.0" + "\n"
-            + "amller" + "\t" + "Liam" + "\t" + "Miller" + "\t" + "Scott" + "\t" + "2014" + "\t" + "5.0" + "\t" + "74.0" + "\n"
-            + "are" + "\t" + "Emily Ann" + "\t" + "Moore" + "\t" + "Scott" + "\t" + "2014" + "\t" + "9.0" + "\t" + "58.0" + "\n"
-            + "enwilson" + "\t" + "Aiden" + "\t" + "Wilson" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "8.0" + "\t" + "83.0" + "\n"
-            + "gailarti" + "\t" + "Abigail" + "\t" + "Martin" + "\t" + "Green" + "\t" + "2015" + "\t" + "7.0" + "\t" + "79.0" + "\n"
-            + "marson" + "\t" + "Emma" + "\t" + "Anderson" + "\t" + "Green" + "\t" + "2015" + "\t" + "7.0" + "\t" + "81.0" + "\n"
-            + "michaeia" + "\t" + "Michael" + "\t" + "Garcia" + "\t" + "Baker" + "\t" + "2016" + "\t" + "5.0" + "\t" + "100.0" + "\n"
-            + "mijacks" + "\t" +  "Mia" + "\t" + "Jackson" + "\t" + "Baker" + "\t" + "2016" + "\t" + "5.0" + "\t" + "50.0" + "\n"
-            + "oliviaas" + "\t" + "Olivia" + "\t" + "Thomas" + "\t" + "Adams" + "\t" + "2017" + "\t" + "6.0" + "\t" + "94.0" + "\n"
-            + "onon" + "\t" + "Mason" + "\t" + "Johnson" + "\t" + "Green" + "\t" + "2015" + "\t" + "10.0" + "\t" + "81.0" + "\n"
-            + "onson" + "\t" + "Madison" + "\t" + "Thompson" + "\t" + "Adams" + "\t" + "2017" + "\t" + "9.0" + "\t" + "89.0" + "\n"
-            + "thms" + "\t" + "Ethan" + "\t" + "Williams" + "\t" + "Baker" + "\t" + "2016" + "\t" + "8.0" + "\t" + "89.0" + "\n"
-            + "vaern" + "\t" + "Ava" + "\t" +  "Hernandez" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "6.0" + "\t" + "91.0" + "\n"
-            + "ydenavi" + "\t" + "Jayden" + "\t" + "Davis" + "\t" + "Green" + "\t" + "2015" + "\t" + "10.0" + "\t" + "97.0" + "\n";
+            + "abetaylor" + "\t" + "Isabella" + "\t" + "Taylor" + "\t" 
+            + "Baker" + "\t" + "2016" + "\t" + "8.0" + "\t" + "71.0" + "\n"
+            + "abethes" + "\t" + "Elizabeth" + "\t" + "White Jones" + "\t" 
+            + "Nelson" + "\t" + "2014" + "\t" + "6.0" + "\t" + "90.0" + "\n"
+            + "acit" + "\t" + "Jacob" + "\t" + "Smith" + "\t" + "Scott" + "\t" 
+            + "2014" + "\t" + "8.0" + "\t" + "79.0" + "\n"
+            + "ahrown" + "\t" + "Noah" + "\t" + "Brown" + "\t" + "Adams" + "\t"
+            + "2017" + "\t" + "8.0" + "\t" + "85.0" + "\n"
+            + "amller" + "\t" + "Liam" + "\t" + "Miller" + "\t" + "Scott" 
+            + "\t" + "2014" + "\t" + "5.0" + "\t" + "74.0" + "\n"
+            + "are" + "\t" + "Emily Ann" + "\t" + "Moore" + "\t" + "Scott" 
+            + "\t" + "2014" + "\t" + "9.0" + "\t" + "58.0" + "\n"
+            + "enwilson" + "\t" + "Aiden" + "\t" + "Wilson" + "\t" + "Nelson"
+            + "\t" + "2014" + "\t" + "8.0" + "\t" + "83.0" + "\n"
+            + "gailarti" + "\t" + "Abigail" + "\t" + "Martin" + "\t" + "Green" 
+            + "\t" + "2015" + "\t" + "7.0" + "\t" + "79.0" + "\n"
+            + "marson" + "\t" + "Emma" + "\t" + "Anderson" + "\t" + "Green"
+            + "\t" + "2015" + "\t" + "7.0" + "\t" + "81.0" + "\n"
+            + "michaeia" + "\t" + "Michael" + "\t" + "Garcia" + "\t" + "Baker"
+            + "\t" + "2016" + "\t" + "5.0" + "\t" + "100.0" + "\n"
+            + "mijacks" + "\t" +  "Mia" + "\t" + "Jackson" + "\t" + "Baker" 
+            + "\t" + "2016" + "\t" + "5.0" + "\t" + "50.0" + "\n"
+            + "oliviaas" + "\t" + "Olivia" + "\t" + "Thomas" + "\t" + "Adams"
+            + "\t" + "2017" + "\t" + "6.0" + "\t" + "94.0" + "\n"
+            + "onon" + "\t" + "Mason" + "\t" + "Johnson" + "\t" + "Green" 
+            + "\t" + "2015" + "\t" + "10.0" + "\t" + "81.0" + "\n"
+            + "onson" + "\t" + "Madison" + "\t" + "Thompson" + "\t" + "Adams" 
+            + "\t" + "2017" + "\t" + "9.0" + "\t" + "89.0" + "\n"
+            + "thms" + "\t" + "Ethan" + "\t" + "Williams" + "\t" + "Baker" 
+            + "\t" + "2016" + "\t" + "8.0" + "\t" + "89.0" + "\n"
+            + "vaern" + "\t" + "Ava" + "\t" +  "Hernandez" + "\t" + "Nelson" 
+            + "\t" + "2014" + "\t" + "6.0" + "\t" + "91.0" + "\n"
+            + "ydenavi" + "\t" + "Jayden" + "\t" + "Davis" + "\t" + "Green" 
+            + "\t" + "2015" + "\t" + "10.0" + "\t" + "97.0" + "\n";
     
     private String addStudents = "STUDENT" + "\n" + "iaartinez" + "\n"
             + "Sophia" + "\n" + "Martinez" + "\n" + "Scott" + "\n" + "2014" 
@@ -248,7 +279,8 @@ public class GradeBookWhiteTest {
         gradebookString = MyGradeBook.initializeWithString(gradebooktxt);
         initialFile = MyGradeBook.initializeWithFile("initial.txt");
         initialString = MyGradeBook.initializeWithString(initialtxt);
-        shortGradebookString = MyGradeBook.initializeWithString(shortGradebook);
+        shortGradebookString = MyGradeBook.initializeWithString(
+                shortGradebook);
     }
     
     /**
@@ -260,13 +292,18 @@ public class GradeBookWhiteTest {
         assertEquals(MyGradeBook.initialize(), emptyGradebook);
         
         // Initialize with file
-        assertEquals(MyGradeBook.initializeWithFile("gradebook.txt"), gradebookFile);
-        assertEquals(MyGradeBook.initializeWithFile("initial.txt"), initialFile);
+        assertEquals(MyGradeBook.initializeWithFile("gradebook.txt"), 
+                gradebookFile);
+        assertEquals(MyGradeBook.initializeWithFile("initial.txt"), 
+                initialFile);
         
         //initialize with string
-        assertEquals(MyGradeBook.initializeWithString(gradebooktxt), gradebookString);
-        assertEquals(MyGradeBook.initializeWithString(initialtxt), initialString);
-        assertEquals(MyGradeBook.initializeWithString(shortGradebook), shortGradebookString);
+        assertEquals(MyGradeBook.initializeWithString(gradebooktxt), 
+                gradebookString);
+        assertEquals(MyGradeBook.initializeWithString(initialtxt), 
+                initialString);
+        assertEquals(MyGradeBook.initializeWithString(shortGradebook), 
+                shortGradebookString);
     }
     
     public void addSamplesToGB() {
@@ -347,12 +384,13 @@ public class GradeBookWhiteTest {
         emptyGradebook.processFile("addStudents.txt");
         emptyGradebook.processFile("addAssignments.txt");
         emptyGradebook.processFile("gradesForAssignment3.txt");
-        /*assertEquals(emptyGradebook.getStudent("iaartinez"),
+        emptyGradebook.processFile("gradesForStudent.txt");
+        assertEquals(emptyGradebook.getStudent("iaartinez"),
                 new Student("iaartinez", "Sophia", "Martinez", "Scott", 2014));
         assertEquals(emptyGradebook.getStudent("illines"),
                 new Student("illines", "William", "Jones", "Nelson", 2014));
         assertEquals(emptyGradebook.getStudent("xaod"),
-                new Student("xaod", "Alexander", "Rodriguez", "Adams", 2017));*/
+                new Student("xaod", "Alexander", "Rodriguez", "Adams", 2017));
     }
     
     /**
@@ -365,16 +403,21 @@ public class GradeBookWhiteTest {
         emptyGradebook.processString(addAssignments);
         emptyGradebook.processString(gradesForStudent);
         emptyGradebook.processString(gradesForAssignment);
-        assertTrue(emptyGradebook.hasAssignment(emptyGradebook.getAssignment("Test")));
+        assertTrue(emptyGradebook.hasAssignment(emptyGradebook.getAssignment(
+                "Test")));
         assertTrue(emptyGradebook.hasAssignment(emptyGradebook.getAssignment(
                 "First Group Project")));
-        assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("iaartinez")));
-        assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("illines")));
-        assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent("xaod")));
+        assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent(
+                "iaartinez")));
+        assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent(
+                "illines")));
+        assertTrue(emptyGradebook.hasStudent(emptyGradebook.getStudent(
+                "xaod")));
         
         initialFile.processString(addStudents);
         initialFile.processString(gradesForStudent);
-        assertTrue(initialFile.assignmentGrade("Opening Assignment", "iaartinez") == 6.0);
+        assertTrue(initialFile.assignmentGrade("Opening Assignment", 
+                "iaartinez") == 6.0);
     }
     
     /**
@@ -384,9 +427,12 @@ public class GradeBookWhiteTest {
     public void testChangeGrade() {
         assertEquals(gradebookFile.changeGrade("First Group Project", 
                 "abetaylor", 95), true);
-        assertTrue(gradebookFile.assignmentGrade("First Group Project", "abetaylor") == 95);
-        assertEquals(gradebookFile.changeGrade("Blargh", "abetaylor", 100), false);
-        assertEquals(gradebookFile.changeGrade("Blargh", "natalia42", -4), false);
+        assertTrue(gradebookFile.assignmentGrade("First Group Project", 
+                "abetaylor") == 95);
+        assertEquals(gradebookFile.changeGrade("Blargh", "abetaylor", 100),
+                false);
+        assertEquals(gradebookFile.changeGrade("Blargh", "natalia42", -4),
+                false);
         assertEquals(gradebookFile.changeGrade("First Group Project", "natalia42", 
                 100), false);
     }
@@ -476,7 +522,8 @@ public class GradeBookWhiteTest {
                 == 9.0);
         assertTrue(initialString.assignmentGrade("Opening Assignment", "are")
                 == 9.0);
-        assertTrue(shortGradebookString.assignmentGrade("Test1", "nmg149") == 85.0);
+        assertTrue(shortGradebookString.assignmentGrade("Test1", "nmg149") 
+                == 85.0);
     }
     
     /**
@@ -487,7 +534,8 @@ public class GradeBookWhiteTest {
         assertEquals(gradebookFile.outputGradebook(), gradebooktxt);
         assertEquals(gradebookString.outputGradebook(), gradebooktxt);
         assertEquals(initialFile.outputGradebook(), initialtxtOut);
-        assertEquals(shortGradebookString.outputGradebook(), shortGradebookOut);
+        assertEquals(shortGradebookString.outputGradebook(), 
+                shortGradebookOut);
     }
     
 }
