@@ -1,12 +1,13 @@
 package gradebook;
 
 /**Class Student
+ * Team 10
  * 
  * @author Kate Hutchinson (klhutch)
  * @author Jesse Oberstein (joberste)
  * @author Nathan Goodman (nmg49)
  * 
- * @version April 8th, 2014
+ * @version April 11th, 2014
  *
  */
 class Student {
@@ -38,6 +39,21 @@ class Student {
         this.year = year;
     }
     
+    /**
+     * Adds this student's given grade to the given assignment.
+     * 
+     * @param assignment A given assignment
+     * @param grade A given grade for a student on this assignment.
+     */
+    void addStudentGrade(Assignment assignment, Double grade) {
+        assignment.addAssignmentGrade(this.id, grade);
+    }
+    
+    /**
+     * Returns this Student as a string representation.
+     * 
+     * @return String A Student represented as a string.
+     */
     @Override
     public String toString() {
         return this.id + "\n" 
@@ -47,11 +63,12 @@ class Student {
                 + this.year + "\n";
     }
     
-    void addStudentGrade(Assignment assignment, Double grade) {
-        assignment.addAssignmentGrade(this.id, grade);
-    }
-    
-    
+    /**
+     * Is this student equal to a given object?
+     * 
+     * @param obj The given object in question.
+     * @return boolean A true/false value.
+     */
     @Override
     public boolean equals(Object obj) {
         if ((obj == null) || ( !(obj instanceof Student))) {
@@ -59,12 +76,11 @@ class Student {
         }
         
         Student comp = (Student) obj;
-        
-        return (this.id.equals(comp.getStudentUsername()) && 
-                this.first.equals(comp.getFirstName()) &&
-                this.last.equals(comp.getLastName()) &&
-                this.advisor.equals(comp.getAdvisor()) &&
-                this.year == comp.getGradYear());
+        return this.id.equals(comp.getStudentUsername())
+                && this.first.equals(comp.getFirstName())
+                && this.last.equals(comp.getLastName())
+                && this.advisor.equals(comp.getAdvisor())
+                && this.year == comp.getGradYear();
     }
     
     

@@ -6,12 +6,13 @@ import java.io.FileNotFoundException;
 import org.junit.Test;
 
 /**Class AssignmentTest
+ * Team 10
  * 
  * @author Kate Hutchinson (klhutch)
  * @author Jesse Oberstein (joberste)
  * @author Nathan Goodman (nmg49)
  * 
- * @version April 8th, 2014
+ * @version April 11th, 2014
  *
  */
 public class AssignmentTest {

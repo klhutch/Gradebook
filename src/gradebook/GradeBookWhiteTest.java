@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import org.junit.Test;
 
 /**Class MyGradebook
+* Team 10
 * 
 * @author Kate Hutchinson (klhutch)
 * @author Jesse Oberstein (joberste)
@@ -130,7 +131,7 @@ public class GradeBookWhiteTest {
             "thms" + "\t" + "86.9512195121951" + "\n" +
             "vaern" + "\t" + "85.4471544715447" + "\n" +
             "xaod" + "\t" + "84.0243902439024" + "\n" +
-            "ydenavi" + "\t" + "87.2764227642276"+ "\n";
+            "ydenavi" + "\t" + "87.2764227642276" + "\n";
     
     private String initialtxt = "GRADEBOOK" + "\n" + "\t" + "\t" + "\t" + "\t"
             + "\t" + "Opening Assignment" + "\t" + "A2" + "\n" + "\t" + "\t"
@@ -228,7 +229,7 @@ public class GradeBookWhiteTest {
     private String gradesForAssignment = "GRADES_FOR_ASSIGNMENT" + "\n"
             + "First Group Project"  + "\n" + "abetaylor" + "\n" + "82" + "\n"
             + "abethes" + "\n" + "92" + "\n" + "acit" + "\n" + "122" + "\n"
-            + "ahrown" + "\n" + "146" + "\n" + "amller" + "\n" +"100" + "\n"
+            + "ahrown" + "\n" + "146" + "\n" + "amller" + "\n" + "100" + "\n"
             + "are" + "\n" + "99" + "\n" + "enwilson" + "\n" + "123" + "\n"
             + "gailarti" + "\n" + "132"  + "\n" + "iaartinez" + "\n" + "79"
             + "\n" + "illines" + "\n" + "128" + "\n" + "marson" + "\n"
@@ -516,14 +517,13 @@ public class GradeBookWhiteTest {
      */
     @Test
     public void assignmentGrade() {
-        assertTrue(gradebookFile.assignmentGrade("A2", "gailarti") == 79.0);
-        assertTrue(gradebookString.assignmentGrade("A2", "gailarti") == 79.0);
-        assertTrue(initialFile.assignmentGrade("Opening Assignment", "are")
-                == 9.0);
-        assertTrue(initialString.assignmentGrade("Opening Assignment", "are")
-                == 9.0);
-        assertTrue(shortGradebookString.assignmentGrade("Test1", "nmg149") 
-                == 85.0);
+        assertSame(gradebookFile.assignmentGrade("A2", "gailarti"), 79.0);
+        assertSame(gradebookString.assignmentGrade("A2", "gailarti"), 79.0);
+        assertSame(initialFile.assignmentGrade("Opening Assignment", "are"),
+                9.0);
+        assertSame(initialString.assignmentGrade("Opening Assignment", "are"),
+                9.0);
+        assertSame(shortGradebookString.assignmentGrade("Test1", "nmg149"), 85.0);
     }
     
     /**
