@@ -431,7 +431,7 @@ public class MyGradeBook {
      */
     public String outputCurrentGrades() {
         String formattedList = "CURRENT_GRADES" + "\n";
-        Set<String> usernameSet = this.currentGrades().keySet();
+        /*Set<String> usernameSet = this.currentGrades().keySet();
         List<String> usernames = new ArrayList<String>();
         for (String user : usernameSet) {
             usernames.add(user);
@@ -443,6 +443,15 @@ public class MyGradeBook {
                     + this.currentGrades().get(user) + "\n";
         }
         return formattedList;
+        */
+        Iterator<Student> myiter = this.students.iterator();
+        while (myiter.hasNext()) {
+            String user = myiter.next().getStudentUsername();
+            formattedList += user + "\t" 
+                    + this.currentGrades().get(user) + "\n";
+        }
+        return formattedList;
+        
     }
     
     /**
