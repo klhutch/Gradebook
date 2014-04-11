@@ -270,25 +270,30 @@ public class MyGradeBook {
         Scanner scan = new Scanner(additionalString);
         while (scan.hasNextLine()) {
             String firstLine = scan.nextLine();
+            System.out.print(firstLine);
             if (firstLine.equals("ASSIGNMENT")) {
                 String name = scan.next();
-                scan.nextLine();
+                System.out.println(scan.nextLine());
                 Double points = scan.nextDouble();
-                scan.nextLine();
+                System.out.println(scan.nextLine());;
                 Double weight = scan.nextDouble();
                 
                 this.addAssignment(name, points, weight);
             }
             else if (firstLine.equals("STUDENT")) {
+                System.out.println("adding student");
                 String user = scan.next();
-                scan.nextLine();
+                System.out.println(user);
                 String first = scan.next();
-                scan.nextLine();
+                System.out.println(first);
                 String last = scan.next();
-                scan.nextLine();
+                System.out.println(last);
                 String advisor = scan.next();
-                scan.nextLine();
+                System.out.println(advisor);
+                
                 int year = scan.nextInt();
+                System.out.println("" + year);
+                
                 
                 this.addStudent(user, first, last, advisor, year);
             }
@@ -303,9 +308,9 @@ public class MyGradeBook {
                 if (firstLine.equals("GRADES_FOR_ASSIGNMENT")) {
                     assignName = scan.next();
                 }
-                scan.nextLine();
+                System.out.println(scan.nextLine());
                 String user = scan.next();
-                scan.nextLine();
+                System.out.println(scan.nextLine());
                 Double grade = scan.nextDouble();
                 this.changeGrade(assignName, user, grade);
             }
