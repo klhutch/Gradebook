@@ -14,6 +14,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.sun.xml.internal.txw2.IllegalAnnotationException;
+
 /**Class MyGradebook
  * 
  * @author Kate Hutchinson (klhutch)
@@ -330,7 +332,8 @@ public class MyGradeBook {
      *            addStudents.txt, gradesForAssignment1.txt, and
      *            gradesForStudent.txt.
      */
-    public void processString(String additionalString) {
+    public void processString(String additionalString) 
+        throws RuntimeException {
         String assignName = "";
         
         String option1 = "ASSIGNMENT";
@@ -346,32 +349,82 @@ public class MyGradeBook {
             
             //System.out.println(firstLine);
             if (firstLine.equals(option1)) {
+                //ASSIGNMENT
                 this.processStringAssignments(additionalString);
                 
             }
             else if (firstLine.substring(
                     0, option2.length()).equals(option2)) {
+                //STUDENT
                 this.processStringStudents(additionalString);
             }
             
             else if (firstLine.equals(option3)) {
-                String s1name = scan.nextLine();
-                Student s1 = this.getStudent(s1name);
-                s1.addStudentGrade(this.getAssignment(scan.next()), 
-                        scan.nextDouble());
+                //GRADES_FOR_STUDENT
+                this.processStringGradesStudents(additionalString);
+               
             }
-            else { //firstLine.equals("GRADES_FOR_ASSIGNMENT" 
-                if (firstLine.equals(option4)) {
-                    assignName = scan.next();
-                }
-                System.out.println(scan.nextLine());
-                String user = scan.next();
-                System.out.println(scan.nextLine());
-                Double grade = scan.nextDouble();
-                this.changeGrade(assignName, user, grade);
+            else if (firstLine.equals(option4)) { 
+                //GRADES_FOR_ASSIGNMENT 
+                this.processStringGradesAssignments(additionalString);
             }
+            else {
+                throw new RuntimeException("wrong format");
+            }
+                
         //}
         scan.close();
+    }
+
+    private void processStringGradesAssignments(String additionalString)
+            throws RuntimeException {
+        Scanner scan = new Scanner(additionalString);
+        String firstLine = scan.nextLine();
+        System.out.println(firstLine);
+        String assignName = scan.nextLine();
+        System.out.println(assignName);
+        
+        
+        
+        
+        while (scan.hasNextLine()) {
+            
+            while (scan.hasNextLine()) {
+                //System.out.println(scan.nextLine());
+                String user = scan.next();
+                System.out.println(user);
+                
+                if (user.equals(firstLine)) {
+                    break;
+                }
+                scan.nextLine();
+                Double grade = scan.nextDouble();
+                System.out.println(""+grade);
+                this.changeGrade(assignName, user, grade);
+                
+            }
+            
+        }
+            
+    }
+
+    private void processStringGradesStudents(String additionalString) {
+        System.out.println("adding assign grades");
+        Scanner scan = new Scanner(additionalString);
+        String firstLine = scan.nextLine();
+        System.out.println(firstLine);
+        String user = scan.nextLine();
+        System.out.println(user);
+        
+        while (scan.hasNextLine()) {
+            String aName = scan.nextLine();
+            System.out.println(aName);
+            double grade = scan.nextDouble();
+            System.out.println(grade);
+            
+            this.changeGrade(aName, user, grade);
+        }
+        
     }
 
     private void processStringStudents(String additionalString) {
