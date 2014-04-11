@@ -14,6 +14,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.sun.xml.internal.txw2.IllegalAnnotationException;
+
 /**Class MyGradebook
  * 
  * @author Kate Hutchinson (klhutch)
@@ -330,13 +332,8 @@ public class MyGradeBook {
      *            addStudents.txt, gradesForAssignment1.txt, and
      *            gradesForStudent.txt.
      */
-<<<<<<< HEAD
     public void processString(String additionalString) 
         throws RuntimeException {
-=======
-    public void processString(String additionalString) {
-        String assignName = "";
->>>>>>> branch 'master' of https://github.com/klhutch/Gradebook.git
         
         String option1 = "ASSIGNMENT";
         String option2 = "STUDENT";
@@ -352,7 +349,6 @@ public class MyGradeBook {
             //ASSIGNMENT
             this.processStringAssignments(additionalString);
             
-<<<<<<< HEAD
         }
         else if (firstLine.substring(
                 0, option2.length()).equals(option2)) {
@@ -372,41 +368,9 @@ public class MyGradeBook {
         else {
             throw new RuntimeException("wrong format");
         }
-=======
-            //System.out.println(firstLine);
-            if (firstLine.equals(option1)) {
-                this.processStringAssignments(additionalString);
-                
-            }
-            else if (firstLine.substring(
-                    0, option2.length()).equals(option2)) {
-                this.processStringStudents(additionalString);
-            }
->>>>>>> branch 'master' of https://github.com/klhutch/Gradebook.git
             
-<<<<<<< HEAD
         
-=======
-            else if (firstLine.equals(option3)) {
-                String s1name = scan.nextLine();
-                Student s1 = this.getStudent(s1name);
-                s1.addStudentGrade(this.getAssignment(scan.next()), 
-                        scan.nextDouble());
-            }
-            else { //firstLine.equals("GRADES_FOR_ASSIGNMENT" 
-                if (firstLine.equals(option4)) {
-                    assignName = scan.next();
-                }
-                System.out.println(scan.nextLine());
-                String user = scan.next();
-                System.out.println(scan.nextLine());
-                Double grade = scan.nextDouble();
-                this.changeGrade(assignName, user, grade);
-            }
-        //}
->>>>>>> branch 'master' of https://github.com/klhutch/Gradebook.git
         scan.close();
-<<<<<<< HEAD
     }
 
     private void processStringGradesAssignments(String additionalString)
@@ -448,8 +412,6 @@ public class MyGradeBook {
             
             this.changeGrade(aName, user, grade);
         }  
-=======
->>>>>>> branch 'master' of https://github.com/klhutch/Gradebook.git
     }
 
     private void processStringStudents(String additionalString) {
