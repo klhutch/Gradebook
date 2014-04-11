@@ -44,7 +44,7 @@ public class AssignmentTest {
      */
     @Test
     public void testAssignmentEquals() {
-        assertTrue(hw1.equals(hw1));
+        assertTrue(hw1.equals(hw1copy));
         assertFalse(test1.equals(hw1));
     }
 }
