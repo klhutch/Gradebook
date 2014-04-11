@@ -117,9 +117,17 @@ public class GradeBookWhiteTest {
         // Add assignments to the empty gradebook.
         emptyGradebook.addAssignment("HW1", 10.0, 2.0);
         emptyGradebook.addAssignment("Test1", 100.0, 10.0);
+
+        // Add students to the empty gradebook.
+        emptyGradebook.addStudent("joberste", "Jesse",
+                "Oberstein", "Mazor", 2017);
+        emptyGradebook.addStudent("klhutch", "Kate", "Hutchinson",
+                "Hughes", 2016);
+        emptyGradebook.addStudent("nmg149", "Nathan", "Goodman",
+                "Hughes", 2017);
         
         // Add assignment grades to the empty gradebook.
-        emptyGradebook.changeGrade("HW1", "joberste", 10.0);
+        assertTrue(emptyGradebook.changeGrade("HW1", "joberste", 10.0));
         emptyGradebook.changeGrade("HW1", "klhutch", 7.0);
         emptyGradebook.changeGrade("HW1", "nmg149", 3.0);
         emptyGradebook.changeGrade("Test1", "joberste", 90.0);
@@ -130,13 +138,9 @@ public class GradeBookWhiteTest {
         hw1.changeGrade("klhutch", 7.0);
         hw1.changeGrade("nmg149", 3.0);
         
-        // Add students to the empty gradebook.
-        emptyGradebook.addStudent("joberste", "Jesse",
-                "Oberstein", "Mazor", 2017);
-        emptyGradebook.addStudent("klhutch", "Kate", "Hutchinson",
-                "Hughes", 2016);
-        emptyGradebook.addStudent("nmg149", "Nathan", "Goodman",
-                "Hughes", 2017);
+        test1.changeGrade("joberste", 90.0);
+        test1.changeGrade("klhutch", 75.0);
+        test1.changeGrade("nmg149", 80.0);
     }
     
     /**
@@ -309,7 +313,10 @@ public class GradeBookWhiteTest {
         
         assertTrue(emptyGradebook.getAssignment("HW1").average() == 
                 6.666666666666667);
-        System.out.println(hw1.average());
+        assertTrue(hw1.average() == 6.666666666666667);
+        assertTrue(test1.average() == 81.66666666666667);
+        assertTrue(emptyGradebook.getAssignment("Test1").average() ==
+                81.66666666666667);
     }
     
     /**
@@ -317,7 +324,8 @@ public class GradeBookWhiteTest {
      */
     @Test
     public void testMedian() {
-        //TODO write test for median
+        System.out.println(hw1.median());
+        //assertTrue()
     }
     
     /**
