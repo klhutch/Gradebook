@@ -330,20 +330,34 @@ public class MyGradeBook {
     public void processString(String additionalString) {
         String assignName = "";
         
+        String option1 = "ASSIGNMENT";
+        String option2 = "STUDENT";
+        String option3 = "GRADES_FOR_STUDENT";
+        String option4 = "GRADES_FOR_ASSIGNMENT";
+        
+        
         Scanner scan = new Scanner(additionalString);
+        String firstLine = scan.nextLine();
         while (scan.hasNextLine()) {
-            String firstLine = scan.nextLine();
-            System.out.print(firstLine);
-            if (firstLine.equals("ASSIGNMENT")) {
-                String name = scan.next();
-                System.out.println(scan.nextLine());
+            
+            System.out.println(firstLine);
+            if (firstLine.equals(option1)) {
+                System.out.println("Adding assignment");
+                String name = scan.nextLine();
+                System.out.println(name);
                 Double points = scan.nextDouble();
-                System.out.println(scan.nextLine());;
+                System.out.println("" + points);
+                //System.out.println(scan.nextLine());
+                //System.out.println(scan.nextLine());
                 Double weight = scan.nextDouble();
+                System.out.println(weight);
                 
                 this.addAssignment(name, points, weight);
+                
+                firstLine = scan.next();
             }
-            else if (firstLine.equals("STUDENT")) {
+            else if (firstLine.substring(0, 
+                    option2.length()).equals(option2)) {
                 System.out.println("adding student");
                 String user = scan.next();
                 System.out.println(user);
@@ -359,16 +373,21 @@ public class MyGradeBook {
                 
                 
                 this.addStudent(user, first, last, advisor, year);
+                
+                if (scan.hasNext()) {
+                    scan.nextLine();
+                    firstLine = scan.nextLine();
+                }
             }
             
-            else if (firstLine.equals("GRADES_FOR_STUDENT")) {
+            else if (firstLine.equals(option3)) {
                 String s1name = scan.nextLine();
                 Student s1 = this.getStudent(s1name);
                 s1.addStudentGrade(this.getAssignment(scan.next()), 
                         scan.nextDouble());
             }
             else { //firstLine.equals("GRADES_FOR_ASSIGNMENT" 
-                if (firstLine.equals("GRADES_FOR_ASSIGNMENT")) {
+                if (firstLine.equals(option4)) {
                     assignName = scan.next();
                 }
                 System.out.println(scan.nextLine());
