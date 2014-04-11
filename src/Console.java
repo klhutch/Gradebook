@@ -74,7 +74,9 @@ public class Console {
                 }
             }
             else if (firstCommand.equals("gb calc")) {
-                this.calc(parsedCommand);
+                if (this.calc(parsedCommand)) {
+                    System.out.println("gb calc failed :(");
+                }
             }
             else if (firstCommand.equals("gb import")) {
                 this.importFormFile(parsedCommand);
@@ -221,6 +223,7 @@ public class Console {
      * Assign a grade to a gradebook
      * @param parsedCommand - a list of strings that 
      * contains the data to assign grade
+     * @return true if error, false if no error
      */
     private boolean assign(ArrayList<String> parsedCommand) {
         if (parsedCommand.size() == 4) {
@@ -251,8 +254,9 @@ public class Console {
      * Calculate stats for an assignment
      * @param parsedCommand - a list of strings that contains 
      * the data to calculate stats
+     * @return true if error, false if no error
      */
-    private void calc(ArrayList<String> parsedCommand) {
+    private boolean calc(ArrayList<String> parsedCommand) {
         if (parsedCommand.size() > 1) {
             if (parsedCommand.size() > 2) {
                 String assignmentName = parsedCommand.get(1);
@@ -275,6 +279,7 @@ public class Console {
                             + "Please enter a valid command to continue. "
                             + "For a list of valid commands, "
                             + "type \"gb help -calc\" into the console");
+                    return true;
                 }
             }
             else {
@@ -282,14 +287,16 @@ public class Console {
                         "You must specify which calculation you "
                         + "wish to perform. Choices are "
                         + "-mean, -median, -min, or -max");
+                return true;
             }
-            
         }
         else {
             System.out.println(
                     "The command \" gb calc \" cannot be called without flags."
                     + " Please type \" gb help -calc \" for more information");
+            return true;
         }
+        return false;
     }
     
     /**
