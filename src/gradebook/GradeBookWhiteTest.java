@@ -115,8 +115,8 @@ public class GradeBookWhiteTest {
     
     private String initialtxt = "GRADEBOOK" + "\n" + "\t" + "\t" + "\t" + "\t"
             + "\t" + "Opening Assignment" + "\t" + "A2" + "\n" + "\t" + "\t"
-            + "\t" + "\t" + "\t" + "10" + "\t" + "100" + "\t" + "1" + "\t"
-            + "5" + "\n"
+            + "\t" + "\t" + "\t" + "10" + "\t" + "100" + "\n" + "\t" + "\t"
+            + "\t" + "\t" + "\t" + "1" + "\t" + "5" + "\n"
             + "abetaylor" + "\t" + "Isabella" + "\t" + "Taylor" + "\t" + "Baker" + "\t" + "2016" + "\t" + "8" + "\t" + "71" + "\n"
             + "abethes" + "\t" + "Elizabeth" + "\t" + "White Jones" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "6" + "\t" + "90" + "\n"
             + "acit" + "\t" + "Jacob" + "\t" + "Smith" + "\t" + "Scott" + "\t" + "2014" + "\t" + "8" + "\t" + "79" + "\n"
@@ -124,16 +124,16 @@ public class GradeBookWhiteTest {
             + "amller" + "\t" + "Liam" + "\t" + "Miller" + "\t" + "Scott" + "\t" + "2014" + "\t" + "5" + "\t" + "74" + "\n"
             + "are" + "\t" + "Emily Ann" + "\t" + "Moore" + "\t" + "Scott" + "\t" + "2014" + "\t" + "9" + "\t" + "58" + "\n"
             + "enwilson" + "\t" + "Aiden" + "\t" + "Wilson" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "8" + "\t" + "83" + "\n"
-            gailarti    Abigail Martin  Green   2015    7   79
-            marson  Emma    Anderson    Green   2015    7   81
-            michaeia    Michael Garcia  Baker   2016    5   100
-            mijacks Mia Jackson Baker   2016    5   50
-            oliviaas    Olivia  Thomas  Adams   2017    6   94
-            onon    Mason   Johnson Green   2015    10  81
-            onson   Madison Thompson    Adams   2017    9   89
-            thms    Ethan   Williams    Baker   2016    8   89
-            vaern   Ava Hernandez   Nelson  2014    6   91
-            ydenavi Jayden  Davis   Green   2015    10  97
+            + "gailarti" + "\t" + "Abigail" + "\t" + "Martin" + "\t" + "Green" + "\t" + "2015" + "\t" + "7" + "\t" + "79" + "\n"
+            + "marson" + "\t" + "Emma" + "\t" + "Anderson" + "\t" + "Green" + "\t" + "2015" + "\t" + "7" + "\t" + "81" + "\n"
+            + "michaeia" + "\t" + "Michael" + "\t" + "Garcia" + "\t" + "Baker" + "\t" + "2016" + "\t" + "5" + "\t" + "100" + "\n"
+            + "mijacks" + "\t" +  "Mia Jackson" + "\t" + "Baker" + "\t" + "2016" + "\t" + "5" + "\t" + "50" + "\n"
+            + "oliviaas" + "\t" + "Olivia" + "\t" + "Thomas" + "\t" + "Adams" + "\t" + "2017" + "\t" + "6" + "\t" + "94" + "\n"
+            + "onon" + "\t" + "Mason" + "\t" + "Johnson" + "\t" + "Green" + "\t" + "2015" + "\t" + "10" + "\t" + "81" + "\n"
+            + "onson" + "\t" + "Madison" + "\t" + "Thompson" + "\t" + "Adams" + "\t" + "2017" + "\t" + "9" + "\t" + "89" + "\n"
+            + "thms" + "\t" + "Ethan" + "\t" + "Williams" + "\t" + "Baker" + "\t" + "2016" + "\t" + "8" + "\t" + "89" + "\n"
+            + "vaern" + "\t" + "Ava" + "\t" +  "Hernandez" + "\t" + "Nelson" + "\t" + "2014" + "\t" + "6" + "\t" + "91" + "\n"
+            + "ydenavi" + "\t" + "Jayden" + "\t" + "Davis" + "\t" + "Green" + "\t" + "2015" + "\t" + "10" + "\t" + "97" + "\n";
 
     // Example Gradebooks
     private MyGradeBook emptyGradebook = MyGradeBook.initialize();
@@ -457,16 +457,15 @@ public class GradeBookWhiteTest {
      */
     @Test
     public void testCurrentGrade() {
-        // TODO 13 places only.
         this.addSamplesToGB();
-        /*assertTrue(emptyGradebook.currentGrade("joberste") 
+        assertTrue(emptyGradebook.currentGrade("joberste") 
                 == 91.6666666666666);
         assertTrue(emptyGradebook.currentGrade("klhutch")
                 == 74.1666666666666);
         assertTrue(gradebookFile.currentGrade("abetaylor")
                 == 63.5772357723577);
         assertTrue(gradebookString.currentGrade("michaeia")
-                == 68.4552845528455);*/
+                == 68.4552845528455);
     }
     
     /**
