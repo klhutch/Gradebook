@@ -633,7 +633,7 @@ public class MyGradeBook {
         return true;
     }
 
-    private boolean hasAssignment(Assignment assign) {
+    boolean hasAssignment(Assignment assign) {
         
         Iterator<Assignment> myiter = this.assignments.iterator();
         while (myiter.hasNext()) {
@@ -655,7 +655,7 @@ public class MyGradeBook {
         return true;
     }
 
-    private boolean hasStudent(Student stud) {
+    boolean hasStudent(Student stud) {
         
         Iterator<Student> myiter = this.students.iterator();
         while (myiter.hasNext()) {
