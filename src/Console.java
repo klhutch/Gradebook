@@ -64,10 +64,14 @@ public class Console {
         if (!(parsedCommand.isEmpty())) {
             String firstCommand = parsedCommand.get(0);
             if (firstCommand.equals("gb add")) {
-                this.add(parsedCommand);
+                if (this.add(parsedCommand)) {
+                    System.out.println("gb add failed :(");
+                }
             }
             else if (firstCommand.equals("gb assign")) {
-                this.assign(parsedCommand);
+                if (this.assign(parsedCommand)) {
+                    System.out.println("gb assign failed :(");
+                }
             }
             else if (firstCommand.equals("gb calc")) {
                 this.calc(parsedCommand);
@@ -133,8 +137,9 @@ public class Console {
     /**
      * Add a Student or an Assignment to the gradebook
      * @param parsedCommand - a list of strings that contains the data to add
+     * @return true if error, false if no error
      */
-    private void add(ArrayList<String> parsedCommand) {
+    private boolean add(ArrayList<String> parsedCommand) {
         if (parsedCommand.size() > 1) {
             String subCommandAdd = parsedCommand.get(1);
             if (subCommandAdd.equals("assignment") 
@@ -182,7 +187,13 @@ public class Console {
                     System.out.print("Advisor: ");
                     advisor = input.nextLine();
                     System.out.print("Year: ");
-                    year = Integer.parseInt(input.nextLine());
+                    try {
+                        year = Integer.parseInt(input.nextLine());
+                    }
+                    catch (NumberFormatException ex) {
+                        System.out.println("Year must be a whole number");
+                        return true;
+                    }
                 }
                 this.gradebook.addStudent(
                         username, first, last, advisor, year);
@@ -194,13 +205,16 @@ public class Console {
                     + "Please enter a valid command to continue. "
                     + "For a list of valid commands, "
                     + "type \"gb help -add\" into the console");
+                return true;
             }
         }
         else {
             System.out.println(
                     "You must specify what you wish to add. "
                     + "Type \"gb help -add\" for move details");
+            return true;
         }
+        return false;
     }
     
     /**
@@ -208,11 +222,18 @@ public class Console {
      * @param parsedCommand - a list of strings that 
      * contains the data to assign grade
      */
-    private void assign(ArrayList<String> parsedCommand) {
+    private boolean assign(ArrayList<String> parsedCommand) {
         if (parsedCommand.size() == 4) {
             String assignmentName = parsedCommand.get(1);
             String username = parsedCommand.get(2);
-            Double newGrade = Double.parseDouble(parsedCommand.get(3));
+            Double newGrade;
+            try {
+                newGrade = Double.parseDouble(parsedCommand.get(3));
+            }
+            catch (NumberFormatException ex) {
+                System.out.println("Grade must be a number");
+                return true;
+            }
             this.gradebook.changeGrade(assignmentName, username, newGrade);
             System.out.println("Grade assigned successfully");
         }
@@ -221,7 +242,9 @@ public class Console {
                     "gb assign must take an assignment, studentId, and grade. "
                     + "Please enter the correct parameters. "
                     + "Type \"gb help -assign\" for more details");
+            return true;
         }
+        return false;
     }
     
     /**
