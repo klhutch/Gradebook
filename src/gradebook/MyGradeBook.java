@@ -188,7 +188,7 @@ public class MyGradeBook {
      * @return Assignment A way to represent an assignment that contains
      *         student's grades.
      */
-    Assignment getAssignment(String aname) {
+    Assignment getAssignment(String aname) throws RuntimeException {
         Iterator<Assignment> myit = this.assignments.iterator();
         
         while (myit.hasNext()) {
@@ -211,7 +211,7 @@ public class MyGradeBook {
      * @return Student A way to represent a student that contains a student's
      *         basic information, including username.
      */
-    Student getStudent(String sname) {
+    Student getStudent(String sname) throws RuntimeException {
         Iterator<Student> myit = this.students.iterator();
         
         while (myit.hasNext()) {
@@ -295,8 +295,15 @@ public class MyGradeBook {
      */
     public boolean changeGrade(String assignmentName, String username, 
             double newGrade) {
-        return this.getAssignment(assignmentName).changeGrade(username, 
-                newGrade);
+        try {
+            this.getStudent(username); //throws an error if it's not there
+            Assignment assign = this.getAssignment(assignmentName);
+            return assign.changeGrade(username, newGrade);
+        }
+        catch (RuntimeException e) {
+            return false; // assignment is not there or student is not there
+        }
+        
     }
 
     /**
