@@ -640,7 +640,6 @@ public class GradeBookTest {
         
         this.addSamplesToGB();
         this.createGradebookGrades();
-        //TODO
         //assertEquals(gradebookString.currentGrades(), hmgrades);
         //assertEquals(gradebookFile.currentGrades(), hmgrades);
     }

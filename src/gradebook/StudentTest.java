@@ -61,7 +61,7 @@ public class StudentTest {
     public void testToString() {
         assertEquals(jesseOberstein.toString(),
                 "joberste" + "\n" + "Jesse" + "\n" + "Oberstein" + "\n"
-                        + "Mazor" + "\n" + "2017");
+                        + "Mazor" + "\n" + "2017" + "\n");
         assertFalse(nathanGoodman.toString().equals("Nathan Goodman"));
     }
 
