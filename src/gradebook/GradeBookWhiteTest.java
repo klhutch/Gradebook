@@ -245,6 +245,53 @@ public class GradeBookWhiteTest {
             + "klhutch" + "\t" + "74.1666666666666" + "\n"
             + "nmg149" + "\t" + "71.6666666666666" + "\n";
     
+    private String studentEmptyGradebook = "STUDENT_GRADES" + "\n"
+            + "joberste" + "\n" + "Jesse" + "\n" + "Oberstein" + "\n"
+            + "Mazor" + "\n" + "2017" + "\n" + "----" + "\n" + "HW1" + "\t" 
+            + "10.0" + "\n" + "Test1" + "\t" + "90.0" + "\n" + "----" + "\n"
+            + "CURRENT GRADE" + "\t" + "91.6666666666666";
+    
+    private String studentGradebook = "STUDENT_GRADES" + "\n"
+            + "iaartinez" + "\n" + "Sophia" + "\n" + "Martinez" + "\n"
+            + "Scott" + "\n" + "2014" + "\n" + "----" + "\n"
+            + "Opening Assignment" + "\t" + "6.0" + "\n" + "A2" + "\t" + "51.0"
+            + "\n" + "First Group Project" + "\t" + "79.0" + "\n" + "Test"
+            + "\t" + "50.0" + "\n" + "----" + "\n" + "CURRENT GRADE" + "\t" 
+            + "51.0162601626016";
+    
+    /*private String assignmentEmptyGradebook = "ASSIGNMENT_GRADES" + "\n" 
+            Test
+            100
+            25
+            ----
+            abetaylor   65.0
+            abethes 88.0
+            acit    85.0
+            ahrown  57.0
+            amller  82.0
+            are 68.0
+            enwilson    97.0
+            gailarti    73.0
+            iaartinez   50.0
+            illines 79.0
+            marson  54.0
+            michaeia    58.0
+            mijacks 83.0
+            oliviaas    61.0
+            onon    51.0
+            onson   71.0
+            thms    92.0
+            vaern   83.0
+            xaod    91.0
+            ydenavi 84.0
+            ----
+            STATS
+            Average 73.6
+            Median  76.0
+            Max 97.0
+            Min 50.0*/
+
+
     // Example Gradebooks
     private MyGradeBook emptyGradebook = MyGradeBook.initialize();
     private MyGradeBook gradebookFile = 
@@ -270,6 +317,8 @@ public class GradeBookWhiteTest {
     private Assignment hw1 = new Assignment("HW1", 10.0, 2.0);
     private Assignment test1 = new Assignment("Test1", 100.0, 10.0);
     
+    // Example HashMap
+    HashMap<String, Double> hmgrades;
     
     
     
@@ -344,6 +393,8 @@ public class GradeBookWhiteTest {
         test1.changeGrade("joberste", 90.0);
         test1.changeGrade("klhutch", 75.0);
         test1.changeGrade("nmg149", 80.0);
+
+        hmgrades = new HashMap<String, Double>();
     }
     
     /**
@@ -425,6 +476,23 @@ public class GradeBookWhiteTest {
         initialFile.processString(gradesForStudent);
         assertEquals(new Double(initialFile.assignmentGrade(
                 "Opening Assignment", "iaartinez")), new Double(6.0));
+    }
+    
+    /**
+     * tests the assignment grade method in MyGradeBook
+     */
+    @Test
+    public void assignmentGrade() {
+        assertEquals(new Double(gradebookFile.assignmentGrade("A2", "gailarti")),
+                new Double(79));
+        assertEquals(new Double(gradebookString.assignmentGrade("A2", 
+                "gailarti")), new Double(79));
+        assertEquals(new Double(initialFile.assignmentGrade(
+                "Opening Assignment", "are")), new Double(9.0));
+        assertEquals(new Double(initialString.assignmentGrade(
+                "Opening Assignment", "are")), new Double(9.0));
+        assertEquals(new Double(shortGradebookString.assignmentGrade("Test1",
+                "nmg149")), new Double(85.0));
     }
     
     /**
@@ -518,34 +586,90 @@ public class GradeBookWhiteTest {
     }
     
     /**
-     * tests the currentGrade method in MyGradeBook
+     * Creates the grades for the gradebook.txt file/string.
      */
-    @Test
-    public void testCurrentGrades() {
-        this.addSamplesToGB();
-        assertEquals(emptyGradebook.outputCurrentGrades(), 
-                currentShortGradebook);
-        //assertEquals(gradebookFile.outputCurrentGrades(),
-        //        currentGradebook);
-        assertEquals(gradebookString.outputCurrentGrades(), 
-                currentGradebook);
+    public void createGradebookGrades() {
+        hmgrades.put("abetaylor", 63.5772357723577);
+        hmgrades.put("abethes", 81.0569105691057);
+        hmgrades.put("acit", 83.2520325203252);
+        hmgrades.put("ahrown", 70.8130081300813);
+        hmgrades.put("amller", 76.5040650406504);
+        hmgrades.put("are", 66.8292682926829);
+        hmgrades.put("enwilson", 91.219512195122);
+        hmgrades.put("gailarti", 77.3170731707317);
+        hmgrades.put("iaartinez", 51.0162601626016);
+        hmgrades.put("illines", 77.520325203252);
+        hmgrades.put("marson", 66.6260162601626);
+        hmgrades.put("michaeia", 68.4552845528455);
+        hmgrades.put("mijacks", 73.0487804878049);
+        hmgrades.put("oliviaas", 62.8048780487805);
+        hmgrades.put("onon", 65.5284552845528);
+        hmgrades.put("onson", 77.9674796747968);
+        hmgrades.put("thms", 86.9512195121951);
+        hmgrades.put("vaern", 85.4471544715447);
+        hmgrades.put("xaod", 84.0243902439024);
+        hmgrades.put("ydenavi", 87.2764227642276);
     }
     
     /**
      * tests the currentGrades method in MyGradeBook
      */
     @Test
-    public void assignmentGrade() {
-        assertEquals(new Double(gradebookFile.assignmentGrade("A2", "gailarti")),
-                new Double(79));
-        assertEquals(new Double(gradebookString.assignmentGrade("A2", 
-                "gailarti")), new Double(79));
-        assertEquals(new Double(initialFile.assignmentGrade(
-                "Opening Assignment", "are")), new Double(9.0));
-        assertEquals(new Double(initialString.assignmentGrade(
-                "Opening Assignment", "are")), new Double(9.0));
-        assertEquals(new Double(shortGradebookString.assignmentGrade("Test1",
-                "nmg149")), new Double(85.0));
+    public void testCurrentGrades() {
+        this.addSamplesToGB();
+        hmgrades.put("joberste", 91.6666666666666);
+        hmgrades.put("klhutch", 74.1666666666666);
+        hmgrades.put("nmg149", 71.6666666666666);
+        assertEquals(emptyGradebook.currentGrades(), hmgrades);
+        
+        this.addSamplesToGB();
+        this.createGradebookGrades();
+        //assertEquals(gradebookString.currentGrades(), hmgrades);
+        //assertEquals(gradebookFile.currentGrades(), hmgrades);
+    }
+    
+    /**
+     * tests the outputCurrentGrades method in MyGradeBook
+     */
+    @Test
+    public void testOutputCurrentGrades() {
+        this.addSamplesToGB();
+        
+        assertEquals(emptyGradebook.outputCurrentGrades(), 
+                currentShortGradebook);
+        //assertEquals(gradebookFile.outputCurrentGrades(),
+        //        currentGradebook);
+        //assertEquals(gradebookString.outputCurrentGrades(), 
+        //        currentGradebook);
+    }
+    
+    /**
+     * tests the outputStudentGrades method in MyGradeBook
+     */
+    @Test
+    public void testOutputStudentGrades() {
+        this.addSamplesToGB();
+
+        hmgrades.put("joberste", 91.6666666666666);
+        hmgrades.put("klhutch", 74.1666666666666);
+        hmgrades.put("nmg149", 71.6666666666666);
+        
+        assertEquals(emptyGradebook.outputStudentGrades("joberste"), 
+                studentEmptyGradebook);
+        
+        this.createGradebookGrades();
+        assertEquals(gradebookFile.outputStudentGrades("iaartinez"),
+                studentGradebook);
+        assertEquals(gradebookString.outputStudentGrades("iaartinez"),
+                studentGradebook);
+    }
+    
+    /**
+     * tests the outputAssignmentGrades method in MyGradeBook
+     */
+    @Test
+    public void testOutputAssignmentGrades() {
+        this.addSamplesToGB();
     }
     
     /**
