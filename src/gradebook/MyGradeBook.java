@@ -783,7 +783,6 @@ public class MyGradeBook {
      *         formatted like gradebook.txt. The usernames will be listed
      *         alphabetically.
      */
-    // TODO Needs to be shorter.
     public String outputGradebook() {
         String formattedGB = "GRADEBOOK" + "\n";
         String assignTabs = "\t" + "\t" + "\t" + "\t";
