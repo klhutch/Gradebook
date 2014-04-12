@@ -53,11 +53,19 @@ public class StudentTest {
                 new Integer(2017));
     }
     
+    /**
+     * Tests the equals method for students.
+     */
+    @Test
     public void testEquals() {
         assertFalse(jesseOberstein.equals(nathanGoodman));
         assertTrue(kateHutchinson.equals(kateHutchinson));
     }
     
+    /**
+     * Tests the toString method for students
+     */
+    @Test
     public void testToString() {
         assertEquals(jesseOberstein.toString(),
                 "joberste" + "\n" + "Jesse" + "\n" + "Oberstein" + "\n"

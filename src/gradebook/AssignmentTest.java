@@ -38,7 +38,8 @@ public class AssignmentTest {
     @Test
     public void testAddGrade() {
         test1.addAssignmentGrade("joberste", 87.0);
-        assertEquals(new Double(test1.grades.get("joberste")), new Double(87.0));
+        assertEquals(new Double(test1.grades.get("joberste")), 
+                new Double(87.0));
         hw1.addAssignmentGrade("nmg149", 4.0);
         assertFalse(new Double(hw1.grades.get("nmg149")).equals(
                 new Double(7.0)));
@@ -65,14 +66,6 @@ public class AssignmentTest {
         assertEquals(new Double(hw1.max()), new Double(8.0));
         assertEquals(new Double(hw1.average()), new Double(5.0));
         assertEquals(new Double(hw1.median()), new Double(5.0));
-    }
-    
-    /** 
-     * Tests the average, median, max, and min methods for an assignment.
-     */
-    @Test
-    public void testChangeGrade() {
-        hw1.addAssignmentGrade("joberste", 8.0);
     }
     
     /** 

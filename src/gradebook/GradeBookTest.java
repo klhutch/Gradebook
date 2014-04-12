@@ -606,21 +606,21 @@ public class GradeBookTest {
      */
     public void createGradebookGrades() {
         hmgrades.put("abetaylor", 63.5772357723577);
-        hmgrades.put("abethes", 81.0569105691057);
+        hmgrades.put("abethes", 81.0569105691056);
         hmgrades.put("acit", 83.2520325203252);
         hmgrades.put("ahrown", 70.8130081300813);
         hmgrades.put("amller", 76.5040650406504);
         hmgrades.put("are", 66.8292682926829);
-        hmgrades.put("enwilson", 91.219512195122);
+        hmgrades.put("enwilson", 91.2195121951219);
         hmgrades.put("gailarti", 77.3170731707317);
         hmgrades.put("iaartinez", 51.0162601626016);
         hmgrades.put("illines", 77.520325203252);
         hmgrades.put("marson", 66.6260162601626);
         hmgrades.put("michaeia", 68.4552845528455);
-        hmgrades.put("mijacks", 73.0487804878049);
-        hmgrades.put("oliviaas", 62.8048780487805);
-        hmgrades.put("onon", 65.5284552845528);
-        hmgrades.put("onson", 77.9674796747968);
+        hmgrades.put("mijacks", 73.0487804878048);
+        hmgrades.put("oliviaas", 62.8048780487804);
+        hmgrades.put("onon", 65.5284552845527);
+        hmgrades.put("onson", 77.9674796747967);
         hmgrades.put("thms", 86.9512195121951);
         hmgrades.put("vaern", 85.4471544715447);
         hmgrades.put("xaod", 84.0243902439024);
