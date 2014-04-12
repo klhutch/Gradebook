@@ -16,7 +16,7 @@ import org.junit.Test;
 * @version April 11th, 2014
 *
 */
-public class GradeBookWhiteTest {
+public class GradeBookTest {
     
     ////////////////////////////////////////////////////////////////////
     ///////        Examples for MyGradeBook             ////////////////
