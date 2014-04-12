@@ -259,37 +259,52 @@ public class GradeBookWhiteTest {
             + "\t" + "50.0" + "\n" + "----" + "\n" + "CURRENT GRADE" + "\t" 
             + "51.0162601626016";
     
-    /*private String assignmentEmptyGradebook = "ASSIGNMENT_GRADES" + "\n" 
-            Test
-            100
-            25
-            ----
-            abetaylor   65.0
-            abethes 88.0
-            acit    85.0
-            ahrown  57.0
-            amller  82.0
-            are 68.0
-            enwilson    97.0
-            gailarti    73.0
-            iaartinez   50.0
-            illines 79.0
-            marson  54.0
-            michaeia    58.0
-            mijacks 83.0
-            oliviaas    61.0
-            onon    51.0
-            onson   71.0
-            thms    92.0
-            vaern   83.0
-            xaod    91.0
-            ydenavi 84.0
-            ----
-            STATS
-            Average 73.6
-            Median  76.0
-            Max 97.0
-            Min 50.0*/
+    private String assignmentEmptyGradebook = "ASSIGNMENT_GRADES" + "\n" 
+            + "Test" + "\n" 
+            + "100" + "\n" 
+            + "25" + "\n" 
+            + "----" + "\n" 
+            + "abetaylor" + "\t" + "65.0" + "\n" 
+            + "abethes" + "\t" + "88.0" + "\n" 
+            + "acit" + "\t" + "85.0" + "\n"
+            + "ahrown" + "\t" + "57.0" + "\n" 
+            + "amller" + "\t" + "82.0" + "\n" 
+            + "are" + "\t" + "68.0" + "\n" 
+            + "enwilson" + "\t" + "97.0" + "\n" 
+            + "gailarti" + "\t" + "73.0" + "\n"
+            + "iaartinez" + "\t" + "50.0" + "\n" 
+            + "illines" + "\t" + "79.0" + "\n" 
+            + "marson" + "\t" + "54.0" + "\n" 
+            + "michaeia" + "\t" + "58.0" + "\n" 
+            + "mijacks" + "\t" + "83.0" + "\n" 
+            + "oliviaas" + "\t" + "61.0" + "\n" 
+            + "onon" + "\t" + "51.0" + "\n" 
+            + "onson" + "\t" + "71.0" + "\n" 
+            + "thms" + "\t" + "92.0" + "\n" 
+            + "vaern" + "\t" + "83.0" + "\n" 
+            + "xaod" + "\t" + "91.0" + "\n" 
+            + "ydenavi" + "\t" + "84.0" + "\n" 
+            + "----" + "\n" 
+            + "STATS" + "\n" 
+            + "Average" + "\t" + "73.6" + "\n" 
+            + "Median" + "\t" + "76.0" + "\n"
+            + "Max" + "\t" + "97.0" + "\n" 
+            + "Min" + "\t" + "50.0" + "\n";
+    
+    private String assignmentGradebook = "ASSIGNMENT_GRADES" + "\n" 
+            + "Test1" + "\n" 
+            + "100.0" + "\n" 
+            + "10.0" + "\n"
+            + "----" + "\n"
+            + "joberste" + "\t" + "90.0" + "\n"
+            + "klhutch" + "\t" + "75.0" + "\n"
+            + "nmg149" + "\t" + "80.0" + "\n" 
+            + "----" + "\n" 
+            + "STATS" + "\n" 
+            + "Average" + "\t" + "81.66666666666667" + "\n" 
+            + "Median" + "\t" + "80.0" + "\n"
+            + "Max" + "\t" + "90.0" + "\n" 
+            + "Min" + "\t" + "75.0" + "\n";
 
 
     // Example Gradebooks
@@ -624,8 +639,9 @@ public class GradeBookWhiteTest {
         
         this.addSamplesToGB();
         this.createGradebookGrades();
-        //assertEquals(gradebookString.currentGrades(), hmgrades);
-        //assertEquals(gradebookFile.currentGrades(), hmgrades);
+        //TODO
+        assertEquals(gradebookString.currentGrades(), hmgrades);
+        assertEquals(gradebookFile.currentGrades(), hmgrades);
     }
     
     /**
@@ -634,13 +650,13 @@ public class GradeBookWhiteTest {
     @Test
     public void testOutputCurrentGrades() {
         this.addSamplesToGB();
-        
+        //TODO
         assertEquals(emptyGradebook.outputCurrentGrades(), 
                 currentShortGradebook);
-        //assertEquals(gradebookFile.outputCurrentGrades(),
-        //        currentGradebook);
-        //assertEquals(gradebookString.outputCurrentGrades(), 
-        //        currentGradebook);
+        assertEquals(gradebookFile.outputCurrentGrades(),
+                currentGradebook);
+        assertEquals(gradebookString.outputCurrentGrades(), 
+                currentGradebook);
     }
     
     /**
