@@ -798,7 +798,6 @@ public class MyGradeBook {
         formattedGB += assignNames + "\n" + assignTabs + assignTotals + "\n" 
                 + assignTabs + assignWeights + "\n";
         
-
         String studentList = "";
         
         Iterator<Student> stuiter = this.students.iterator();
