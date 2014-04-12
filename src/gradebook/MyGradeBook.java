@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Iterator;
@@ -301,8 +302,6 @@ public class MyGradeBook {
      *            The String will be formatted like addAssignments.txt,
      *            addStudents.txt, gradesForAssignment1.txt, and
      *            gradesForStudent.txt.
-     * @throws Runtime Exception if header is not equal to one of the options
-     *         Runtime Exception if the format is wrong
      */
     public void processString(String additionalString) 
         throws RuntimeException {
@@ -312,7 +311,7 @@ public class MyGradeBook {
         String option3 = "GRADES_FOR_STUDENT";
         String option4 = "GRADES_FOR_ASSIGNMENT";
         
-       try { 
+        try { 
             Scanner scan = new Scanner(additionalString);
             String firstLine = scan.nextLine();
             
@@ -353,28 +352,28 @@ public class MyGradeBook {
      * @param additionalString the String to be processed
      */
     private void processStringGradesAssignments(String additionalString) {
-            Scanner scan = new Scanner(additionalString);
-            String firstLine = scan.nextLine();
-    
-            String assignName = scan.nextLine();
-            
+        Scanner scan = new Scanner(additionalString);
+        String firstLine = scan.nextLine();
+
+        String assignName = scan.nextLine();
+        
+        
+        while (scan.hasNextLine()) {
             
             while (scan.hasNextLine()) {
+                String user = scan.nextLine();
+                if (user.equals(firstLine)) {
+                    break;
+                }
+                Double grade = scan.nextDouble();
+                this.changeGrade(assignName, user, grade);
                 
-                while (scan.hasNextLine()) {
-                    String user = scan.nextLine();
-                    if (user.equals(firstLine)) {
-                        break;
-                    }
-                    Double grade = scan.nextDouble();
-                    this.changeGrade(assignName, user, grade);
-                    
-                    if (scan.hasNextLine()) {
-                        scan.nextLine();
-                    }
-                    
-                }   
-            }
+                if (scan.hasNextLine()) {
+                    scan.nextLine();
+                }
+                
+            }   
+        }
         
             
     }
@@ -552,7 +551,7 @@ public class MyGradeBook {
         double curGrade = (assignGrades / allWeights) * 100;
         
         BigDecimal bGrade = new BigDecimal(curGrade);
-        bGrade = bGrade.setScale(13, BigDecimal.ROUND_FLOOR);
+        bGrade = bGrade.setScale(13, RoundingMode.FLOOR);
         curGrade = bGrade.doubleValue();
         
         return curGrade; 
@@ -655,7 +654,8 @@ public class MyGradeBook {
      *         Assignments are to remain in the same order as given.
      * @throws RuntimeException if Student not found
      */
-    public String outputStudentGrades(String username) throws RuntimeException {
+    public String outputStudentGrades(String username) 
+        throws RuntimeException {
         String formattedList = "STUDENT_GRADES" + "\n" 
                 + this.getStudent(username).toString();
         String assignsAndGrades = "";
@@ -751,7 +751,7 @@ public class MyGradeBook {
      * @param fName The name of the file to ouput to
      * @return a String message about completion of Output
      */
-    public String fileOutputAssignmentGrades(String aName, String fName){
+    public String fileOutputAssignmentGrades(String aName, String fName) {
         PrintWriter file;
         try {
             file = new PrintWriter(fName, "UTF-8");
@@ -827,6 +827,7 @@ public class MyGradeBook {
      * writes the result from outputGradebook to a file
      * 
      * @param filename The name of the file to ouput to
+     * @return String message re: completion of file output
      */
     public String fileOutputGradebook(String filename) {
         try {
