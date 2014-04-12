@@ -84,7 +84,7 @@ public class Console {
             else if (firstCommand.equals("gb import")) {
                 if (this.importFormFile(parsedCommand)) {
                     System.out.println("gb import failed :(");
-                };
+                }
             }
             else if (firstCommand.equals("gb print")) {
                 this.print(parsedCommand);
