@@ -39,15 +39,6 @@ class Student {
         this.year = year;
     }
     
-    /**
-     * Adds this student's given grade to the given assignment.
-     * 
-     * @param assignment A given assignment
-     * @param grade A given grade for a student on this assignment.
-     */
-    void addStudentGrade(Assignment assignment, Double grade) {
-        assignment.addAssignmentGrade(this.id, grade);
-    }
     
     /**
      * Returns this Student as a string representation.

@@ -75,11 +75,12 @@ public class MyGradeBook {
             while (filescan.hasNextLine()) {
                 startingString += filescan.nextLine() + "\n";
             }
+            return startingString;
         }
         catch (FileNotFoundException e) {
            throw new RuntimeException("File not found");
         }
-        return startingString;
+        
     }
     
     

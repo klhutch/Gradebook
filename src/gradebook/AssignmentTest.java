@@ -1,8 +1,5 @@
 package gradebook;
 import static org.junit.Assert.*;
-
-import java.io.FileNotFoundException;
-
 import org.junit.Test;
 
 /**Class AssignmentTest
@@ -16,12 +13,13 @@ import org.junit.Test;
  *
  */
 public class AssignmentTest {
-    Assignment hw1 = new Assignment("HW1", 10.0, 2.0);
-    Assignment hw1copy = new Assignment("HW1", 10.0, 2.0);
-    Assignment test1 = new Assignment("Test1", 100.0, 10.0);
+    // Examples of Assignments.
+    private Assignment hw1 = new Assignment("HW1", 10.0, 2.0);
+    private Assignment hw1copy = new Assignment("HW1", 10.0, 2.0);
+    private Assignment test1 = new Assignment("Test1", 100.0, 10.0);
     
     /**
-     * creates grades to be used in the assignments
+     * Tests the accessor methods for assignments.
      */
     @Test
     public void testAssignmentAccessor() {
@@ -34,18 +32,33 @@ public class AssignmentTest {
         assertTrue(test1.getWeight().equals(10.0));
     }
     
+    /**
+     * Tests the addAssignmentGrade method.
+     */
     @Test
-    public void testAddGrades() {
+    public void testAddGrade() {
         test1.addAssignmentGrade("joberste", 87.0);
         assertTrue(test1.grades.get("joberste").equals(87.0));
     }
 
     /** 
-     * Tests the equals method for assignment.
+     * Tests the equals and hashCode methods for assignment.
      */
     @Test
     public void testAssignmentEquals() {
         assertTrue(hw1.equals(hw1copy));
         assertFalse(test1.equals(hw1));
+    }
+    
+    /**
+     * Tests the toString method for assignment.
+     */
+    @Test
+    public void testToString() {
+        assertEquals(hw1.toString(), "HW1" + "\n" 
+                + "10.0" + "\n" 
+                + "2.0" + "\n"
+                + hw1.grades.toString() + "\n");
+        assertFalse(test1.toString().equals("Test1"));
     }
 }
