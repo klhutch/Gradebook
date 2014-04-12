@@ -721,7 +721,7 @@ public class MyGradeBook {
      * @throws RuntimeException if Assignment is not found
      */
     public String outputAssignmentGrades(String assignName) 
-            throws RuntimeException {
+        throws RuntimeException {
         double assignTotal = this.getAssignment(assignName).getTotal();
         double assignWeight = this.getAssignment(assignName).getWeight();
         String formattedList = "ASSIGNMENT_GRADES" + "\n" 
