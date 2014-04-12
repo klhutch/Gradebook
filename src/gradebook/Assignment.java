@@ -16,8 +16,11 @@ import java.util.List;
  *
  */
 class Assignment {
+    /**the name of this assignment */
     String name;
+    /** the total points of this assignment */
     Double totalPoints;
+    /** the weight of this assignment */
     Double weight;
     
     /**
@@ -32,7 +35,6 @@ class Assignment {
      * 
      * @param name - the name of the Assignment
      * @param weight - the weight of the Assignment
-     * @param totalPoints - the total number of points an assignement is worth
      */
     Assignment(String name, Double totalPoints, Double weight) {
         this.name = name;

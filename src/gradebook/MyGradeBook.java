@@ -64,9 +64,10 @@ public class MyGradeBook {
      * @param filename
      *            The name of the given file.
      * @return String The formatted string of the given file's contents.
-     * @throws FileNotFoundException
+     * @throws RuntimeException if file not found
      */
-    private String convertFileToString(String filename) {
+    private String convertFileToString(String filename) 
+        throws RuntimeException {
         Scanner filescan;
         String startingString = "";
         try {
@@ -76,9 +77,7 @@ public class MyGradeBook {
             }
         }
         catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println(
-                    "InitializeWithFile: The file entered cannot be found.");
+           throw new RuntimeException("File not found");
         }
         return startingString;
     }
@@ -92,8 +91,10 @@ public class MyGradeBook {
      *            the filename for the file that contains the initial grade
      *            book, which is formatted like initial.txt
      * @return a MyGradebook that contains the grade book from filename
+     * @throws RuntimeException if file not found
      */
-    public static MyGradeBook initializeWithFile(String filename) {
+    public static MyGradeBook initializeWithFile(String filename) 
+        throws RuntimeException {
         MyGradeBook mygb = MyGradeBook.initialize();
         String file = mygb.convertFileToString(filename);
         
