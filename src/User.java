@@ -12,6 +12,7 @@ public class User {
     /** Main method
      * used in running a program, determines what happens in
      * program execution and calls other functions
+     * @param args - give args to main function
      */
     public static void main(String[] args) {
         Console console = Console.getInstance();

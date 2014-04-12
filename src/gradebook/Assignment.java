@@ -87,20 +87,14 @@ class Assignment {
     }
     
 
+    
+    
+    
+    
     /**
-     * Gets the grades for this assignment.
-     * 
-     * @return HashMap<String, Double> A map of student usernames and those
-     *         students' grades is returned.
+     * gives a string representing this Assignment
+     * @return string representation of this Assignment
      */
-    HashMap<String, Double> getGrades() {
-        return this.grades;
-    }
-    
-    
-    
-    
-    
     public String toString() {
         return this.name + "\n" 
                 + this.totalPoints + "\n" 
@@ -112,8 +106,6 @@ class Assignment {
     /**
      * Calculates the average across all students for a given assignment
      * 
-     * @param assignmentName
-     *            name of the assignment
      * @return the average across all students for assignmentName
      */
     double average() {
@@ -141,28 +133,24 @@ class Assignment {
     /**
      * Calculates the median across all students for a given assignment
      * 
-     * @param assignmentName
-     *            name of the assignment
      * @return the median across all students for assignmentName
      */
     double median() {
         List<Double> gradelist = this.sortGrades();
         double ans = 0;
         int half = (gradelist.size() / 2);
-            if (gradelist.size() % 2 == 0) {
-                ans = ((gradelist.get(half - 1) + gradelist.get(half))) / 2;
-            }
-            else {
-                ans = gradelist.get(half);
-            }
-            return ans;
+        if (gradelist.size() % 2 == 0) {
+            ans = ((gradelist.get(half - 1) + gradelist.get(half))) / 2;
+        }
+        else {
+            ans = gradelist.get(half);
+        }
+        return ans;
     }
 
     /**
      * Calculates the min across all students for a given assignment
      * 
-     * @param assignmentName
-     *            name of the assignment
      * @return the min across all students for assignmentName
      */
     double min() {
@@ -177,8 +165,6 @@ class Assignment {
     /**
      * Calculates the max across all students for a given assignment
      * 
-     * @param assignmentName
-     *            name of the assignment
      * @return the max across all students for assignmentName
      */
     double max() {
@@ -193,8 +179,6 @@ class Assignment {
     /**
      * Provides the grade earned by the given student for the given assignment
      * 
-     * @param assignmentName
-     *            name of the assignment
      * @param username
      *            username for the student
      * @return the grade earned by username for assignmentName
@@ -215,8 +199,8 @@ class Assignment {
      *         assignment/student combination exists, returns false otherwise
      */
     boolean changeGrade(String username, double newGrade) {
-            this.grades.put(username, newGrade);
-            return true;
+        this.grades.put(username, newGrade);
+        return true;
     }
     
     /** 
@@ -242,10 +226,12 @@ class Assignment {
       
     }
     
-    
+    /**
+     * @return integer representation of this assignment
+     */
     @Override
     public int hashCode() {
-       return grades.hashCode() + name.hashCode() + 
+        return grades.hashCode() + name.hashCode() + 
                totalPoints.hashCode() + weight.hashCode();
     }
     

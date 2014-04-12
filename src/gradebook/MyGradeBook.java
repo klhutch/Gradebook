@@ -72,14 +72,18 @@ public class MyGradeBook {
         String startingString = "";
         try {
             filescan = new Scanner(new File(filename));
-            while (filescan.hasNextLine()) {
-                startingString += filescan.nextLine() + "\n";
-            }
         }
         catch (FileNotFoundException e) {
-           throw new RuntimeException("File not found");
+            throw new RuntimeException("File not found");
         }
+            
+        while (filescan.hasNextLine()) {
+            startingString += filescan.nextLine() + "\n";
+        }
+        
         return startingString;
+       
+        
     }
     
     
@@ -247,7 +251,6 @@ public class MyGradeBook {
                 return current;
             } 
         }
-      
         throw new RuntimeException("Assignment not found");
     }
     
