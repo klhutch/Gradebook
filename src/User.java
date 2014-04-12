@@ -1,5 +1,5 @@
 /**Class User
- * 
+ * Team 10
  * @author Kate Hutchinson (klhutch)
  * @author Jesse Oberstein (joberste)
  * @author Nathan Goodman (nmg49)
@@ -19,7 +19,8 @@ public class User {
         boolean quit = false;
         if (login) {
         System.out.println("Enter a command to begin "
-                + "(type \"gb help\" for a list of commands)");
+                + "(type \"gb help\" for a list of commands). "
+                + "Make sure to proceed each subcommand with a '-'.");
             while (!quit) {
                 System.out.print("$$$$~ ");
                 quit = console.getCommand();
