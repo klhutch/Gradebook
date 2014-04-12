@@ -13,7 +13,9 @@ import java.util.Comparator;
 public class MyStudentComparator implements Comparator<Student> {
     
     /**
-     * return result from comparing student's usernames
+     * @param o1 - first student to compare
+     * @param 02 - second student to compare
+     * @return result from comparing student's usernames
      */
     @Override
     public int compare(Student o1, Student o2) {
