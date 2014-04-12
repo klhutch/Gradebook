@@ -247,7 +247,6 @@ public class MyGradeBook {
                 return current;
             } 
         }
-      
         throw new RuntimeException("Assignment not found");
     }
     
