@@ -82,7 +82,9 @@ public class Console {
                 }
             }
             else if (firstCommand.equals("gb import")) {
-                this.importFormFile(parsedCommand);
+                if (this.importFormFile(parsedCommand)) {
+                    System.out.println("gb import failed :(");
+                };
             }
             else if (firstCommand.equals("gb print")) {
                 this.print(parsedCommand);
@@ -355,25 +357,12 @@ public class Console {
                 System.out.println(
                         "Calculate stats for a student or an assignment");
                 System.out.println("FLAGS:");
-                System.out.println(
-                        "-student (or -s): Calculate stats for a student");
-                System.out.println(
-                        "-assignment (or -a): "
-                                + "Calculate stats for an assignment");
                 System.out.println("-mean: calculates the mean");
                 System.out.println("-median: calculates the median");
                 System.out.println("-minimum: calculates the minimum");
                 System.out.println("-maximum: calculates the maximum");
                 System.out.println("FORMAT:");
-                System.out.println("IF STUDENT: gb calc -s "
-                        + "-(studentId) ONEOF[-mean, -median, "
-                        + "-minimum, -maximum]");
-                System.out.println("IF ASSIGNMENT: gb calc -a "
-                        + "-(assignmentName) ONEOF[-mean, -median, "
-                        + "-minimum, -maximum]");
-                System.out.println("Ommiting the flags calculates "
-                        + "on the entire gradebook.");
-                System.out.println("EXAMPLE: gb calc -mean");
+                System.out.println("gb calc -(assignmentName) -(FLAG)");
             }
             else if (subCommandHelp.equals("help")) {
                 System.out.println("Displays help information:");
@@ -605,7 +594,7 @@ public class Console {
         if (parsedCommand.size() > 0) {
             String fileName = parsedCommand.get(1);
             if (parsedCommand.size() == 2) {
-                MyGradeBook.initializeWithFile(fileName);
+                this.gradebook = MyGradeBook.initializeWithFile(fileName);
             }
             else {
                 if (parsedCommand.size() == 3) {
@@ -617,6 +606,7 @@ public class Console {
                         catch (FileNotFoundException ex) {
                             System.out.println(
                                     "The file you entered does not exist");
+                            return true;
                         }
                     }
                     else {
@@ -637,6 +627,7 @@ public class Console {
                             + "\" gb help -import \" for more information");
             return true;
         }
+        System.out.println("The file has been imported successfully");
         return false;
     }
 }
