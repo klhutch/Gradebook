@@ -14,7 +14,7 @@ public class MyStudentComparator implements Comparator<Student> {
     
     /**
      * @param o1 - first student to compare
-     * @param 02 - second student to compare
+     * @param o2 - second student to compare
      * @return result from comparing student's usernames
      */
     @Override
