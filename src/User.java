@@ -8,7 +8,7 @@
  *
  */
 public class User {
-    
+
     /** Main method
      * used in running a program, determines what happens in
      * program execution and calls other functions
@@ -18,9 +18,9 @@ public class User {
         boolean login = console.login();
         boolean quit = false;
         if (login) {
-        System.out.println("Enter a command to begin "
-                + "(type \"gb help\" for a list of commands). "
-                + "Make sure to proceed each subcommand with a '-'.");
+            System.out.println("Enter a command to begin "
+                    + "(type \"gb help\" for a list of commands). "
+                    + "Make sure to proceed each subcommand with a '-'.");
             while (!quit) {
                 System.out.print("$$$$~ ");
                 quit = console.getCommand();

@@ -298,7 +298,8 @@ public class Console {
         else {
             System.out.println(
                     "The command \" gb calc \" cannot be called without flags."
-                            + " Please type \" gb help -calc \" for more information");
+                            + " Please type \" gb help -calc \""
+                            + " for more information");
             return true;
         }
         return false;
